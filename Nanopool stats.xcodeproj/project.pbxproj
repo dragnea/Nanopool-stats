@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6480D61D1EDC556700D78FFD /* AccountStatsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D61B1EDC556700D78FFD /* AccountStatsCell.m */; };
+		6480D61E1EDC556700D78FFD /* AccountStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6480D61C1EDC556700D78FFD /* AccountStatsCell.xib */; };
+		6480D6221EDC55B500D78FFD /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6211EDC55B500D78FFD /* Account.m */; };
+		6480D6251EDC58CA00D78FFD /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6241EDC58CA00D78FFD /* CustomCell.m */; };
+		6480D6291EDC59E500D78FFD /* CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6281EDC59E500D78FFD /* CoreData.m */; };
+		6480D62C1EDC5A9A00D78FFD /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6480D62A1EDC5A9A00D78FFD /* Database.xcdatamodeld */; };
+		6480D6391EDC5EB700D78FFD /* AccountTypeHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6381EDC5EB700D78FFD /* AccountTypeHeader.m */; };
+		6480D63B1EDC5EC200D78FFD /* AccountTypeHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6480D63A1EDC5EC200D78FFD /* AccountTypeHeader.xib */; };
 		6498E2941EDC453A00973BC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2931EDC453A00973BC1 /* main.m */; };
 		6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2961EDC453A00973BC1 /* AppDelegate.m */; };
 		6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6498E29E1EDC453A00973BC1 /* Assets.xcassets */; };
@@ -16,6 +24,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6480D61A1EDC556700D78FFD /* AccountStatsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountStatsCell.h; sourceTree = "<group>"; };
+		6480D61B1EDC556700D78FFD /* AccountStatsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountStatsCell.m; sourceTree = "<group>"; };
+		6480D61C1EDC556700D78FFD /* AccountStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountStatsCell.xib; sourceTree = "<group>"; };
+		6480D6201EDC55B500D78FFD /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		6480D6211EDC55B500D78FFD /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
+		6480D6231EDC58CA00D78FFD /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		6480D6241EDC58CA00D78FFD /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		6480D6271EDC59E500D78FFD /* CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreData.h; sourceTree = "<group>"; };
+		6480D6281EDC59E500D78FFD /* CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreData.m; sourceTree = "<group>"; };
+		6480D62B1EDC5A9A00D78FFD /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
+		6480D6371EDC5EB700D78FFD /* AccountTypeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountTypeHeader.h; sourceTree = "<group>"; };
+		6480D6381EDC5EB700D78FFD /* AccountTypeHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTypeHeader.m; sourceTree = "<group>"; };
+		6480D63A1EDC5EC200D78FFD /* AccountTypeHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTypeHeader.xib; sourceTree = "<group>"; };
 		6498E28F1EDC453A00973BC1 /* Nanopool stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nanopool stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6498E2931EDC453A00973BC1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6498E2951EDC453A00973BC1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -23,9 +44,9 @@
 		6498E29E1EDC453A00973BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6498E2A11EDC453A00973BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6498E2A31EDC453A00973BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6498E2A91EDC461C00973BC1 /* DashboardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashboardVC.h; path = ViewControllers/DashboardVC.h; sourceTree = "<group>"; };
-		6498E2AA1EDC461C00973BC1 /* DashboardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashboardVC.m; path = ViewControllers/DashboardVC.m; sourceTree = "<group>"; };
-		6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DashboardVC.xib; path = ViewControllers/DashboardVC.xib; sourceTree = "<group>"; };
+		6498E2A91EDC461C00973BC1 /* DashboardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardVC.h; sourceTree = "<group>"; };
+		6498E2AA1EDC461C00973BC1 /* DashboardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardVC.m; sourceTree = "<group>"; };
+		6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +60,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6480D6171EDC51D300D78FFD /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6498E2A91EDC461C00973BC1 /* DashboardVC.h */,
+				6498E2AA1EDC461C00973BC1 /* DashboardVC.m */,
+				6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6480D6181EDC51ED00D78FFD /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				6480D6231EDC58CA00D78FFD /* CustomCell.h */,
+				6480D6241EDC58CA00D78FFD /* CustomCell.m */,
+				6480D61A1EDC556700D78FFD /* AccountStatsCell.h */,
+				6480D61B1EDC556700D78FFD /* AccountStatsCell.m */,
+				6480D61C1EDC556700D78FFD /* AccountStatsCell.xib */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		6480D6191EDC520000D78FFD /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				6480D6371EDC5EB700D78FFD /* AccountTypeHeader.h */,
+				6480D6381EDC5EB700D78FFD /* AccountTypeHeader.m */,
+				6480D63A1EDC5EC200D78FFD /* AccountTypeHeader.xib */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		6480D61F1EDC559800D78FFD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6480D6201EDC55B500D78FFD /* Account.h */,
+				6480D6211EDC55B500D78FFD /* Account.m */,
+				6480D62A1EDC5A9A00D78FFD /* Database.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6480D6261EDC59CB00D78FFD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6480D6271EDC59E500D78FFD /* CoreData.h */,
+				6480D6281EDC59E500D78FFD /* CoreData.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		6498E2861EDC453A00973BC1 = {
 			isa = PBXGroup;
 			children = (
@@ -58,11 +130,13 @@
 		6498E2911EDC453A00973BC1 /* Nanopool stats */ = {
 			isa = PBXGroup;
 			children = (
+				6480D6261EDC59CB00D78FFD /* Controllers */,
+				6480D61F1EDC559800D78FFD /* Models */,
+				6480D6191EDC520000D78FFD /* CustomViews */,
+				6480D6181EDC51ED00D78FFD /* CustomCells */,
+				6480D6171EDC51D300D78FFD /* ViewControllers */,
 				6498E2951EDC453A00973BC1 /* AppDelegate.h */,
 				6498E2961EDC453A00973BC1 /* AppDelegate.m */,
-				6498E2A91EDC461C00973BC1 /* DashboardVC.h */,
-				6498E2AA1EDC461C00973BC1 /* DashboardVC.m */,
-				6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */,
 				6498E29E1EDC453A00973BC1 /* Assets.xcassets */,
 				6498E2A01EDC453A00973BC1 /* LaunchScreen.storyboard */,
 				6498E2A31EDC453A00973BC1 /* Info.plist */,
@@ -111,6 +185,7 @@
 					6498E28E1EDC453A00973BC1 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = NJT84KJKR3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -139,8 +214,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6498E2A21EDC453A00973BC1 /* LaunchScreen.storyboard in Resources */,
+				6480D61E1EDC556700D78FFD /* AccountStatsCell.xib in Resources */,
 				6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */,
 				6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */,
+				6480D63B1EDC5EC200D78FFD /* AccountTypeHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,8 +229,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */,
+				6480D61D1EDC556700D78FFD /* AccountStatsCell.m in Sources */,
+				6480D62C1EDC5A9A00D78FFD /* Database.xcdatamodeld in Sources */,
+				6480D6251EDC58CA00D78FFD /* CustomCell.m in Sources */,
 				6498E2941EDC453A00973BC1 /* main.m in Sources */,
+				6480D6221EDC55B500D78FFD /* Account.m in Sources */,
 				6498E2AC1EDC461C00973BC1 /* DashboardVC.m in Sources */,
+				6480D6391EDC5EB700D78FFD /* AccountTypeHeader.m in Sources */,
+				6480D6291EDC59E500D78FFD /* CoreData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,11 +348,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NJT84KJKR3;
 				INFOPLIST_FILE = "Nanopool stats/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dragneamihai.Nanopool-stats";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -277,11 +363,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NJT84KJKR3;
 				INFOPLIST_FILE = "Nanopool stats/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dragneamihai.Nanopool-stats";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -304,8 +392,22 @@
 				6498E2A81EDC453A00973BC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6480D62A1EDC5A9A00D78FFD /* Database.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6480D62B1EDC5A9A00D78FFD /* Database.xcdatamodel */,
+			);
+			currentVersion = 6480D62B1EDC5A9A00D78FFD /* Database.xcdatamodel */;
+			path = Database.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6498E2871EDC453A00973BC1 /* Project object */;
 }
