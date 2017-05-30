@@ -23,6 +23,7 @@
 + (id)cellInTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath;
 + (void)registerNibInTableView:(UITableView *)tableView;
 + (void)registerClassInTableView:(UITableView *)tableView;
++ (UITableViewCell *)dummyTableViewCell;
 
 @end
 

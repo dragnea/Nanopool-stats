@@ -11,6 +11,7 @@
 #import "AccountStatsCell.h"
 #import "Account.h"
 #import "CoreData.h"
+#import "AddAccountVC.h"
 
 @interface DashboardVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -47,6 +48,10 @@
 
 - (void)updatePlaceholder {
     
+}
+
+- (IBAction)addCcountButtonTouched:(id)sender {
+    [self presentViewController:[[AddAccountVC alloc] init] animated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDataSource

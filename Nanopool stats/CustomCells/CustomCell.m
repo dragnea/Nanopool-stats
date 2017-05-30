@@ -54,6 +54,10 @@
     return [tableView registerClass:[self class] forCellReuseIdentifier:className];
 }
 
++ (UITableViewCell *)dummyTableViewCell {
+    return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dummyTableViewCell"];
+}
+
 @end
 
 

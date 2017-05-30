@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <UIKit/UIColor.h>
 
 typedef NS_ENUM(int16_t, AccountType) {
-    AccountTypeETH
+    AccountTypeNone,
+    AccountTypeEthereum,
+    AccountTypeEthereumClassic,
+    AccountTypeSiaCoin,
+    AccountTypeZCash,
+    AccountTypeMonero,
+    AccountTypePascal
 };
 
 @interface Account : NSManagedObject
@@ -19,5 +26,11 @@ typedef NS_ENUM(int16_t, AccountType) {
 @property (nonatomic) float balance;
 
 @property (nullable, nonatomic, strong, readonly) NSString *currencyName;
+
++ (NSString * _Nonnull)nameForType:(AccountType)type;
++ (NSString * _Nonnull)currencyForType:(AccountType)type;
++ (UIColor * _Nonnull)colorForType:(AccountType)type;
++ (NSString * _Nullable)currencyIconForType:(AccountType)type large:(BOOL)large;
++ (NSArray * _Nonnull)types;
 
 @end

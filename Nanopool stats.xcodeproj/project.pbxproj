@@ -15,6 +15,20 @@
 		6480D62C1EDC5A9A00D78FFD /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6480D62A1EDC5A9A00D78FFD /* Database.xcdatamodeld */; };
 		6480D6391EDC5EB700D78FFD /* AccountTypeHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6381EDC5EB700D78FFD /* AccountTypeHeader.m */; };
 		6480D63B1EDC5EC200D78FFD /* AccountTypeHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6480D63A1EDC5EC200D78FFD /* AccountTypeHeader.xib */; };
+		6480D63F1EDD652D00D78FFD /* AddAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D63D1EDD652D00D78FFD /* AddAccountVC.m */; };
+		6480D6401EDD652D00D78FFD /* AddAccountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6480D63E1EDD652D00D78FFD /* AddAccountVC.xib */; };
+		6480D6441EDD6BCA00D78FFD /* AccountSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6421EDD6BCA00D78FFD /* AccountSelectCell.m */; };
+		6480D6451EDD6BCA00D78FFD /* AccountSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6480D6431EDD6BCA00D78FFD /* AccountSelectCell.xib */; };
+		6480D6491EDD8D5800D78FFD /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6471EDD8D5800D78FFD /* TextFieldCell.m */; };
+		6480D64A1EDD8D5800D78FFD /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6480D6481EDD8D5800D78FFD /* TextFieldCell.xib */; };
+		6480D64E1EDD98D400D78FFD /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D64D1EDD98D400D78FFD /* UIColor+Additions.m */; };
+		6480D6521EDDAD0D00D78FFD /* NanopoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6511EDDAD0D00D78FFD /* NanopoolController.m */; };
+		6480D6611EDDAF6B00D78FFD /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6551EDDAF6B00D78FFD /* AFHTTPSessionManager.m */; };
+		6480D6621EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6581EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m */; };
+		6480D6631EDDAF6B00D78FFD /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D65A1EDDAF6B00D78FFD /* AFSecurityPolicy.m */; };
+		6480D6641EDDAF6B00D78FFD /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D65C1EDDAF6B00D78FFD /* AFURLRequestSerialization.m */; };
+		6480D6651EDDAF6B00D78FFD /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D65E1EDDAF6B00D78FFD /* AFURLResponseSerialization.m */; };
+		6480D6661EDDAF6B00D78FFD /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6601EDDAF6B00D78FFD /* AFURLSessionManager.m */; };
 		6498E2941EDC453A00973BC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2931EDC453A00973BC1 /* main.m */; };
 		6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2961EDC453A00973BC1 /* AppDelegate.m */; };
 		6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6498E29E1EDC453A00973BC1 /* Assets.xcassets */; };
@@ -37,6 +51,33 @@
 		6480D6371EDC5EB700D78FFD /* AccountTypeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountTypeHeader.h; sourceTree = "<group>"; };
 		6480D6381EDC5EB700D78FFD /* AccountTypeHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTypeHeader.m; sourceTree = "<group>"; };
 		6480D63A1EDC5EC200D78FFD /* AccountTypeHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTypeHeader.xib; sourceTree = "<group>"; };
+		6480D63C1EDD652D00D78FFD /* AddAccountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountVC.h; sourceTree = "<group>"; };
+		6480D63D1EDD652D00D78FFD /* AddAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountVC.m; sourceTree = "<group>"; };
+		6480D63E1EDD652D00D78FFD /* AddAccountVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountVC.xib; sourceTree = "<group>"; };
+		6480D6411EDD6BCA00D78FFD /* AccountSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSelectCell.h; sourceTree = "<group>"; };
+		6480D6421EDD6BCA00D78FFD /* AccountSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSelectCell.m; sourceTree = "<group>"; };
+		6480D6431EDD6BCA00D78FFD /* AccountSelectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSelectCell.xib; sourceTree = "<group>"; };
+		6480D6461EDD8D5800D78FFD /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		6480D6471EDD8D5800D78FFD /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
+		6480D6481EDD8D5800D78FFD /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
+		6480D64C1EDD98D400D78FFD /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Additions.h"; path = "Utils/UIColor+Additions.h"; sourceTree = "<group>"; };
+		6480D64D1EDD98D400D78FFD /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Additions.m"; path = "Utils/UIColor+Additions.m"; sourceTree = "<group>"; };
+		6480D64F1EDD997200D78FFD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		6480D6501EDDAD0D00D78FFD /* NanopoolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanopoolController.h; sourceTree = "<group>"; };
+		6480D6511EDDAD0D00D78FFD /* NanopoolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanopoolController.m; sourceTree = "<group>"; };
+		6480D6541EDDAF6B00D78FFD /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		6480D6551EDDAF6B00D78FFD /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		6480D6561EDDAF6B00D78FFD /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		6480D6571EDDAF6B00D78FFD /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		6480D6581EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		6480D6591EDDAF6B00D78FFD /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		6480D65A1EDDAF6B00D78FFD /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		6480D65B1EDDAF6B00D78FFD /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		6480D65C1EDDAF6B00D78FFD /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		6480D65D1EDDAF6B00D78FFD /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		6480D65E1EDDAF6B00D78FFD /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		6480D65F1EDDAF6B00D78FFD /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		6480D6601EDDAF6B00D78FFD /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		6498E28F1EDC453A00973BC1 /* Nanopool stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nanopool stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6498E2931EDC453A00973BC1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6498E2951EDC453A00973BC1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -66,6 +107,9 @@
 				6498E2A91EDC461C00973BC1 /* DashboardVC.h */,
 				6498E2AA1EDC461C00973BC1 /* DashboardVC.m */,
 				6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */,
+				6480D63C1EDD652D00D78FFD /* AddAccountVC.h */,
+				6480D63D1EDD652D00D78FFD /* AddAccountVC.m */,
+				6480D63E1EDD652D00D78FFD /* AddAccountVC.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -78,6 +122,12 @@
 				6480D61A1EDC556700D78FFD /* AccountStatsCell.h */,
 				6480D61B1EDC556700D78FFD /* AccountStatsCell.m */,
 				6480D61C1EDC556700D78FFD /* AccountStatsCell.xib */,
+				6480D6411EDD6BCA00D78FFD /* AccountSelectCell.h */,
+				6480D6421EDD6BCA00D78FFD /* AccountSelectCell.m */,
+				6480D6431EDD6BCA00D78FFD /* AccountSelectCell.xib */,
+				6480D6461EDD8D5800D78FFD /* TextFieldCell.h */,
+				6480D6471EDD8D5800D78FFD /* TextFieldCell.m */,
+				6480D6481EDD8D5800D78FFD /* TextFieldCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -107,8 +157,41 @@
 			children = (
 				6480D6271EDC59E500D78FFD /* CoreData.h */,
 				6480D6281EDC59E500D78FFD /* CoreData.m */,
+				6480D6501EDDAD0D00D78FFD /* NanopoolController.h */,
+				6480D6511EDDAD0D00D78FFD /* NanopoolController.m */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6480D64B1EDD98B900D78FFD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6480D6531EDDAED500D78FFD /* AFNetworking */,
+				6480D64C1EDD98D400D78FFD /* UIColor+Additions.h */,
+				6480D64D1EDD98D400D78FFD /* UIColor+Additions.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		6480D6531EDDAED500D78FFD /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				6480D6541EDDAF6B00D78FFD /* AFHTTPSessionManager.h */,
+				6480D6551EDDAF6B00D78FFD /* AFHTTPSessionManager.m */,
+				6480D6561EDDAF6B00D78FFD /* AFNetworking.h */,
+				6480D6571EDDAF6B00D78FFD /* AFNetworkReachabilityManager.h */,
+				6480D6581EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m */,
+				6480D6591EDDAF6B00D78FFD /* AFSecurityPolicy.h */,
+				6480D65A1EDDAF6B00D78FFD /* AFSecurityPolicy.m */,
+				6480D65B1EDDAF6B00D78FFD /* AFURLRequestSerialization.h */,
+				6480D65C1EDDAF6B00D78FFD /* AFURLRequestSerialization.m */,
+				6480D65D1EDDAF6B00D78FFD /* AFURLResponseSerialization.h */,
+				6480D65E1EDDAF6B00D78FFD /* AFURLResponseSerialization.m */,
+				6480D65F1EDDAF6B00D78FFD /* AFURLSessionManager.h */,
+				6480D6601EDDAF6B00D78FFD /* AFURLSessionManager.m */,
+			);
+			name = AFNetworking;
+			path = Utils/AFNetworking;
 			sourceTree = "<group>";
 		};
 		6498E2861EDC453A00973BC1 = {
@@ -130,6 +213,7 @@
 		6498E2911EDC453A00973BC1 /* Nanopool stats */ = {
 			isa = PBXGroup;
 			children = (
+				6480D64B1EDD98B900D78FFD /* Utils */,
 				6480D6261EDC59CB00D78FFD /* Controllers */,
 				6480D61F1EDC559800D78FFD /* Models */,
 				6480D6191EDC520000D78FFD /* CustomViews */,
@@ -140,6 +224,7 @@
 				6498E29E1EDC453A00973BC1 /* Assets.xcassets */,
 				6498E2A01EDC453A00973BC1 /* LaunchScreen.storyboard */,
 				6498E2A31EDC453A00973BC1 /* Info.plist */,
+				6480D64F1EDD997200D78FFD /* PrefixHeader.pch */,
 				6498E2921EDC453A00973BC1 /* Supporting Files */,
 			);
 			path = "Nanopool stats";
@@ -215,8 +300,11 @@
 			files = (
 				6498E2A21EDC453A00973BC1 /* LaunchScreen.storyboard in Resources */,
 				6480D61E1EDC556700D78FFD /* AccountStatsCell.xib in Resources */,
+				6480D6401EDD652D00D78FFD /* AddAccountVC.xib in Resources */,
+				6480D64A1EDD8D5800D78FFD /* TextFieldCell.xib in Resources */,
 				6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */,
 				6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */,
+				6480D6451EDD6BCA00D78FFD /* AccountSelectCell.xib in Resources */,
 				6480D63B1EDC5EC200D78FFD /* AccountTypeHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,13 +318,24 @@
 			files = (
 				6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */,
 				6480D61D1EDC556700D78FFD /* AccountStatsCell.m in Sources */,
+				6480D63F1EDD652D00D78FFD /* AddAccountVC.m in Sources */,
+				6480D6491EDD8D5800D78FFD /* TextFieldCell.m in Sources */,
 				6480D62C1EDC5A9A00D78FFD /* Database.xcdatamodeld in Sources */,
+				6480D6661EDDAF6B00D78FFD /* AFURLSessionManager.m in Sources */,
 				6480D6251EDC58CA00D78FFD /* CustomCell.m in Sources */,
+				6480D6621EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m in Sources */,
 				6498E2941EDC453A00973BC1 /* main.m in Sources */,
 				6480D6221EDC55B500D78FFD /* Account.m in Sources */,
+				6480D6651EDDAF6B00D78FFD /* AFURLResponseSerialization.m in Sources */,
+				6480D6641EDDAF6B00D78FFD /* AFURLRequestSerialization.m in Sources */,
+				6480D6631EDDAF6B00D78FFD /* AFSecurityPolicy.m in Sources */,
+				6480D6441EDD6BCA00D78FFD /* AccountSelectCell.m in Sources */,
 				6498E2AC1EDC461C00973BC1 /* DashboardVC.m in Sources */,
 				6480D6391EDC5EB700D78FFD /* AccountTypeHeader.m in Sources */,
+				6480D6521EDDAD0D00D78FFD /* NanopoolController.m in Sources */,
+				6480D6611EDDAF6B00D78FFD /* AFHTTPSessionManager.m in Sources */,
 				6480D6291EDC59E500D78FFD /* CoreData.m in Sources */,
+				6480D64E1EDD98D400D78FFD /* UIColor+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +449,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NJT84KJKR3;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Nanopool stats/PrefixHeader.pch";
 				INFOPLIST_FILE = "Nanopool stats/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dragneamihai.Nanopool-stats";
@@ -365,6 +465,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NJT84KJKR3;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Nanopool stats/PrefixHeader.pch";
 				INFOPLIST_FILE = "Nanopool stats/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dragneamihai.Nanopool-stats";
