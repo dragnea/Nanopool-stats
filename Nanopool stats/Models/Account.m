@@ -11,6 +11,7 @@
 
 @implementation Account
 @dynamic type;
+@dynamic address;
 @dynamic name;
 @dynamic balance;
 

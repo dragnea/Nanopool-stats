@@ -80,8 +80,22 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
 
 - (void)addAccountWithType:(AccountType)accountType name:(NSString *)name address:(NSString *)address completion:(completionBlock)completion {
     // check miner account
+    
     [self getWithAccountType:accountType endpoint:@"accountexist" address:address completion:^(NSDictionary *responseObject, NSString *error) {
-        if (completion) {
+        if (!error) {
+            NSManagedObjectContext *workerContext = [CoreData workerContext];
+            [workerContext performBlock:^{
+                Account *account = [Account entityInContext:workerContext key:@"address" value:address shouldCreate:YES];
+                account.name = name;
+                account.type = accountType;
+                NSError *saveError = nil;
+                if (![workerContext save:&saveError]) {
+                    completion(saveError.localizedDescription);
+                } else {
+                    completion(nil);
+                }
+            }];
+        } else {
             completion(error);
         }
     }];

@@ -12,4 +12,6 @@
 
 + (UIColor *)decColorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
 
++ (UIColor *)themeColorBackground;
+
 @end

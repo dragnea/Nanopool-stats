@@ -9,6 +9,7 @@
 #import "AddAccountVC.h"
 #import "TextFieldCell.h"
 #import "AccountSelectCell.h"
+#import "TableHeader.h"
 #import "NanopoolController.h"
 
 @interface AddAccountVC ()<UITableViewDataSource, UITableViewDelegate, TextFieldCellDelegate>
@@ -25,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [TableHeader registerNibInTableView:self.tableView];
     [TextFieldCell registerNibInTableView:self.tableView];
     [AccountSelectCell registerNibInTableView:self.tableView];
     
@@ -42,15 +44,25 @@
 
 - (IBAction)dismissButtonTouched:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tableView endEditing:YES];
 }
 
 - (IBAction)addButtonTouched:(id)sender {
+    [self.tableView endEditing:YES];
     [[NanopoolController sharedInstance] addAccountWithType:self.accountType name:self.name address:self.address completion:^(NSString *error) {
-        if (error) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Account cannot be addded" message:error preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil]];
-            [self presentViewController: alertController animated:YES completion:nil];
+        NSString *message;
+        if (!error) {
+            message = @"Successfully added!";
+        } else {
+            message = error;
         }
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"New account" message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            if (!error) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }]];
+        [self presentViewController: alertController animated:YES completion:nil];
     }];
 }
 
@@ -77,15 +89,20 @@
     return 40.0f;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    TableHeader *headerView = [TableHeader headerFooterInTableView:tableView];
     switch (section) {
         case 0:
-            return @"General informations";
+            headerView.text = @"General informations";
+            break;
         case 1:
-            return @"Select an account type";
+            headerView.text = @"Select an account type";
+            break;
         default:
-            return nil;
+            headerView.text = @"???";
+            break;
     }
+    return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,10 +114,6 @@
         default:
             return 1.0f;
     }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 1.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

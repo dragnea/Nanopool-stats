@@ -31,7 +31,7 @@
     NSError *error = nil;
     self.accountsFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:accountsFetchRequest
                                                                                 managedObjectContext:[CoreData mainContext]
-                                                                                  sectionNameKeyPath:@"currencyName"
+                                                                                  sectionNameKeyPath:@"type"
                                                                                            cacheName:nil];
     if (![self.accountsFetchedResultsController performFetch:&error]) {
         // TODO: add error handling
@@ -67,7 +67,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 80.0f;
+    return 60.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,7 +76,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     AccountTypeHeader *headerView = [AccountTypeHeader headerFooterInTableView:tableView];
-    headerView.currencyName = self.accountsFetchedResultsController.sections[section].name;
+    headerView.accountType = [self.accountsFetchedResultsController.sections[section].name integerValue];
     return headerView;
 }
 

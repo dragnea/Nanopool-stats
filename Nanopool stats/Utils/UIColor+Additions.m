@@ -14,4 +14,8 @@
     return [UIColor colorWithRed:red/255.0f green:green/255.0f blue:blue/255.0f alpha:alpha];
 }
 
++ (UIColor *)themeColorBackground {
+    return [UIColor decColorWithRed:78.0f green:89.0f blue:170.0 alpha:1.0f];
+}
+
 @end

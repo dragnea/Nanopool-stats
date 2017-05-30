@@ -39,6 +39,14 @@
 
 #pragma mark - UITextFieldDelegate
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.contentView.backgroundColor = [[UIColor themeColorBackground] colorWithAlphaComponent:0.1f];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.contentView.backgroundColor = [UIColor clearColor];
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([self.delegate respondsToSelector:@selector(textFieldCell:textDidChanged:)]) {
         [self.delegate textFieldCell:self textDidChanged:[textField.text stringByReplacingCharactersInRange:range withString:string]];

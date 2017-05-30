@@ -30,9 +30,11 @@
 
     // Configure the view for the selected state
     if (selected) {
-        self.contentView.backgroundColor = [Account colorForType:self.accountType];
+        self.contentView.backgroundColor = [[UIColor themeColorBackground] colorWithAlphaComponent:1.0f];
+        self.nameLabel.textColor = [UIColor whiteColor];
     } else {
         self.contentView.backgroundColor = [UIColor whiteColor];
+        self.nameLabel.textColor = [UIColor blackColor];
     }
 }
 

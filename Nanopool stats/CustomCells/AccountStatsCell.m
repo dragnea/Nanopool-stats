@@ -10,6 +10,9 @@
 #import "Account.h"
 
 @interface AccountStatsCell ()
+@property (nonatomic, weak) IBOutlet UILabel *accountLabel;
+@property (nonatomic, weak) IBOutlet UILabel *currentHashrateLabel;
+@property (nonatomic, weak) IBOutlet UILabel *averageHashrateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *balanceLabel;
 @end
 
@@ -29,7 +32,8 @@
 - (void)setAccount:(Account *)account {
     _account = account;
     
-    self.balanceLabel.text = [NSString stringWithFormat:@"%f", account.balance];
+    self.accountLabel.text = (!account.name ? account.address : account.name);
+    self.balanceLabel.text = [NSString stringWithFormat:@"%f %@", account.balance, [Account currencyForType:account.type]];
     
 }
 

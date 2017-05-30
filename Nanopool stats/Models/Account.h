@@ -6,8 +6,7 @@
 //  Copyright © 2017 Dragnea Mihai. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import "ManagedObject.h"
 #import <UIKit/UIColor.h>
 
 typedef NS_ENUM(int16_t, AccountType) {
@@ -20,8 +19,9 @@ typedef NS_ENUM(int16_t, AccountType) {
     AccountTypePascal
 };
 
-@interface Account : NSManagedObject
+@interface Account : ManagedObject
 @property (nonatomic) AccountType type;
+@property (nullable, nonatomic, copy) NSString *address;
 @property (nullable, nonatomic, copy) NSString *name;
 @property (nonatomic) float balance;
 

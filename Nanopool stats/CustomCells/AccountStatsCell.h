@@ -7,8 +7,7 @@
 //
 
 #import "CustomCell.h"
-
-@class Account;
+#import "Account.h"
 
 @interface AccountStatsCell : UITableViewCell
 @property (nonatomic, weak) Account *account;

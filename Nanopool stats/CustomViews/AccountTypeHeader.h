@@ -7,9 +7,10 @@
 //
 
 #import "CustomCell.h"
+#import "Account.h"
 
 @interface AccountTypeHeader : UITableViewHeaderFooterView
 
-@property (nonatomic, weak) NSString *currencyName;
+@property (nonatomic) AccountType accountType;
 
 @end

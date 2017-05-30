@@ -8,14 +8,19 @@
 
 #import "AccountTypeHeader.h"
 
+@interface AccountTypeHeader ()
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *currencyImageView;
+@property (nonatomic, weak) IBOutlet UILabel *currencyLabel;
+@end
+
 @implementation AccountTypeHeader
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)setAccountType:(AccountType)accountType {
+    _accountType = accountType;
+    self.nameLabel.text = [Account nameForType:accountType];
+    self.currencyLabel.text = [Account currencyForType:accountType];
+    self.currencyImageView.image = [UIImage imageNamed:[Account currencyIconForType:accountType large:NO]];
 }
-*/
 
 @end
