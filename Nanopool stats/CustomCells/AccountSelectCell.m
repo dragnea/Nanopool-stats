@@ -17,12 +17,14 @@
 @implementation AccountSelectCell
 
 + (CGFloat)height {
-    return 65.0f;
+    return 60.0f;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    self.nameLabel.textColor = [[UIColor blackColor] themeColorWithValueAlpha];
+    self.currencyLabel.textColor = [[UIColor blackColor] themeColorWithValueTitleAlpha];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

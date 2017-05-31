@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor themeColorBackground];
+    
     [TableHeader registerNibInTableView:self.tableView];
     [TextFieldCell registerNibInTableView:self.tableView];
     [AccountSelectCell registerNibInTableView:self.tableView];

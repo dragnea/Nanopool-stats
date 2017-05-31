@@ -10,5 +10,9 @@
 #import "Account.h"
 
 @interface AccountStatsCell : UITableViewCell
+
 @property (nonatomic, weak) Account *account;
+
++ (CGFloat)heigth;
+
 @end

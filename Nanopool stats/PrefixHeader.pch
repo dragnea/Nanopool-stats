@@ -15,6 +15,7 @@
 
 #import "UIColor+Additions.h"
 #import "NSManagedObjectContext+Additions.h"
+#import "DMSButton.h"
 
 
 #endif /* PrefixHeader_pch */

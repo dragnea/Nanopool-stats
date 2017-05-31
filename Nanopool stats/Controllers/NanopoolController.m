@@ -42,19 +42,9 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
     return self;
 }
 
-- (void)getWithAccountType:(AccountType)accountType endpoint:(NSString *)endpoint address:(NSString *)address completion:(APICompletionHandler)completion {
+- (void)getMinerWithAccountType:(AccountType)accountType endpoint:(NSString *)endpoint address:(NSString *)address completion:(APICompletionHandler)completion {
     
-    NSString *poolType;
-    switch (accountType) {
-        case AccountTypeEthereum:
-            poolType = @"eth";
-            break;
-            
-        default:
-            poolType = @"";
-            break;
-    }
-    
+    NSString *poolType = [Account apiForType:accountType];
     NSString *stringURL = [[[self.apiURLString stringByAppendingPathComponent:poolType] stringByAppendingPathComponent:endpoint] stringByAppendingPathComponent:address];
     [self.apiManager GET:stringURL parameters:nil progress:nil
                  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -78,11 +68,29 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
      ];
 }
 
+- (void)updateGeneralInfoForAccountType:(AccountType)accountType address:(NSString *)address {
+    [self getMinerWithAccountType:accountType endpoint:@"user" address:address completion:^(NSDictionary *responseObject, NSString *error) {
+        NSManagedObjectContext *workerContext = [CoreData workerContext];
+        [workerContext performBlock:^{
+            Account *account = [Account entityInContext:workerContext key:@"address" value:address shouldCreate:YES];
+            [account updateWithDictionary:responseObject[@"data"]];
+            NSError *saveError = nil;
+            if (![workerContext save:&saveError]) {
+                // TODO: handle error
+            } else {
+                // success
+            }
+        }];
+    }];
+}
+
+#pragma mark - public methods
+
 - (void)addAccountWithType:(AccountType)accountType name:(NSString *)name address:(NSString *)address completion:(completionBlock)completion {
     // check miner account
-    
-    [self getWithAccountType:accountType endpoint:@"accountexist" address:address completion:^(NSDictionary *responseObject, NSString *error) {
+    [self getMinerWithAccountType:accountType endpoint:@"accountexist" address:address completion:^(NSDictionary *responseObject, NSString *error) {
         if (!error) {
+            // add account
             NSManagedObjectContext *workerContext = [CoreData workerContext];
             [workerContext performBlock:^{
                 Account *account = [Account entityInContext:workerContext key:@"address" value:address shouldCreate:YES];
@@ -92,6 +100,7 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
                 if (![workerContext save:&saveError]) {
                     completion(saveError.localizedDescription);
                 } else {
+                    [self updateGeneralInfoForAccountType:accountType address:address];
                     completion(nil);
                 }
             }];
@@ -100,6 +109,13 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
         }
     }];
     
+}
+
+- (void)updateAccounts {
+    NSArray *accounts = [Account entitiesInContext:[CoreData mainContext]];
+    for (Account *account in accounts) {
+        [self updateGeneralInfoForAccountType:account.type address:account.address];
+    }
 }
 
 @end

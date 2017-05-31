@@ -15,6 +15,7 @@ typedef void(^completionBlock)(NSString *error);
 
 + (NanopoolController *)sharedInstance;
 
+- (void)updateAccounts;
 - (void)addAccountWithType:(AccountType)accountType name:(NSString *)name address:(NSString *)address completion:(completionBlock)completion;
 
 @end

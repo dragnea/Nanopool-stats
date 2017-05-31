@@ -15,44 +15,23 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ySl-iG-7lm">
-                    <rect key="frame" x="171" y="20" width="32" height="32"/>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ySl-iG-7lm">
+                    <rect key="frame" x="165" y="14" width="44" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="32" id="8ye-Bz-VbM"/>
-                        <constraint firstAttribute="width" constant="32" id="mp4-Jp-PBR"/>
+                        <constraint firstAttribute="height" constant="44" id="8ye-Bz-VbM"/>
+                        <constraint firstAttribute="width" constant="44" id="mp4-Jp-PBR"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y08-ga-DXu">
-                    <rect key="frame" x="125" y="27" width="38" height="18"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ß" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r6c-Co-eYW">
-                    <rect key="frame" x="211" y="27" width="60" height="18"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="60" id="z8Z-JG-ewP"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ySl-iG-7lm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3uA-cy-c28"/>
-                <constraint firstItem="y08-ga-DXu" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Dm2-lK-KHj"/>
-                <constraint firstItem="r6c-Co-eYW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="J4U-ln-fiz"/>
-                <constraint firstItem="ySl-iG-7lm" firstAttribute="leading" secondItem="y08-ga-DXu" secondAttribute="trailing" constant="8" id="R6I-qp-9fb"/>
                 <constraint firstItem="ySl-iG-7lm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Ume-Yf-7Jt"/>
-                <constraint firstItem="r6c-Co-eYW" firstAttribute="leading" secondItem="ySl-iG-7lm" secondAttribute="trailing" constant="8" id="fBA-nX-apQ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="currencyImageView" destination="ySl-iG-7lm" id="NvX-I1-lkK"/>
-                <outlet property="currencyLabel" destination="r6c-Co-eYW" id="gYf-Xv-5S7"/>
-                <outlet property="nameLabel" destination="y08-ga-DXu" id="wuZ-Tr-43t"/>
             </connections>
             <point key="canvasLocation" x="-57.5" y="-97"/>
         </view>

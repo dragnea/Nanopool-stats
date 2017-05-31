@@ -13,4 +13,6 @@
 
 @property (nonatomic) AccountType accountType;
 
++ (CGFloat)height;
+
 @end

@@ -13,11 +13,9 @@
 @dynamic type;
 @dynamic address;
 @dynamic name;
+@dynamic hashrate;
+@dynamic avgHashrate;
 @dynamic balance;
-
-- (NSString *)currencyName {
-    return [Account nameForType:self.type];
-}
 
 + (NSString *)nameForType:(AccountType)type {
     switch (type) {
@@ -95,6 +93,25 @@
     }
 }
 
++ (NSString * _Nullable)apiForType:(AccountType)type {
+    switch (type) {
+        case AccountTypeEthereum:
+            return @"eth";
+        case AccountTypeEthereumClassic:
+            return @"etc";
+        case AccountTypeSiaCoin:
+            return @"sia";
+        case AccountTypeZCash:
+            return @"zec";
+        case AccountTypeMonero:
+            return @"xmr";
+        case AccountTypePascal:
+            return @"pasc";
+        default:
+            return @"";
+    }
+}
+
 + (NSArray * _Nonnull)types {
     static NSArray *types;
     if (!types) {
@@ -106,6 +123,10 @@
                   @(AccountTypePascal)];
     }
     return types;
+}
+
+- (double)avgHashrate6h {
+    return [self.avgHashrate[@"h6"] doubleValue];
 }
 
 @end

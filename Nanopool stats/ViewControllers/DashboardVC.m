@@ -12,9 +12,14 @@
 #import "Account.h"
 #import "CoreData.h"
 #import "AddAccountVC.h"
+#import "NanopoolController.h"
 
 @interface DashboardVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UILabel *placeholderTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *placeholderDetailsLabel;
+@property (nonatomic, weak) IBOutlet DMSButton *addButton;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *addButtonBottomConstraint;
 @property (nonatomic, strong) NSFetchedResultsController *accountsFetchedResultsController;
 @end
 
@@ -22,6 +27,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor themeColorBackground];
+    self.placeholderTitleLabel.textColor = [UIColor whiteColor];
+    self.placeholderDetailsLabel.textColor = [[UIColor whiteColor] themeColorWithValueTitleAlpha];
+    self.addButton.backgroundColor = [UIColor whiteColor];
+    [self.addButton setTitleColor:[UIColor themeColorBackground] forState:UIControlStateNormal];
     
     [AccountTypeHeader registerNibInTableView:self.tableView];
     [AccountStatsCell registerNibInTableView:self.tableView];
@@ -37,8 +48,15 @@
         // TODO: add error handling
     } else {
         self.accountsFetchedResultsController.delegate = self;
+        [self updatePlaceholder];
         [self.tableView reloadData];
     }
+    
+    [[NanopoolController sharedInstance] updateAccounts];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,7 +65,13 @@
 }
 
 - (void)updatePlaceholder {
-    
+    BOOL showPlaceholder = !self.accountsFetchedResultsController.fetchedObjects.count;
+    self.addButtonBottomConstraint.constant = showPlaceholder ? self.view.bounds.size.height / 2.0f + 80.0f : 20.0f;
+    [UIView animateWithDuration:0.25f animations:^{
+        self.placeholderTitleLabel.alpha = showPlaceholder;
+        self.placeholderDetailsLabel.alpha = showPlaceholder;
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (IBAction)addCcountButtonTouched:(id)sender {
@@ -67,11 +91,11 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 60.0f;
+    return [AccountTypeHeader height];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100.0f;
+    return [AccountStatsCell heigth];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -84,6 +108,10 @@
     AccountStatsCell *accountCell = [AccountStatsCell cellInTableView:tableView forIndexPath:indexPath];
     accountCell.account = [self.accountsFetchedResultsController objectAtIndexPath:indexPath];
     return accountCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -117,17 +145,17 @@
       newIndexPath:(NSIndexPath *)newIndexPath {
     switch (type) {
         case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         case NSFetchedResultsChangeMove:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         default:

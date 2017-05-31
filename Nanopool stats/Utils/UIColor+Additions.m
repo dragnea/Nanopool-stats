@@ -15,7 +15,20 @@
 }
 
 + (UIColor *)themeColorBackground {
-    return [UIColor decColorWithRed:78.0f green:89.0f blue:170.0 alpha:1.0f];
+    return [UIColor decColorWithRed:90.0f green:100.0f blue:200.0 alpha:1.0f];
+}
+
+
+- (UIColor *)themeColorWithValueAlpha {
+    return self;
+}
+
+- (UIColor *)themeColorWithValueTitleAlpha {
+    return [self colorWithAlphaComponent:0.5f];
+}
+
+- (UIColor *)themeColorWithSeparatorAlpha {
+    return [self colorWithAlphaComponent:0.1f];
 }
 
 @end

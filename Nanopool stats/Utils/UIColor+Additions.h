@@ -14,4 +14,8 @@
 
 + (UIColor *)themeColorBackground;
 
+- (UIColor *)themeColorWithValueAlpha;
+- (UIColor *)themeColorWithValueTitleAlpha;
+- (UIColor *)themeColorWithSeparatorAlpha;
+
 @end
