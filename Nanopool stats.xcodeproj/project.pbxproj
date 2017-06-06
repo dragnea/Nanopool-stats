@@ -40,6 +40,8 @@
 		6A97E3081EDDF5A700E23C7E /* TableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A97E3071EDDF5A700E23C7E /* TableHeader.xib */; };
 		6A97E30B1EDDFD1000E23C7E /* ManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A97E30A1EDDFD1000E23C7E /* ManagedObject.m */; };
 		6A97E30E1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A97E30D1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.m */; };
+		6AAEB0BC1EE71C95005C7AD7 /* AccountDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AAEB0BA1EE71C95005C7AD7 /* AccountDetailsVC.m */; };
+		6AAEB0BD1EE71C95005C7AD7 /* AccountDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AAEB0BB1EE71C95005C7AD7 /* AccountDetailsVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +104,9 @@
 		6A97E30A1EDDFD1000E23C7E /* ManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedObject.m; sourceTree = "<group>"; };
 		6A97E30C1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+Additions.h"; path = "Utils/NSManagedObjectContext+Additions.h"; sourceTree = "<group>"; };
 		6A97E30D1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+Additions.m"; path = "Utils/NSManagedObjectContext+Additions.m"; sourceTree = "<group>"; };
+		6AAEB0B91EE71C95005C7AD7 /* AccountDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountDetailsVC.h; sourceTree = "<group>"; };
+		6AAEB0BA1EE71C95005C7AD7 /* AccountDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailsVC.m; sourceTree = "<group>"; };
+		6AAEB0BB1EE71C95005C7AD7 /* AccountDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountDetailsVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +129,9 @@
 				6480D63C1EDD652D00D78FFD /* AddAccountVC.h */,
 				6480D63D1EDD652D00D78FFD /* AddAccountVC.m */,
 				6480D63E1EDD652D00D78FFD /* AddAccountVC.xib */,
+				6AAEB0B91EE71C95005C7AD7 /* AccountDetailsVC.h */,
+				6AAEB0BA1EE71C95005C7AD7 /* AccountDetailsVC.m */,
+				6AAEB0BB1EE71C95005C7AD7 /* AccountDetailsVC.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -330,6 +338,7 @@
 				6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */,
 				6480D6451EDD6BCA00D78FFD /* AccountSelectCell.xib in Resources */,
 				6480D63B1EDC5EC200D78FFD /* AccountTypeHeader.xib in Resources */,
+				6AAEB0BD1EE71C95005C7AD7 /* AccountDetailsVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +363,7 @@
 				6498E2941EDC453A00973BC1 /* main.m in Sources */,
 				6480D6221EDC55B500D78FFD /* Account.m in Sources */,
 				6480D6651EDDAF6B00D78FFD /* AFURLResponseSerialization.m in Sources */,
+				6AAEB0BC1EE71C95005C7AD7 /* AccountDetailsVC.m in Sources */,
 				6480D6641EDDAF6B00D78FFD /* AFURLRequestSerialization.m in Sources */,
 				6480D6631EDDAF6B00D78FFD /* AFSecurityPolicy.m in Sources */,
 				6480D6441EDD6BCA00D78FFD /* AccountSelectCell.m in Sources */,

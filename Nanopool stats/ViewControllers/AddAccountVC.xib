@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddAccountVC">
             <connections>
-                <outlet property="addButton" destination="GGx-1Q-u78" id="rzd-5N-YEk"/>
                 <outlet property="tableView" destination="v2k-uj-aq2" id="iEv-MJ-Clo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,68 +21,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="v2k-uj-aq2">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="7RS-Is-Sk4"/>
                         <outlet property="delegate" destination="-1" id="Wf9-zx-1MP"/>
                     </connections>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fE-6s-csd">
-                    <rect key="frame" x="97.5" y="29" width="180" height="26"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="26" id="6Ub-LO-bNZ"/>
-                        <constraint firstAttribute="width" constant="180" id="Sxf-QB-TvN"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDd-RW-KE4">
-                    <rect key="frame" x="16" y="20" width="44" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="44" id="Q1A-UV-m5A"/>
-                        <constraint firstAttribute="height" constant="44" id="hbI-fp-Q9U"/>
-                    </constraints>
-                    <state key="normal" image="dismiss_arrow"/>
-                    <connections>
-                        <action selector="dismissButtonTouched:" destination="-1" eventType="touchUpInside" id="tcs-FT-urD"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGx-1Q-u78">
-                    <rect key="frame" x="315" y="20" width="44" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="44" id="222-ad-dlv"/>
-                        <constraint firstAttribute="height" constant="44" id="Uvi-Zq-gAZ"/>
-                    </constraints>
-                    <state key="normal" title="Save">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled">
-                        <color key="titleColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="addButtonTouched:" destination="-1" eventType="touchUpInside" id="nlg-af-hcG"/>
-                    </connections>
-                </button>
             </subviews>
-            <color key="backgroundColor" red="0.30588235289999999" green="0.34901960780000002" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="LDd-RW-KE4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="5jR-Li-Tf4"/>
-                <constraint firstItem="5fE-6s-csd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="29" id="9Kw-re-vON"/>
-                <constraint firstItem="5fE-6s-csd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="BBZ-Fo-IlV"/>
                 <constraint firstAttribute="trailing" secondItem="v2k-uj-aq2" secondAttribute="trailing" id="Hm5-bt-oup"/>
-                <constraint firstItem="v2k-uj-aq2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="OfG-MH-KAz"/>
-                <constraint firstItem="LDd-RW-KE4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="P10-Io-HKD"/>
-                <constraint firstAttribute="trailing" secondItem="GGx-1Q-u78" secondAttribute="trailing" constant="16" id="g43-mA-2vM"/>
+                <constraint firstItem="v2k-uj-aq2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OfG-MH-KAz"/>
                 <constraint firstAttribute="bottom" secondItem="v2k-uj-aq2" secondAttribute="bottom" id="gf0-hQ-1Qg"/>
                 <constraint firstItem="v2k-uj-aq2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="h34-JZ-gBh"/>
-                <constraint firstItem="GGx-1Q-u78" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="tMk-QV-80A"/>
             </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <point key="canvasLocation" x="13.5" y="40.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="dismiss_arrow" width="24" height="12"/>
-    </resources>
 </document>

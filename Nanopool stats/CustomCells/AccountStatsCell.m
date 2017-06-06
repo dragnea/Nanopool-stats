@@ -14,7 +14,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *accountLabel;
 
 @property (nonatomic, weak) IBOutlet UILabel *currentHashrateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *currentHashrateTitileLabel;
+@property (nonatomic, weak) IBOutlet UILabel *currentHashrateTitleLabel;
 
 @property (nonatomic, weak) IBOutlet UILabel *averageHashrateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *averageHashrateTitleLabel;
@@ -36,7 +36,7 @@
     self.averageHashrateLabel.textColor = self.balanceLabel.textColor;
     
     self.accountLabel.textColor = [[UIColor whiteColor] themeColorWithValueTitleAlpha];
-    self.currentHashrateTitileLabel.textColor = self.accountLabel.textColor;
+    self.currentHashrateTitleLabel.textColor = self.accountLabel.textColor;
     self.averageHashrateTitleLabel.textColor = self.accountLabel.textColor;
     
     self.numberFormatter = [[NSNumberFormatter alloc] init];

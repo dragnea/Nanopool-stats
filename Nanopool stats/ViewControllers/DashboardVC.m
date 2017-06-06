@@ -28,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Dashboard";
     self.view.backgroundColor = [UIColor themeColorBackground];
     self.placeholderTitleLabel.textColor = [UIColor whiteColor];
     self.placeholderDetailsLabel.textColor = [[UIColor whiteColor] themeColorWithValueTitleAlpha];
@@ -55,10 +56,6 @@
     [[NanopoolController sharedInstance] updateAccounts];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -75,7 +72,7 @@
 }
 
 - (IBAction)addCcountButtonTouched:(id)sender {
-    [self presentViewController:[[AddAccountVC alloc] init] animated:YES completion:nil];
+    [self.navigationController pushViewController:[[AddAccountVC alloc] init] animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

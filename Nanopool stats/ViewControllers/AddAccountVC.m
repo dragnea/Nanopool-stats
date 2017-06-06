@@ -14,7 +14,6 @@
 
 @interface AddAccountVC ()<UITableViewDataSource, UITableViewDelegate, TextFieldCellDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIButton *addButton;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic) AccountType accountType;
@@ -26,17 +25,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor themeColorBackground];
+    
+    //self.view.backgroundColor = [UIColor themeColorBackground];
+    self.title = @"Add account";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(addButtonTouched:)];
     
     [TableHeader registerNibInTableView:self.tableView];
     [TextFieldCell registerNibInTableView:self.tableView];
     [AccountSelectCell registerNibInTableView:self.tableView];
     
-    self.addButton.enabled = NO;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,12 +42,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)dismissButtonTouched:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.tableView endEditing:YES];
-}
-
-- (IBAction)addButtonTouched:(id)sender {
+- (void)addButtonTouched:(id)sender {
     [self.tableView endEditing:YES];
     [[NanopoolController sharedInstance] addAccountWithType:self.accountType name:self.name address:self.address completion:^(NSString *error) {
         NSString *message;
@@ -61,7 +54,7 @@
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"New account" message:message preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             if (!error) {
-                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         }]];
         [self presentViewController: alertController animated:YES completion:nil];
@@ -151,7 +144,7 @@
             break;
         case 1:
             self.accountType = [[Account types][indexPath.row] integerValue];
-            self.addButton.enabled = (self.address.length && self.accountType);
+            self.navigationItem.rightBarButtonItem.enabled = (self.address.length && self.accountType);
             break;
         default:
             break;
@@ -170,7 +163,7 @@
         self.name = text;
     } else {
         self.address = text;
-        self.addButton.enabled = (text.length && self.accountType);
+        self.navigationItem.rightBarButtonItem.enabled = (text.length && self.accountType);
     }
 }
 
