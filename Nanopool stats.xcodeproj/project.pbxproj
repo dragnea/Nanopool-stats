@@ -36,6 +36,7 @@
 		6498E2A21EDC453A00973BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6498E2A01EDC453A00973BC1 /* LaunchScreen.storyboard */; };
 		6498E2AC1EDC461C00973BC1 /* DashboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2AA1EDC461C00973BC1 /* DashboardVC.m */; };
 		6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */; };
+		64A102F81EE8191E00ADE84F /* Worker.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A102F71EE8191E00ADE84F /* Worker.m */; };
 		6A97E3061EDDF59700E23C7E /* TableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A97E3051EDDF59700E23C7E /* TableHeader.m */; };
 		6A97E3081EDDF5A700E23C7E /* TableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A97E3071EDDF5A700E23C7E /* TableHeader.xib */; };
 		6A97E30B1EDDFD1000E23C7E /* ManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A97E30A1EDDFD1000E23C7E /* ManagedObject.m */; };
@@ -97,6 +98,8 @@
 		6498E2A91EDC461C00973BC1 /* DashboardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardVC.h; sourceTree = "<group>"; };
 		6498E2AA1EDC461C00973BC1 /* DashboardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardVC.m; sourceTree = "<group>"; };
 		6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardVC.xib; sourceTree = "<group>"; };
+		64A102F61EE8191E00ADE84F /* Worker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Worker.h; sourceTree = "<group>"; };
+		64A102F71EE8191E00ADE84F /* Worker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Worker.m; sourceTree = "<group>"; };
 		6A97E3041EDDF59700E23C7E /* TableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeader.h; sourceTree = "<group>"; };
 		6A97E3051EDDF59700E23C7E /* TableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeader.m; sourceTree = "<group>"; };
 		6A97E3071EDDF5A700E23C7E /* TableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableHeader.xib; sourceTree = "<group>"; };
@@ -174,6 +177,8 @@
 			children = (
 				6480D6201EDC55B500D78FFD /* Account.h */,
 				6480D6211EDC55B500D78FFD /* Account.m */,
+				64A102F61EE8191E00ADE84F /* Worker.h */,
+				64A102F71EE8191E00ADE84F /* Worker.m */,
 				6480D62A1EDC5A9A00D78FFD /* Database.xcdatamodeld */,
 				6A97E3091EDDFD1000E23C7E /* ManagedObject.h */,
 				6A97E30A1EDDFD1000E23C7E /* ManagedObject.m */,
@@ -374,6 +379,7 @@
 				6480D6291EDC59E500D78FFD /* CoreData.m in Sources */,
 				6480D6691EDEFA1500D78FFD /* DMSButton.m in Sources */,
 				6480D64E1EDD98D400D78FFD /* UIColor+Additions.m in Sources */,
+				64A102F81EE8191E00ADE84F /* Worker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

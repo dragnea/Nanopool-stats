@@ -95,6 +95,8 @@
                         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                         dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
                         formattedValue = [dateFormatter dateFromString:value];
+                    } else if ([value isKindOfClass:[NSNumber class]]) {
+                        formattedValue = [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
                     } else {
                         formattedValue = nil;
                     }

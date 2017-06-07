@@ -7,7 +7,8 @@
 //
 
 #import "ManagedObject.h"
-#import <UIKit/UIColor.h>
+
+@class Worker;
 
 typedef NS_ENUM(int16_t, AccountType) {
     AccountTypeNone,
@@ -23,15 +24,16 @@ typedef NS_ENUM(int16_t, AccountType) {
 @property (nonatomic) AccountType type;
 @property (nullable, nonatomic, copy) NSString *address;
 @property (nullable, nonatomic, copy) NSString *name;
+@property (nullable, nonatomic, copy) NSDate *lastUpdate;
 @property (nonatomic) double balance;
 @property (nonatomic) double hashrate;
 @property (nullable, nonatomic, copy) NSDictionary *avgHashrate;
+@property (nullable, nonatomic, retain) NSSet <Worker *>*workers;
 
 @property (nonatomic, readonly) double avgHashrate6h;
 
 + (NSString * _Nonnull)nameForType:(AccountType)type;
 + (NSString * _Nonnull)currencyForType:(AccountType)type;
-+ (UIColor * _Nonnull)colorForType:(AccountType)type;
 + (NSString * _Nullable)currencyIconForType:(AccountType)type large:(BOOL)large;
 + (NSString * _Nullable)apiForType:(AccountType)type;
 + (NSArray * _Nonnull)types;

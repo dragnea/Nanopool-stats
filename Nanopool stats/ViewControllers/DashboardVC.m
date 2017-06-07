@@ -11,16 +11,16 @@
 #import "AccountStatsCell.h"
 #import "Account.h"
 #import "CoreData.h"
-#import "AddAccountVC.h"
 #import "NanopoolController.h"
+#import "AddAccountVC.h"
+#import "AccountDetailsVC.h"
 
 @interface DashboardVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UILabel *placeholderTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *placeholderDetailsLabel;
 @property (nonatomic, weak) IBOutlet DMSButton *addButton;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *addButtonBottomConstraint;
-@property (nonatomic, strong) NSFetchedResultsController *accountsFetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController <Account *>*accountsFetchedResultsController;
 @end
 
 @implementation DashboardVC
@@ -63,12 +63,8 @@
 
 - (void)updatePlaceholder {
     BOOL showPlaceholder = !self.accountsFetchedResultsController.fetchedObjects.count;
-    self.addButtonBottomConstraint.constant = showPlaceholder ? self.view.bounds.size.height / 2.0f + 80.0f : 20.0f;
-    [UIView animateWithDuration:0.25f animations:^{
-        self.placeholderTitleLabel.alpha = showPlaceholder;
-        self.placeholderDetailsLabel.alpha = showPlaceholder;
-        [self.view layoutIfNeeded];
-    }];
+    self.placeholderTitleLabel.alpha = showPlaceholder;
+    self.placeholderDetailsLabel.alpha = showPlaceholder;
 }
 
 - (IBAction)addCcountButtonTouched:(id)sender {
@@ -109,6 +105,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *address = [self.accountsFetchedResultsController objectAtIndexPath:indexPath].address;
+    AccountDetailsVC *accountDetailsVC = [[AccountDetailsVC alloc] initWithAddress:address];
+    [self.navigationController pushViewController:accountDetailsVC animated:YES];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

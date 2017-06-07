@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DashboardVC">
             <connections>
                 <outlet property="addButton" destination="ZM5-XV-A5S" id="roQ-6u-Hmv"/>
-                <outlet property="addButtonBottomConstraint" destination="vXM-w7-xMr" id="rn4-VX-mxP"/>
                 <outlet property="placeholderDetailsLabel" destination="Ctz-h9-BXg" id="P72-zM-IKY"/>
                 <outlet property="placeholderTitleLabel" destination="HXy-wp-TTb" id="Qrd-AK-Mtq"/>
                 <outlet property="tableView" destination="YnM-vH-azl" id="XOF-eT-ilf"/>
@@ -25,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="YnM-vH-azl">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="SgG-W2-Ajo"/>
@@ -42,14 +41,14 @@
                         <action selector="addCcountButtonTouched:" destination="-1" eventType="touchUpInside" id="cVi-IQ-iHy"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No account to display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXy-wp-TTb">
-                    <rect key="frame" x="20" y="550.5" width="335" height="20.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No accounts to display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXy-wp-TTb">
+                    <rect key="frame" x="20" y="297.5" width="335" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please use the button below to add your accounts" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ctz-h9-BXg">
-                    <rect key="frame" x="20" y="571" width="335" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can add as many accounts as you want. Here you'll see a summary of informations for each account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ctz-h9-BXg">
+                    <rect key="frame" x="20" y="318" width="335" height="31.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -60,18 +59,19 @@
                 <constraint firstItem="Ctz-h9-BXg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="6At-7G-q7h"/>
                 <constraint firstAttribute="bottom" secondItem="YnM-vH-azl" secondAttribute="bottom" id="A1l-pX-qWW"/>
                 <constraint firstAttribute="trailing" secondItem="ZM5-XV-A5S" secondAttribute="trailing" constant="20" id="EjV-Ei-ZIV"/>
-                <constraint firstItem="ZM5-XV-A5S" firstAttribute="top" secondItem="Ctz-h9-BXg" secondAttribute="bottom" constant="16" id="GUD-05-2Jh"/>
+                <constraint firstItem="Ctz-h9-BXg" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Fdi-Se-x1g"/>
                 <constraint firstItem="HXy-wp-TTb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Ncb-sS-xbW"/>
                 <constraint firstAttribute="trailing" secondItem="Ctz-h9-BXg" secondAttribute="trailing" constant="20" id="Ofr-dp-AN8"/>
                 <constraint firstItem="Ctz-h9-BXg" firstAttribute="top" secondItem="HXy-wp-TTb" secondAttribute="bottom" id="aPd-nN-QPK"/>
-                <constraint firstItem="YnM-vH-azl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="cot-eD-AEP"/>
+                <constraint firstItem="YnM-vH-azl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cot-eD-AEP"/>
                 <constraint firstAttribute="trailing" secondItem="HXy-wp-TTb" secondAttribute="trailing" constant="20" id="k6L-0L-iyP"/>
                 <constraint firstAttribute="trailing" secondItem="YnM-vH-azl" secondAttribute="trailing" id="q1a-P0-Uzf"/>
                 <constraint firstItem="ZM5-XV-A5S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qg1-bq-BcF"/>
                 <constraint firstItem="YnM-vH-azl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sMC-KW-Tb6"/>
                 <constraint firstAttribute="bottom" secondItem="ZM5-XV-A5S" secondAttribute="bottom" constant="20" id="vXM-w7-xMr"/>
             </constraints>
-            <point key="canvasLocation" x="34.5" y="53.5"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="8" y="54"/>
         </view>
     </objects>
 </document>

@@ -10,4 +10,6 @@
 
 @interface AccountDetailsVC : UIViewController
 
+- (id)initWithAddress:(NSString *)address;
+
 @end

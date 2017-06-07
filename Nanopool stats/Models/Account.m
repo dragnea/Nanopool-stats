@@ -7,15 +7,16 @@
 //
 
 #import "Account.h"
-#import <UIKit/UIColor.h>
 
 @implementation Account
 @dynamic type;
 @dynamic address;
 @dynamic name;
+@dynamic lastUpdate;
 @dynamic hashrate;
 @dynamic avgHashrate;
 @dynamic balance;
+@dynamic workers;
 
 + (NSString *)nameForType:(AccountType)type {
     switch (type) {
@@ -52,25 +53,6 @@
             return @"Pasc";
         default:
             return @"n/a";
-    }
-}
-
-+ (UIColor * _Nonnull)colorForType:(AccountType)type {
-    switch (type) {
-        case AccountTypeEthereum:
-            return [UIColor decColorWithRed:240.0f green:107.0f blue:71.0f alpha:1.0f];
-        case AccountTypeEthereumClassic:
-            return [UIColor decColorWithRed:74.0f green:185.0f blue:5.0f alpha:1.0f];
-        case AccountTypeSiaCoin:
-            return [UIColor decColorWithRed:55.0f green:180.0f blue:236.0f alpha:1.0f];
-        case AccountTypeZCash:
-            return [UIColor decColorWithRed:84.0f green:130.0f blue:171.0f alpha:1.0f];
-        case AccountTypeMonero:
-            return [UIColor decColorWithRed:82.0f green:82.0f blue:82.0f alpha:1.0f];
-        case AccountTypePascal:
-            return [UIColor decColorWithRed:255.0f green:183.0f blue:0.0f alpha:1.0f];
-        default:
-            return [UIColor clearColor];
     }
 }
 

@@ -13,6 +13,7 @@
 @protocol TextFieldCellDelegate <NSObject>
 
 - (void)textFieldCell:(TextFieldCell *)textFieldCell textDidChanged:(NSString *)text;
+- (void)textFieldCellDidReturn:(TextFieldCell *)textFieldCell;
 
 @end
 

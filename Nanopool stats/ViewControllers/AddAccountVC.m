@@ -25,10 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    //self.view.backgroundColor = [UIColor themeColorBackground];
     self.title = @"Add account";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(addButtonTouched:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(addAccount)];
     
     [TableHeader registerNibInTableView:self.tableView];
     [TextFieldCell registerNibInTableView:self.tableView];
@@ -42,7 +40,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)addButtonTouched:(id)sender {
+- (void)addAccount {
     [self.tableView endEditing:YES];
     [[NanopoolController sharedInstance] addAccountWithType:self.accountType name:self.name address:self.address completion:^(NSString *error) {
         NSString *message;
@@ -164,6 +162,12 @@
     } else {
         self.address = text;
         self.navigationItem.rightBarButtonItem.enabled = (text.length && self.accountType);
+    }
+}
+
+- (void)textFieldCellDidReturn:(TextFieldCell *)textFieldCell {
+    if (self.navigationItem.rightBarButtonItem.enabled) {
+        [self addAccount];
     }
 }
 

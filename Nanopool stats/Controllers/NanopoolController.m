@@ -8,6 +8,7 @@
 
 #import "NanopoolController.h"
 #import "CoreData.h"
+#import "Worker.h"
 #import "AFNetworking.h"
 
 typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *error);
@@ -73,7 +74,14 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
         NSManagedObjectContext *workerContext = [CoreData workerContext];
         [workerContext performBlock:^{
             Account *account = [Account entityInContext:workerContext key:@"address" value:address shouldCreate:YES];
-            [account updateWithDictionary:responseObject[@"data"]];
+            NSDictionary *accountDictionary = responseObject[@"data"];
+            [account updateWithDictionary:accountDictionary];
+            account.lastUpdate = [NSDate date];
+            for (NSDictionary *workerDictionary in accountDictionary[@"worker"]) {
+                Worker *worker = [Worker entityInContext:workerContext key:@"id" value:workerDictionary[@"id"] shouldCreate:YES];
+                [worker updateWithDictionary:workerDictionary];
+                worker.account = account;
+            }
             NSError *saveError = nil;
             if (![workerContext save:&saveError]) {
                 // TODO: handle error
