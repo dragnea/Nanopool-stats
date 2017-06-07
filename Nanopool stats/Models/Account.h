@@ -30,7 +30,12 @@ typedef NS_ENUM(int16_t, AccountType) {
 @property (nullable, nonatomic, copy) NSDictionary *avgHashrate;
 @property (nullable, nonatomic, retain) NSSet <Worker *>*workers;
 
+@property (nonatomic, readonly) double avgHashrate1h;
+@property (nonatomic, readonly) double avgHashrate3h;
 @property (nonatomic, readonly) double avgHashrate6h;
+@property (nonatomic, readonly) double avgHashrate12h;
+@property (nonatomic, readonly) double avgHashrate24h;
+@property (nullable, nonatomic, strong, readonly) NSString *label;
 
 + (NSString * _Nonnull)nameForType:(AccountType)type;
 + (NSString * _Nonnull)currencyForType:(AccountType)type;

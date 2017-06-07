@@ -44,7 +44,6 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
 }
 
 - (void)getMinerWithAccountType:(AccountType)accountType endpoint:(NSString *)endpoint address:(NSString *)address completion:(APICompletionHandler)completion {
-    
     NSString *poolType = [Account apiForType:accountType];
     NSString *stringURL = [[[self.apiURLString stringByAppendingPathComponent:poolType] stringByAppendingPathComponent:endpoint] stringByAppendingPathComponent:address];
     [self.apiManager GET:stringURL parameters:nil progress:nil

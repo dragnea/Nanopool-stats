@@ -107,8 +107,28 @@
     return types;
 }
 
+- (double)avgHashrate1h {
+    return [self.avgHashrate[@"h1"] doubleValue];
+}
+
+- (double)avgHashrate3h {
+    return [self.avgHashrate[@"h3"] doubleValue];
+}
+
 - (double)avgHashrate6h {
     return [self.avgHashrate[@"h6"] doubleValue];
+}
+
+- (double)avgHashrate12h {
+    return [self.avgHashrate[@"h12"] doubleValue];
+}
+
+- (double)avgHashrate24h {
+    return [self.avgHashrate[@"h24"] doubleValue];
+}
+
+- (NSString *)label {
+    return (!self.name ? self.address : self.name);;
 }
 
 @end

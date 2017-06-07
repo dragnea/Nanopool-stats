@@ -37,6 +37,10 @@
 		6498E2AC1EDC461C00973BC1 /* DashboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2AA1EDC461C00973BC1 /* DashboardVC.m */; };
 		6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */; };
 		64A102F81EE8191E00ADE84F /* Worker.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A102F71EE8191E00ADE84F /* Worker.m */; };
+		6A85161C1EE88066003B91B2 /* AverageHashratesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A85161A1EE88066003B91B2 /* AverageHashratesCell.m */; };
+		6A85161D1EE88066003B91B2 /* AverageHashratesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A85161B1EE88066003B91B2 /* AverageHashratesCell.xib */; };
+		6A8516211EE88126003B91B2 /* TitleValueCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A85161F1EE88126003B91B2 /* TitleValueCollectionCell.m */; };
+		6A8516221EE88126003B91B2 /* TitleValueCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8516201EE88126003B91B2 /* TitleValueCollectionCell.xib */; };
 		6A97E3061EDDF59700E23C7E /* TableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A97E3051EDDF59700E23C7E /* TableHeader.m */; };
 		6A97E3081EDDF5A700E23C7E /* TableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A97E3071EDDF5A700E23C7E /* TableHeader.xib */; };
 		6A97E30B1EDDFD1000E23C7E /* ManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A97E30A1EDDFD1000E23C7E /* ManagedObject.m */; };
@@ -100,6 +104,12 @@
 		6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardVC.xib; sourceTree = "<group>"; };
 		64A102F61EE8191E00ADE84F /* Worker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Worker.h; sourceTree = "<group>"; };
 		64A102F71EE8191E00ADE84F /* Worker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Worker.m; sourceTree = "<group>"; };
+		6A8516191EE88066003B91B2 /* AverageHashratesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AverageHashratesCell.h; sourceTree = "<group>"; };
+		6A85161A1EE88066003B91B2 /* AverageHashratesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AverageHashratesCell.m; sourceTree = "<group>"; };
+		6A85161B1EE88066003B91B2 /* AverageHashratesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AverageHashratesCell.xib; sourceTree = "<group>"; };
+		6A85161E1EE88126003B91B2 /* TitleValueCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleValueCollectionCell.h; sourceTree = "<group>"; };
+		6A85161F1EE88126003B91B2 /* TitleValueCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleValueCollectionCell.m; sourceTree = "<group>"; };
+		6A8516201EE88126003B91B2 /* TitleValueCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleValueCollectionCell.xib; sourceTree = "<group>"; };
 		6A97E3041EDDF59700E23C7E /* TableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeader.h; sourceTree = "<group>"; };
 		6A97E3051EDDF59700E23C7E /* TableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeader.m; sourceTree = "<group>"; };
 		6A97E3071EDDF5A700E23C7E /* TableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableHeader.xib; sourceTree = "<group>"; };
@@ -153,6 +163,12 @@
 				6480D6461EDD8D5800D78FFD /* TextFieldCell.h */,
 				6480D6471EDD8D5800D78FFD /* TextFieldCell.m */,
 				6480D6481EDD8D5800D78FFD /* TextFieldCell.xib */,
+				6A8516191EE88066003B91B2 /* AverageHashratesCell.h */,
+				6A85161A1EE88066003B91B2 /* AverageHashratesCell.m */,
+				6A85161B1EE88066003B91B2 /* AverageHashratesCell.xib */,
+				6A85161E1EE88126003B91B2 /* TitleValueCollectionCell.h */,
+				6A85161F1EE88126003B91B2 /* TitleValueCollectionCell.m */,
+				6A8516201EE88126003B91B2 /* TitleValueCollectionCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -338,10 +354,12 @@
 				6480D61E1EDC556700D78FFD /* AccountStatsCell.xib in Resources */,
 				6480D6401EDD652D00D78FFD /* AddAccountVC.xib in Resources */,
 				6480D64A1EDD8D5800D78FFD /* TextFieldCell.xib in Resources */,
+				6A8516221EE88126003B91B2 /* TitleValueCollectionCell.xib in Resources */,
 				6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */,
 				6A97E3081EDDF5A700E23C7E /* TableHeader.xib in Resources */,
 				6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */,
 				6480D6451EDD6BCA00D78FFD /* AccountSelectCell.xib in Resources */,
+				6A85161D1EE88066003B91B2 /* AverageHashratesCell.xib in Resources */,
 				6480D63B1EDC5EC200D78FFD /* AccountTypeHeader.xib in Resources */,
 				6AAEB0BD1EE71C95005C7AD7 /* AccountDetailsVC.xib in Resources */,
 			);
@@ -359,12 +377,14 @@
 				6480D63F1EDD652D00D78FFD /* AddAccountVC.m in Sources */,
 				6480D6491EDD8D5800D78FFD /* TextFieldCell.m in Sources */,
 				6A97E30B1EDDFD1000E23C7E /* ManagedObject.m in Sources */,
+				6A85161C1EE88066003B91B2 /* AverageHashratesCell.m in Sources */,
 				6480D62C1EDC5A9A00D78FFD /* Database.xcdatamodeld in Sources */,
 				6480D6661EDDAF6B00D78FFD /* AFURLSessionManager.m in Sources */,
 				6480D6251EDC58CA00D78FFD /* CustomCell.m in Sources */,
 				6A97E30E1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.m in Sources */,
 				6480D6621EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m in Sources */,
 				6A97E3061EDDF59700E23C7E /* TableHeader.m in Sources */,
+				6A8516211EE88126003B91B2 /* TitleValueCollectionCell.m in Sources */,
 				6498E2941EDC453A00973BC1 /* main.m in Sources */,
 				6480D6221EDC55B500D78FFD /* Account.m in Sources */,
 				6480D6651EDDAF6B00D78FFD /* AFURLResponseSerialization.m in Sources */,
