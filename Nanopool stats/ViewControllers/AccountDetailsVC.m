@@ -38,7 +38,7 @@
     [AverageHashratesCell registerNibInTableView:self.tableView];
     [HashrateGraphCell registerNibInTableView:self.tableView];
     [[NanopoolController sharedInstance] updateHashrateHistoryForAccount:self.account completion:^(NSString *error) {
-        
+        [self.tableView reloadData];
     }];
 }
 

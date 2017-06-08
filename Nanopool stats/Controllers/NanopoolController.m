@@ -112,10 +112,14 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
                 account.type = accountType;
                 NSError *saveError = nil;
                 if (![workerContext save:&saveError]) {
-                    completion(saveError.localizedDescription);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(saveError.localizedDescription);
+                    });
                 } else {
-                    [self updateGeneralInfoForAccountType:accountType address:address];
-                    completion(nil);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self updateGeneralInfoForAccountType:accountType address:address];
+                        completion(nil);
+                    });
                 }
             }];
         } else {
@@ -135,9 +139,13 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
                 account.hashrateHistory = responseObject[@"data"];
                 NSError *saveError = nil;
                 if (![workerContext save:&saveError]) {
-                    completion(saveError.localizedDescription);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(saveError.localizedDescription);
+                    });
                 } else {
-                    completion(nil);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(nil);
+                    });
                 }
             }];
         } else {
