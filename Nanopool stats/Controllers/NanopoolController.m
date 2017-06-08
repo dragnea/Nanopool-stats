@@ -93,6 +93,13 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
 
 #pragma mark - public methods
 
+- (void)updateAccounts {
+    NSArray *accounts = [Account entitiesInContext:[CoreData mainContext]];
+    for (Account *account in accounts) {
+        [self updateGeneralInfoForAccountType:account.type address:account.address];
+    }
+}
+
 - (void)addAccountWithType:(AccountType)accountType name:(NSString *)name address:(NSString *)address completion:(completionBlock)completion {
     // check miner account
     [self getMinerWithAccountType:accountType endpoint:@"accountexist" address:address completion:^(NSDictionary *responseObject, NSString *error) {
@@ -118,11 +125,25 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
     
 }
 
-- (void)updateAccounts {
-    NSArray *accounts = [Account entitiesInContext:[CoreData mainContext]];
-    for (Account *account in accounts) {
-        [self updateGeneralInfoForAccountType:account.type address:account.address];
-    }
+- (void)updateHashrateHistoryForAccount:(Account *)account completion:(completionBlock)completion {
+    NSString *address = account.address;
+    [self getMinerWithAccountType:account.type endpoint:@"history" address:address completion:^(NSDictionary *responseObject, NSString *error) {
+        if (!error) {
+            NSManagedObjectContext *workerContext = [CoreData workerContext];
+            [workerContext performBlock:^{
+                Account *account = [Account entityInContext:workerContext key:@"address" value:address shouldCreate:YES];
+                account.hashrateHistory = responseObject[@"data"];
+                NSError *saveError = nil;
+                if (![workerContext save:&saveError]) {
+                    completion(saveError.localizedDescription);
+                } else {
+                    completion(nil);
+                }
+            }];
+        } else {
+            completion(error);
+        }
+    }];
 }
 
 @end

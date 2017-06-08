@@ -28,7 +28,7 @@
 }
 
 - (UIColor *)themeColorWithSeparatorAlpha {
-    return [self colorWithAlphaComponent:0.1f];
+    return [self colorWithAlphaComponent:0.2f];
 }
 
 @end

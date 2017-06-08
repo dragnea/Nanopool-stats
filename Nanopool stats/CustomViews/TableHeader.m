@@ -21,9 +21,9 @@
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f/[UIScreen mainScreen].scale);
-    CGContextSetStrokeColorWithColor(context, [[UIColor themeColorBackground] themeColorWithSeparatorAlpha].CGColor);
-    CGContextMoveToPoint(context, 0.0f, rect.size.height - 1.0f);
-    CGContextAddLineToPoint(context, rect.size.width, rect.size.height - 1.0f);
+    CGContextSetStrokeColorWithColor(context, [UIColor themeColorBackground].CGColor);
+    CGContextMoveToPoint(context, 0.0f, rect.size.height);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
     CGContextStrokePath(context);
 }
 

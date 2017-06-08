@@ -17,5 +17,6 @@ typedef void(^completionBlock)(NSString *error);
 
 - (void)updateAccounts;
 - (void)addAccountWithType:(AccountType)accountType name:(NSString *)name address:(NSString *)address completion:(completionBlock)completion;
+- (void)updateHashrateHistoryForAccount:(Account *)account completion:(completionBlock)completion;
 
 @end

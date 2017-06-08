@@ -28,6 +28,7 @@ typedef NS_ENUM(int16_t, AccountType) {
 @property (nonatomic) double balance;
 @property (nonatomic) double hashrate;
 @property (nullable, nonatomic, copy) NSDictionary *avgHashrate;
+@property (nullable, nonatomic, copy) NSArray *hashrateHistory;
 @property (nullable, nonatomic, retain) NSSet <Worker *>*workers;
 
 @property (nonatomic, readonly) double avgHashrate1h;

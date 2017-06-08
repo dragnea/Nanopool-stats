@@ -15,6 +15,7 @@
 @dynamic lastUpdate;
 @dynamic hashrate;
 @dynamic avgHashrate;
+@dynamic hashrateHistory;
 @dynamic balance;
 @dynamic workers;
 

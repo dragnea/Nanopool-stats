@@ -10,7 +10,9 @@
 #import "Account.h"
 #import "CoreData.h"
 #import "AverageHashratesCell.h"
+#import "HashrateGraphCell.h"
 #import "TableHeader.h"
+#import "NanopoolController.h"
 
 @interface AccountDetailsVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -23,10 +25,10 @@
 - (id)initWithAddress:(NSString *)address {
     if (self = [super init]) {
         self.address = address;
-        self.account = [Account entityInContext:[CoreData mainContext] key:@"address" value:address shouldCreate:NO];
     }
     return self;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -34,6 +36,10 @@
     
     [TableHeader registerNibInTableView:self.tableView];
     [AverageHashratesCell registerNibInTableView:self.tableView];
+    [HashrateGraphCell registerNibInTableView:self.tableView];
+    [[NanopoolController sharedInstance] updateHashrateHistoryForAccount:self.account completion:^(NSString *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,15 +47,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (Account *)account {
+    return [Account entityInContext:[CoreData mainContext] key:@"address" value:self.address shouldCreate:NO];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
+            return 1;
+        case 1:
             return 1;
         default:
             return 0;
@@ -63,19 +75,58 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [AverageHashratesCell height];
+    switch (indexPath.section) {
+        case 0:
+            switch (indexPath.row) {
+                case 0:
+                    return [AverageHashratesCell height];
+                default:
+                    return 1.0f;
+            }
+            break;
+        case 1:
+            switch (indexPath.row) {
+                case 0:
+                    return [HashrateGraphCell height];
+                default:
+                    return 1.0f;
+            }
+        default:
+            return 1.0f;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     TableHeader *headerView = [TableHeader headerFooterInTableView:tableView];
-    headerView.text = @"Calculated average hashrate";
+    switch (section) {
+        case 0:
+            headerView.text = @"Calculated average hashrate";
+            break;
+        case 1:
+            headerView.text = @"Hashrate MH/s";
+            break;
+        default:
+            headerView.text = @"???";
+            break;
+    }
     return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AverageHashratesCell *averageCell = [AverageHashratesCell cellInTableView:tableView forIndexPath:indexPath];
-    averageCell.account = self.account;
-    return averageCell;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            AverageHashratesCell *averageCell = [AverageHashratesCell cellInTableView:tableView forIndexPath:indexPath];
+            averageCell.account = self.account;
+            return averageCell;
+        }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            HashrateGraphCell *hashrateGraphCell = [HashrateGraphCell cellInTableView:tableView forIndexPath:indexPath];
+            hashrateGraphCell.account = self.account;
+            return hashrateGraphCell;
+        }
+    }
+    return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"errCell"];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

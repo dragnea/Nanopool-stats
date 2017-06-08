@@ -27,9 +27,11 @@
     [super setSelected:selected];
     /* make visible a cell selection. used to set average hours for hashrate in dashboard
     UIColor *textColor = selected ? [UIColor whiteColor] : [UIColor blackColor];
-    self.titleLabel.textColor = [textColor themeColorWithValueTitleAlpha];
-    self.valueLabel.textColor = [textColor themeColorWithValueAlpha];
-    self.contentView.backgroundColor = selected ? [UIColor themeColorBackground] : [UIColor whiteColor];
+    [UIView animateWithDuration:0.25f animations:^{
+        self.titleLabel.textColor = [textColor themeColorWithValueTitleAlpha];
+        self.valueLabel.textColor = [textColor themeColorWithValueAlpha];
+        self.contentView.backgroundColor = selected ? [UIColor themeColorBackground] : [UIColor whiteColor];
+    }];
     */
 }
 
@@ -41,11 +43,11 @@
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f/[UIScreen mainScreen].scale);
-    CGContextSetStrokeColorWithColor(context, [[UIColor blackColor] themeColorWithSeparatorAlpha].CGColor);
+    CGContextSetStrokeColorWithColor(context, [[UIColor themeColorBackground] themeColorWithSeparatorAlpha].CGColor);
     
     // vertical line
-    CGContextMoveToPoint(context, rect.size.width - 1.0f, 4.0f);
-    CGContextAddLineToPoint(context, rect.size.width - 1.0f, rect.size.height - 4.0f);
+    CGContextMoveToPoint(context, rect.size.width, 4.0f);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height - 4.0f);
     CGContextStrokePath(context);
 }
 
