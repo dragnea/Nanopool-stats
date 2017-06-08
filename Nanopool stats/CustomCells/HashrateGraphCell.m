@@ -8,24 +8,36 @@
 
 #import "HashrateGraphCell.h"
 #import "Account.h"
+#import "BEMSimpleLineGraphView.h"
 
-@interface HashrateGraphCell ()
-@property (nonatomic) double maxValue;
-@property (nonatomic) NSInteger yAxisLinesCount;
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) NSArray *yAxisLabels;
+@interface HashrateGraphCell ()<BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
+@property (nonatomic, weak) IBOutlet BEMSimpleLineGraphView *graphView;
 @end
 
 @implementation HashrateGraphCell
 
 + (CGFloat)height {
-    return 150.0f;
+    return 180.0f;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.yAxisLinesCount = 8;
+    UIColor *themeColor = [UIColor themeColorBackground];
+    
+    self.graphView.animationGraphStyle = BEMLineAnimationFade;
+    self.graphView.animationGraphEntranceTime = 1.0f;
+    self.graphView.displayDotsWhileAnimating = NO;
+    self.graphView.enableBezierCurve = YES;
+    self.graphView.enableReferenceAxisFrame = YES;
+    self.graphView.enableYAxisLabel = YES;
+    self.graphView.enablePopUpReport = YES;
+    self.graphView.widthLine = 1.0f / [UIScreen mainScreen].scale;
+    self.graphView.colorLine = themeColor;
+    self.graphView.colorTop = [UIColor whiteColor];
+    self.graphView.colorReferenceLines = [UIColor blackColor];
+    self.graphView.colorBottom = themeColor;
+    self.graphView.colorYaxisLabel = [[UIColor blackColor] themeColorWithValueTitleAlpha];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -36,44 +48,28 @@
 
 - (void)setAccount:(Account *)account {
     _account = account;
-    self.maxValue = [[account.hashrateHistory valueForKeyPath:@"@max.hashrate"] doubleValue];
-    
-    [self setNeedsDisplay];
+    [self.graphView reloadGraph];
+}
+
+#pragma mark - BEMSimpleLineGraphDataSource
+
+- (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph {
+    return self.account.hashrateHistory.count;
+}
+
+- (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index {
+    return [self.account.hashrateHistory[index][@"hashrate"] floatValue];
+}
+
+#pragma mark - BEMSimpleLineGraphDelegate
+
+- (NSInteger)numberOfYAxisLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph {
+    return 8;
 }
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGRect contentFrame = self.scrollView.frame;
-    CGFloat yAxisLinesSpace = contentFrame.size.height / self.yAxisLinesCount;
-    double hashrateScale = contentFrame.size.height / self.maxValue;
-    
-    CGContextSetLineWidth(context, 1.0f / [UIScreen mainScreen].scale);
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.0f alpha:0.1f].CGColor);
-    
-    NSDictionary *labelsAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:13.0f], NSForegroundColorAttributeName: [UIColor colorWithWhite:0.5f alpha:1.0f]};
-    for (NSInteger yAxisLineIndex = 0; yAxisLineIndex < self.yAxisLinesCount; yAxisLineIndex++) {
-        
-        // draw horizontal lines
-        CGFloat yAxisLineCoord = contentFrame.size.height - yAxisLineIndex * yAxisLinesSpace;
-        CGContextMoveToPoint(context, CGRectGetMinX(contentFrame), yAxisLineCoord);
-        CGContextAddLineToPoint(context, CGRectGetMaxX(contentFrame), yAxisLineCoord);
-        CGContextStrokePath(context);
-        
-        // draw horizontal labels
-        CGRect labelFrame = CGRectMake(16.0f, yAxisLineCoord - 10.0f, CGRectGetMinX(contentFrame) - 16.0f, 15.0f);
-        [@"label" drawInRect:labelFrame withAttributes:labelsAttributes];
-    }
-    
-    NSInteger numberOfHashrates = self.account.hashrateHistory.count;
-    for (NSInteger hashrateIndex = 0; hashrateIndex < numberOfHashrates; hashrateIndex++) {
-        NSDictionary *hashrateDictionary = self.account.hashrateHistory[hashrateIndex];
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[hashrateDictionary[@"date"] doubleValue]];
-        double hashrate = [hashrateDictionary[@"hashrate"] doubleValue];
-        
-    }
-    
-    // bottom line
+    CGContextSetLineWidth(context, 1.0f/[UIScreen mainScreen].scale);
     CGContextSetStrokeColorWithColor(context, [UIColor themeColorBackground].CGColor);
     CGContextMoveToPoint(context, 0.0f, rect.size.height);
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height);

@@ -20,6 +20,14 @@ typedef NS_ENUM(int16_t, AccountType) {
     AccountTypePascal
 };
 
+typedef NS_ENUM(int16_t, AccountAvgHour) {
+    AccountAvgHour1h = 0,
+    AccountAvgHour3h = 1,
+    AccountAvgHour6h = 2,
+    AccountAvgHour12h = 3,
+    AccountAvgHour24h = 4
+};
+
 @interface Account : ManagedObject
 @property (nonatomic) AccountType type;
 @property (nullable, nonatomic, copy) NSString *address;
@@ -27,15 +35,14 @@ typedef NS_ENUM(int16_t, AccountType) {
 @property (nullable, nonatomic, copy) NSDate *lastUpdate;
 @property (nonatomic) double balance;
 @property (nonatomic) double hashrate;
+@property (nonatomic) AccountAvgHour selectedAvgHashrateIndex;
 @property (nullable, nonatomic, copy) NSDictionary *avgHashrate;
 @property (nullable, nonatomic, copy) NSArray *hashrateHistory;
 @property (nullable, nonatomic, retain) NSSet <Worker *>*workers;
 
-@property (nonatomic, readonly) double avgHashrate1h;
-@property (nonatomic, readonly) double avgHashrate3h;
-@property (nonatomic, readonly) double avgHashrate6h;
-@property (nonatomic, readonly) double avgHashrate12h;
-@property (nonatomic, readonly) double avgHashrate24h;
+// custom properties
+@property (nonatomic, readonly) double selectedAvgHashrate;
+@property (nonnull, nonatomic, strong, readonly) NSString *selectedAvgHashrateTitle;
 @property (nullable, nonatomic, strong, readonly) NSString *label;
 
 + (NSString * _Nonnull)nameForType:(AccountType)type;
@@ -43,5 +50,7 @@ typedef NS_ENUM(int16_t, AccountType) {
 + (NSString * _Nullable)currencyIconForType:(AccountType)type large:(BOOL)large;
 + (NSString * _Nullable)apiForType:(AccountType)type;
 + (NSArray * _Nonnull)types;
+- (double)avgHashrateForHour:(AccountAvgHour)hour;
+- (NSString * _Nonnull)avgHashrateTitleForHour:(AccountAvgHour)hour;
 
 @end

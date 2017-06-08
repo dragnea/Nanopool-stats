@@ -47,6 +47,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    NSError *error;
+    if (![[CoreData mainContext] save:&error]) {
+        NSLog(@"err: %@", error.localizedDescription);
+    }
+}
+
 - (Account *)account {
     return [Account entityInContext:[CoreData mainContext] key:@"address" value:self.address shouldCreate:NO];
 }

@@ -25,14 +25,13 @@
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    /* make visible a cell selection. used to set average hours for hashrate in dashboard
+    
     UIColor *textColor = selected ? [UIColor whiteColor] : [UIColor blackColor];
     [UIView animateWithDuration:0.25f animations:^{
         self.titleLabel.textColor = [textColor themeColorWithValueTitleAlpha];
         self.valueLabel.textColor = [textColor themeColorWithValueAlpha];
         self.contentView.backgroundColor = selected ? [UIColor themeColorBackground] : [UIColor whiteColor];
     }];
-    */
 }
 
 - (void)setValue:(NSString *)value forTitle:(NSString *)title {

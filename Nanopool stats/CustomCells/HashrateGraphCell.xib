@@ -11,32 +11,36 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HashrateGraphCell" rowHeight="106" id="KGk-i7-Jjw" customClass="HashrateGraphCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HashrateGraphCell" id="KGk-i7-Jjw" customClass="HashrateGraphCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4V-dv-6P2">
-                        <rect key="frame" x="50" y="0.0" width="270" height="89.5"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOL-RX-Ukv" customClass="BEMSimpleLineGraphView">
+                        <rect key="frame" x="16" y="0.0" width="288" height="104.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="enableBezierCurve" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                         <connections>
-                            <outlet property="delegate" destination="KGk-i7-Jjw" id="BEy-OB-Lru"/>
+                            <outlet property="dataSource" destination="KGk-i7-Jjw" id="Zna-Pk-xXf"/>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="qFA-zq-gkB"/>
                         </connections>
-                    </scrollView>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="c4V-dv-6P2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="CI9-dd-icz"/>
-                    <constraint firstAttribute="trailing" secondItem="c4V-dv-6P2" secondAttribute="trailing" id="Lys-fD-YLy"/>
-                    <constraint firstAttribute="bottom" secondItem="c4V-dv-6P2" secondAttribute="bottom" constant="16" id="N0f-Sh-jip"/>
-                    <constraint firstItem="c4V-dv-6P2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="c6X-zE-bVX"/>
+                    <constraint firstItem="tOL-RX-Ukv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="aEZ-G6-J3e"/>
+                    <constraint firstItem="tOL-RX-Ukv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bRp-hr-Di4"/>
+                    <constraint firstAttribute="bottom" secondItem="tOL-RX-Ukv" secondAttribute="bottom" constant="1" id="p4A-85-tu8"/>
+                    <constraint firstAttribute="trailing" secondItem="tOL-RX-Ukv" secondAttribute="trailing" constant="16" id="rOf-mr-fEJ"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="scrollView" destination="c4V-dv-6P2" id="gEd-EM-bWf"/>
+                <outlet property="graphView" destination="tOL-RX-Ukv" id="xLa-Hx-5Ts"/>
             </connections>
             <point key="canvasLocation" x="-101" y="-3"/>
         </tableViewCell>

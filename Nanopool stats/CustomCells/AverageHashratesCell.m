@@ -12,10 +12,8 @@
 
 @interface AverageHashratesCell ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) NSArray <NSString *>*titles;
-@property (nonatomic, strong) NSArray <NSString *>*values;
 @property (nonatomic, strong) NSNumberFormatter *numberFormatter;
-
+@property (nonatomic, strong) NSArray <NSString *>*values;
 @end
 
 @implementation AverageHashratesCell
@@ -36,8 +34,6 @@
     self.numberFormatter.minimumFractionDigits = 1;
     self.numberFormatter.maximumFractionDigits = 8;
     self.numberFormatter.positiveSuffix = @" MH/s";
-    
-    self.titles = @[@"1 hour", @"3 hours", @"6 hours", @"12 hours", @"24 hours"];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -48,11 +44,11 @@
 
 - (void)setAccount:(Account *)account {
     _account = account;
-    self.values = @[[self.numberFormatter stringFromNumber:@(account.avgHashrate1h)],
-                    [self.numberFormatter stringFromNumber:@(account.avgHashrate3h)],
-                    [self.numberFormatter stringFromNumber:@(account.avgHashrate6h)],
-                    [self.numberFormatter stringFromNumber:@(account.avgHashrate12h)],
-                    [self.numberFormatter stringFromNumber:@(account.avgHashrate24h)]];
+    self.values = @[[self.numberFormatter stringFromNumber:@([self.account avgHashrateForHour:AccountAvgHour1h])],
+                    [self.numberFormatter stringFromNumber:@([self.account avgHashrateForHour:AccountAvgHour3h])],
+                    [self.numberFormatter stringFromNumber:@([self.account avgHashrateForHour:AccountAvgHour6h])],
+                    [self.numberFormatter stringFromNumber:@([self.account avgHashrateForHour:AccountAvgHour12h])],
+                    [self.numberFormatter stringFromNumber:@([self.account avgHashrateForHour:AccountAvgHour24h])]];
     [self.collectionView reloadData];
 }
 
@@ -68,7 +64,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TitleValueCollectionCell *titleValueCell = [TitleValueCollectionCell cellInCollectionView:collectionView atIndexPath:indexPath];
-    [titleValueCell setValue:self.values[indexPath.item] forTitle:self.titles[indexPath.item]];
+    [titleValueCell setValue:self.values[indexPath.item] forTitle:[self.account avgHashrateTitleForHour:indexPath.item]];
+    titleValueCell.selected = self.account.selectedAvgHashrateIndex == indexPath.item;
     return titleValueCell;
 }
 
@@ -84,6 +81,10 @@
 
 #pragma mark - UICollectionViewDelegate
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    self.account.selectedAvgHashrateIndex = indexPath.item;
+    [collectionView reloadData];
+}
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();

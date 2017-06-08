@@ -14,6 +14,7 @@
 @dynamic name;
 @dynamic lastUpdate;
 @dynamic hashrate;
+@dynamic selectedAvgHashrateIndex;
 @dynamic avgHashrate;
 @dynamic hashrateHistory;
 @dynamic balance;
@@ -108,24 +109,46 @@
     return types;
 }
 
-- (double)avgHashrate1h {
-    return [self.avgHashrate[@"h1"] doubleValue];
+- (double)selectedAvgHashrate {
+    return [self avgHashrateForHour:self.selectedAvgHashrateIndex];
 }
 
-- (double)avgHashrate3h {
-    return [self.avgHashrate[@"h3"] doubleValue];
+- (NSString *)selectedAvgHashrateTitle {
+    return [self avgHashrateTitleForHour:self.selectedAvgHashrateIndex];
 }
 
-- (double)avgHashrate6h {
-    return [self.avgHashrate[@"h6"] doubleValue];
+- (double)avgHashrateForHour:(AccountAvgHour)hour {
+    switch (hour) {
+        case AccountAvgHour1h:
+            return [self.avgHashrate[@"h1"] doubleValue];
+        case AccountAvgHour3h:
+            return [self.avgHashrate[@"h3"] doubleValue];
+        case AccountAvgHour6h:
+            return [self.avgHashrate[@"h6"] doubleValue];
+        case AccountAvgHour12h:
+            return [self.avgHashrate[@"h12"] doubleValue];
+        case AccountAvgHour24h:
+            return [self.avgHashrate[@"h24"] doubleValue];
+        default:
+            return 0.0f;
+    }
 }
 
-- (double)avgHashrate12h {
-    return [self.avgHashrate[@"h12"] doubleValue];
-}
-
-- (double)avgHashrate24h {
-    return [self.avgHashrate[@"h24"] doubleValue];
+- (NSString * _Nonnull)avgHashrateTitleForHour:(AccountAvgHour)hour {
+    switch (hour) {
+        case AccountAvgHour1h:
+            return @"1 hour";
+        case AccountAvgHour3h:
+            return @"3 hours";
+        case AccountAvgHour6h:
+            return @"6 hours";
+        case AccountAvgHour12h:
+            return @"12 hours";
+        case AccountAvgHour24h:
+            return @"24 hours";
+        default:
+            return @"";
+    }
 }
 
 - (NSString *)label {
