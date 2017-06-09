@@ -12,6 +12,9 @@
 
 @interface HashrateGraphCell ()<BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 @property (nonatomic, weak) IBOutlet BEMSimpleLineGraphView *graphView;
+@property (nonatomic, weak) IBOutlet UILabel *firstDateLabel;
+@property (nonatomic, weak) IBOutlet UILabel *lastDateLabel;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @end
 
 @implementation HashrateGraphCell
@@ -38,6 +41,12 @@
     self.graphView.colorReferenceLines = [UIColor blackColor];
     self.graphView.colorBottom = themeColor;
     self.graphView.colorYaxisLabel = [[UIColor blackColor] themeColorWithValueTitleAlpha];
+    
+    self.firstDateLabel.textColor = [[UIColor blackColor] themeColorWithValueTitleAlpha];
+    self.lastDateLabel.textColor = self.firstDateLabel.textColor;
+    
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    self.dateFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"YYYYMMMdd jm" options:0 locale:[NSLocale currentLocale]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -48,7 +57,13 @@
 
 - (void)setAccount:(Account *)account {
     _account = account;
+    self.firstDateLabel.text = [self stringDateAtIndex:0];
+    self.lastDateLabel.text = [self stringDateAtIndex:account.hashrateHistory.count - 1];
     [self.graphView reloadGraph];
+}
+
+- (NSString *)stringDateAtIndex:(NSInteger)index {
+    return [self.dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[self.account.hashrateHistory[index][@"date"] doubleValue]]];
 }
 
 #pragma mark - BEMSimpleLineGraphDataSource
@@ -65,6 +80,20 @@
 
 - (NSInteger)numberOfYAxisLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph {
     return 8;
+}
+
+- (UIView *)popUpViewForLineGraph:(BEMSimpleLineGraphView *)graph {
+    UILabel *popupLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 20.0f)];
+    popupLabel.backgroundColor = [UIColor whiteColor];
+    popupLabel.textColor = [UIColor blackColor];
+    popupLabel.textAlignment = NSTextAlignmentCenter;
+    popupLabel.font = [UIFont systemFontOfSize:13.0f weight:UIFontWeightThin];
+    return popupLabel;
+}
+
+- (void)lineGraph:(BEMSimpleLineGraphView *)graph modifyPopupView:(UILabel *)popupView forIndex:(NSUInteger)index {
+    popupView.text = [NSString stringWithFormat:@"%.1f %@", [self.account.hashrateHistory[index][@"hashrate"] doubleValue], [self stringDateAtIndex:index]];
+    [popupView sizeToFit];
 }
 
 - (void)drawRect:(CGRect)rect {

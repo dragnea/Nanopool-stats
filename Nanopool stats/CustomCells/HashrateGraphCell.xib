@@ -29,18 +29,42 @@
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="qFA-zq-gkB"/>
                         </connections>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="start date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-Am-e23">
+                        <rect key="frame" x="16" y="84" width="54.5" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="knm-JE-HUC"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="end date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lai-lX-Vuv">
+                        <rect key="frame" x="254" y="84" width="49.5" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="oBW-bi-slj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Lai-lX-Vuv" secondAttribute="trailing" constant="16" id="Nfe-Mf-Yov"/>
+                    <constraint firstAttribute="bottom" secondItem="Lai-lX-Vuv" secondAttribute="bottom" constant="1" id="Oca-36-6yb"/>
                     <constraint firstItem="tOL-RX-Ukv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="aEZ-G6-J3e"/>
                     <constraint firstItem="tOL-RX-Ukv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bRp-hr-Di4"/>
+                    <constraint firstItem="gXq-Am-e23" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="oza-BQ-jJL"/>
                     <constraint firstAttribute="bottom" secondItem="tOL-RX-Ukv" secondAttribute="bottom" constant="1" id="p4A-85-tu8"/>
                     <constraint firstAttribute="trailing" secondItem="tOL-RX-Ukv" secondAttribute="trailing" constant="16" id="rOf-mr-fEJ"/>
+                    <constraint firstAttribute="bottom" secondItem="gXq-Am-e23" secondAttribute="bottom" constant="1" id="xb7-7z-sLh"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="firstDateLabel" destination="gXq-Am-e23" id="NNG-Nk-srE"/>
                 <outlet property="graphView" destination="tOL-RX-Ukv" id="xLa-Hx-5Ts"/>
+                <outlet property="lastDateLabel" destination="Lai-lX-Vuv" id="v1l-lX-nB9"/>
             </connections>
             <point key="canvasLocation" x="-101" y="-3"/>
         </tableViewCell>
