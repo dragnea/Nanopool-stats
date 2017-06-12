@@ -58,8 +58,8 @@
     self.accountLabel.text = account.label;
     self.balanceLabel.text = [NSString stringWithFormat:@"%@ %@", [Account currencyForType:account.type], [self.numberFormatter stringFromNumber:@(account.balance)]];
     self.currentHashrateLabel.text = [NSString stringWithFormat:@"%@ MH/s", [self.numberFormatter stringFromNumber:@(account.hashrate)]];
-    self.averageHashrateLabel.text = [NSString stringWithFormat:@"%@ MH/s", [self.numberFormatter stringFromNumber:@(account.selectedAvgHashrate)]];
-    self.averageHashrateTitleLabel.text = account.selectedAvgHashrateTitle;
+    self.averageHashrateLabel.text = [NSString stringWithFormat:@"%@ MH/s", [self.numberFormatter stringFromNumber:@([account avgHashrateForHour:AccountAvgHour6h])]];
+    self.averageHashrateTitleLabel.text = [account avgHashrateTitleForHour:AccountAvgHour6h];
     
 }
 

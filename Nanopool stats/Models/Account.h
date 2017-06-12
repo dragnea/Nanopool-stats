@@ -25,7 +25,8 @@ typedef NS_ENUM(int16_t, AccountAvgHour) {
     AccountAvgHour3h = 1,
     AccountAvgHour6h = 2,
     AccountAvgHour12h = 3,
-    AccountAvgHour24h = 4
+    AccountAvgHour24h = 4,
+    AccountAvgHourAll = 5
 };
 
 @interface Account : ManagedObject
@@ -42,7 +43,6 @@ typedef NS_ENUM(int16_t, AccountAvgHour) {
 
 // custom properties
 @property (nonatomic, readonly) double selectedAvgHashrate;
-@property (nonnull, nonatomic, strong, readonly) NSString *selectedAvgHashrateTitle;
 @property (nullable, nonatomic, strong, readonly) NSString *label;
 
 + (NSString * _Nonnull)nameForType:(AccountType)type;

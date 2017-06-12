@@ -9,8 +9,7 @@
 #import "TitleValueCollectionCell.h"
 
 @interface TitleValueCollectionCell ()
-@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UILabel *valueLabel;
+
 @end
 
 @implementation TitleValueCollectionCell
@@ -34,19 +33,19 @@
     }];
 }
 
-- (void)setValue:(NSString *)value forTitle:(NSString *)title {
-    self.titleLabel.text = title;
-    self.valueLabel.text = value;
-}
-
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f/[UIScreen mainScreen].scale);
-    CGContextSetStrokeColorWithColor(context, [[UIColor themeColorBackground] themeColorWithSeparatorAlpha].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor themeColorBackground].CGColor);
     
-    // vertical line
-    CGContextMoveToPoint(context, rect.size.width, 4.0f);
-    CGContextAddLineToPoint(context, rect.size.width, rect.size.height - 4.0f);
+    // draw left vertical line
+    CGContextMoveToPoint(context, 0.0f, 0.0f);
+    CGContextAddLineToPoint(context, 0.0f, rect.size.height);
+    CGContextStrokePath(context);
+    
+    // draw right vertical line
+    CGContextMoveToPoint(context, rect.size.width, 0.0f);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
     CGContextStrokePath(context);
 }
 

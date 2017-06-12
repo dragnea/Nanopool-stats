@@ -14,6 +14,10 @@
 
 @implementation TableHeader
 
++ (CGFloat)height {
+    return 40.0f;
+}
+
 - (void)setText:(NSString *)text {
     self.titleLabel.text = text;
 }

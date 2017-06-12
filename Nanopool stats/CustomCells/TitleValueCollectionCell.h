@@ -9,7 +9,7 @@
 #import "CustomCell.h"
 
 @interface TitleValueCollectionCell : UICollectionViewCell
-
-- (void)setValue:(NSString *)value forTitle:(NSString *)title;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *valueLabel;
 
 @end
