@@ -9,7 +9,7 @@
 #import "AccountTypeHeader.h"
 
 @interface AccountTypeHeader ()
-@property (nonatomic, weak) IBOutlet UIImageView *currencyImageView;
+
 @end
 
 @implementation AccountTypeHeader
@@ -21,14 +21,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.currencyImageView.backgroundColor = [UIColor whiteColor];
-    self.currencyImageView.layer.cornerRadius = self.currencyImageView.bounds.size.width / 2.0f;
-    self.currencyImageView.layer.masksToBounds = YES;
 }
 
 - (void)setAccountType:(AccountType)accountType {
     _accountType = accountType;
-    self.currencyImageView.image = [UIImage imageNamed:[Account currencyIconForType:accountType large:NO]];
+    
 }
 
 - (void)drawRect:(CGRect)rect {

@@ -13,8 +13,15 @@
 #import "GraphCell.h"
 #import "TableHeader.h"
 #import "NanopoolController.h"
+#import "TextFieldCell.h"
 
-@interface AccountDetailsVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, HorizontalSelectCellDelegate>
+typedef NS_ENUM(NSInteger, Section) {
+    SectionName = 0,
+    SectionAverages = 1,
+    SectionHashrateGraph = 2
+};
+
+@interface AccountDetailsVC ()<UITableViewDataSource, UITableViewDelegate, HorizontalSelectCellDelegate, TextFieldCellDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, strong) Account *account;
@@ -56,6 +63,7 @@
     [self reloadAll];
     
     [TableHeader registerNibInTableView:self.tableView];
+    [TextFieldCell registerNibInTableView:self.tableView];
     [HorizontalSelectCell registerNibInTableView:self.tableView];
     [GraphCell registerNibInTableView:self.tableView];
     [[NanopoolController sharedInstance] updateHashrateHistoryForAccount:self.account completion:^(NSString *error) {
@@ -117,7 +125,7 @@
             [self.hashrates addObject:[[GraphCellItem alloc] initWithTitle:[self.dateFormatter stringFromDate:date] value:hashrate]];
         }
     }
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)reloadAll {
@@ -139,14 +147,16 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case 0:
+        case SectionName:
             return 1;
-        case 1:
+        case SectionAverages:
+            return 1;
+        case SectionHashrateGraph:
             return 1;
         default:
             return 0;
@@ -161,24 +171,25 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case 0:
+        case SectionName:
+            switch (indexPath.row) {
+                case 0:
+                    return [TextFieldCell height];
+            }
+            break;
+        case SectionAverages:
             switch (indexPath.row) {
                 case 0:
                     return [HorizontalSelectCell height];
-                default:
-                    return 1.0f;
             }
             break;
-        case 1:
+        case SectionHashrateGraph:
             switch (indexPath.row) {
                 case 0:
                     return [GraphCell height];
-                default:
-                    return 1.0f;
             }
-        default:
-            return 1.0f;
     }
+    return 1.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -188,10 +199,13 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     TableHeader *headerView = [TableHeader headerFooterInTableView:tableView];
     switch (section) {
-        case 0:
+        case SectionName:
+            headerView.text = @"General informations";
+            break;
+        case SectionAverages:
             headerView.text = @"Calculated average hashrate";
             break;
-        case 1:
+        case SectionHashrateGraph:
             headerView.text = @"Hashrate MH/s";
             break;
         default:
@@ -202,15 +216,23 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == SectionName) {
+        if (indexPath.row == 0) {
+            TextFieldCell *nameTextFieldCell = [TextFieldCell cellInTableView:tableView forIndexPath:indexPath];
+            nameTextFieldCell.textField.text = self.account.name;
+            nameTextFieldCell.textField.placeholder = @"No account name (optional)";
+            nameTextFieldCell.delegate = self;
+            return nameTextFieldCell;
+        }
+    } else if (indexPath.section == SectionAverages) {
         if (indexPath.row == 0) {
             HorizontalSelectCell *avgHashrateSelectCell = [HorizontalSelectCell cellInTableView:tableView forIndexPath:indexPath];
             avgHashrateSelectCell.items = self.avgHashrates;
-            avgHashrateSelectCell.delegate = self;
             avgHashrateSelectCell.selectedItemIndex = self.account.selectedAvgHashrateIndex;
+            avgHashrateSelectCell.delegate = self;
             return avgHashrateSelectCell;
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == SectionHashrateGraph) {
         if (indexPath.row == 0) {
             GraphCell *hashrateCell = [GraphCell cellInTableView:tableView forIndexPath:indexPath];
             hashrateCell.items = self.hashrates;
@@ -229,6 +251,16 @@
 - (void)horizontalSelectCell:(HorizontalSelectCell *)horizontalSelectCell didSelectItemAtIndex:(NSInteger)index {
     self.account.selectedAvgHashrateIndex = index;
     [self reloadHashrates];
+}
+
+#pragma mark - TextFieldCellDelegate
+
+- (void)textFieldCellDidReturn:(TextFieldCell *)textFieldCell {
+    [textFieldCell resignFirstResponder];
+}
+
+- (void)textFieldCell:(TextFieldCell *)textFieldCell textDidChanged:(NSString *)text {
+    self.account.name = text;
 }
 
 @end

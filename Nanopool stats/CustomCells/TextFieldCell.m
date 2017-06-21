@@ -15,7 +15,7 @@
 @implementation TextFieldCell
 
 + (CGFloat)height {
-    return 65.0f;
+    return 50.0f;
 }
 
 - (void)awakeFromNib {
@@ -41,10 +41,12 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.contentView.backgroundColor = [[UIColor themeColorBackground] colorWithAlphaComponent:0.1f];
+    [self setNeedsDisplay];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.contentView.backgroundColor = [UIColor clearColor];
+    [self setNeedsDisplay];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -59,6 +61,25 @@
         [self.delegate textFieldCellDidReturn:self];
     }
     return YES;
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, (self.textField.isFirstResponder ? 3.0f : 1.0f)/[UIScreen mainScreen].scale);
+    CGContextSetStrokeColorWithColor(context, [UIColor themeColorBackground].CGColor);
+    // draw bottom line
+    CGContextMoveToPoint(context, 0.0f, rect.size.height);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
+    CGContextStrokePath(context);
+    // draw text field bottom border
+    UIColor *borderColor = [UIColor themeColorBackground];
+    CGRect borderFrame = CGRectInset(self.textField.frame, -6.0f, 0.0f);
+    CGContextSetStrokeColorWithColor(context, (self.textField.isFirstResponder ? borderColor : [borderColor themeColorWithSeparatorAlpha]).CGColor);
+    CGContextMoveToPoint(context, CGRectGetMinX(borderFrame), CGRectGetMaxY(self.textField.frame) - 8.0f);
+    CGContextAddLineToPoint(context, CGRectGetMinX(borderFrame), CGRectGetMaxY(self.textField.frame));
+    CGContextAddLineToPoint(context, CGRectGetMaxX(borderFrame), CGRectGetMaxY(self.textField.frame));
+    CGContextAddLineToPoint(context, CGRectGetMaxX(borderFrame), CGRectGetMaxY(self.textField.frame) - 8.0f);
+    CGContextStrokePath(context);
 }
 
 @end

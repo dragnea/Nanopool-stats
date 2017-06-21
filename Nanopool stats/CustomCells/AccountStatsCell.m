@@ -10,6 +10,7 @@
 #import "Account.h"
 
 @interface AccountStatsCell ()
+@property (nonatomic, weak) IBOutlet UIImageView *currencyImageView;
 @property (nonatomic, weak) IBOutlet UILabel *balanceLabel;
 @property (nonatomic, weak) IBOutlet UILabel *accountLabel;
 
@@ -39,6 +40,10 @@
     self.currentHashrateTitleLabel.textColor = self.accountLabel.textColor;
     self.averageHashrateTitleLabel.textColor = self.accountLabel.textColor;
     
+    self.currencyImageView.backgroundColor = [UIColor whiteColor];
+    self.currencyImageView.layer.cornerRadius = self.currencyImageView.bounds.size.width / 2.0f;
+    self.currencyImageView.layer.masksToBounds = YES;
+    
     self.numberFormatter = [[NSNumberFormatter alloc] init];
     self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     self.numberFormatter.usesGroupingSeparator = NO;
@@ -55,8 +60,9 @@
 - (void)setAccount:(Account *)account {
     _account = account;
     
+    self.currencyImageView.image = [UIImage imageNamed:[Account currencyIconForType:account.type large:NO]];
     self.accountLabel.text = account.label;
-    self.balanceLabel.text = [NSString stringWithFormat:@"%@ %@", [Account currencyForType:account.type], [self.numberFormatter stringFromNumber:@(account.balance)]];
+    self.balanceLabel.text = [NSString stringWithFormat:@"%@ %@", [self.numberFormatter stringFromNumber:@(account.balance)], [Account currencyForType:account.type]];
     self.currentHashrateLabel.text = [NSString stringWithFormat:@"%@ MH/s", [self.numberFormatter stringFromNumber:@(account.hashrate)]];
     self.averageHashrateLabel.text = [NSString stringWithFormat:@"%@ MH/s", [self.numberFormatter stringFromNumber:@([account avgHashrateForHour:AccountAvgHour6h])]];
     self.averageHashrateTitleLabel.text = [account avgHashrateTitleForHour:AccountAvgHour6h];
@@ -67,8 +73,8 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f/[UIScreen mainScreen].scale);
     CGContextSetStrokeColorWithColor(context, [[UIColor whiteColor] themeColorWithSeparatorAlpha].CGColor);
-    CGContextMoveToPoint(context, 0.0f, rect.size.height);
-    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
+    CGContextMoveToPoint(context, 0.0f, rect.size.height - 1.0f);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height - 1.0f);
     CGContextStrokePath(context);
 }
 
