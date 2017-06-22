@@ -14,11 +14,16 @@
 #import "TableHeader.h"
 #import "NanopoolController.h"
 #import "TextFieldCell.h"
+#import "InfoDetailsCell.h"
 
 typedef NS_ENUM(NSInteger, Section) {
     SectionName = 0,
-    SectionAverages = 1,
-    SectionHashrateGraph = 2
+    SectionAverages,
+    SectionHashrateGraph,
+    SectionWorkers,
+    SectionPayments,
+    SectionShares,
+    SectionCalculator
 };
 
 @interface AccountDetailsVC ()<UITableViewDataSource, UITableViewDelegate, HorizontalSelectCellDelegate, TextFieldCellDelegate>
@@ -66,6 +71,7 @@ typedef NS_ENUM(NSInteger, Section) {
     [TextFieldCell registerNibInTableView:self.tableView];
     [HorizontalSelectCell registerNibInTableView:self.tableView];
     [GraphCell registerNibInTableView:self.tableView];
+    [InfoDetailsCell registerNibInTableView:self.tableView];
     [[NanopoolController sharedInstance] updateHashrateHistoryForAccount:self.account completion:^(NSString *error) {
         [self reloadAll];
     }];
@@ -125,7 +131,7 @@ typedef NS_ENUM(NSInteger, Section) {
             [self.hashrates addObject:[[GraphCellItem alloc] initWithTitle:[self.dateFormatter stringFromDate:date] value:hashrate]];
         }
     }
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:SectionHashrateGraph]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)reloadAll {
@@ -147,7 +153,7 @@ typedef NS_ENUM(NSInteger, Section) {
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -157,6 +163,14 @@ typedef NS_ENUM(NSInteger, Section) {
         case SectionAverages:
             return 1;
         case SectionHashrateGraph:
+            return 1;
+        case SectionWorkers:
+            return 1;
+        case SectionPayments:
+            return 1;
+        case SectionShares:
+            return 1;
+        case SectionCalculator:
             return 1;
         default:
             return 0;
@@ -188,12 +202,32 @@ typedef NS_ENUM(NSInteger, Section) {
                 case 0:
                     return [GraphCell height];
             }
+        case SectionWorkers:
+            switch (indexPath.row) {
+                case 0:
+                    return [InfoDetailsCell height];
+            }
+        case SectionPayments:
+            switch (indexPath.row) {
+                case 0:
+                    return [InfoDetailsCell height];
+            }
+        case SectionShares:
+            switch (indexPath.row) {
+                case 0:
+                    return [InfoDetailsCell height];
+            }
+        case SectionCalculator:
+            switch (indexPath.row) {
+                case 0:
+                    return [InfoDetailsCell height];
+            }
     }
     return 1.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 1;
+    return 1.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -207,6 +241,18 @@ typedef NS_ENUM(NSInteger, Section) {
             break;
         case SectionHashrateGraph:
             headerView.text = @"Hashrate MH/s";
+            break;
+        case SectionWorkers:
+            headerView.text = @"Workers";
+            break;
+        case SectionPayments:
+            headerView.text = @"Payments";
+            break;
+        case SectionShares:
+            headerView.text = @"Shares";
+            break;
+        case SectionCalculator:
+            headerView.text = @"Calculator";
             break;
         default:
             headerView.text = @"???";
@@ -237,6 +283,30 @@ typedef NS_ENUM(NSInteger, Section) {
             GraphCell *hashrateCell = [GraphCell cellInTableView:tableView forIndexPath:indexPath];
             hashrateCell.items = self.hashrates;
             return hashrateCell;
+        }
+    } else if (indexPath.section == SectionWorkers) {
+        if (indexPath.row == 0) {
+            InfoDetailsCell *workersInfoCell = [InfoDetailsCell cellInTableView:tableView forIndexPath:indexPath];
+            workersInfoCell.infoText = [NSString stringWithFormat:@"%d workers", (int)self.account.workers.count];
+            return workersInfoCell;
+        }
+    } else if (indexPath.section == SectionPayments) {
+        if (indexPath.row == 0) {
+            InfoDetailsCell *paymentsInfoCell = [InfoDetailsCell cellInTableView:tableView forIndexPath:indexPath];
+            paymentsInfoCell.infoText = [NSString stringWithFormat:@"%d payments", (int)0];
+            return paymentsInfoCell;
+        }
+    } else if (indexPath.section == SectionShares) {
+        if (indexPath.row == 0) {
+            InfoDetailsCell *sharesInfoCell = [InfoDetailsCell cellInTableView:tableView forIndexPath:indexPath];
+            sharesInfoCell.infoText = [NSString stringWithFormat:@"%d average", (int)0];
+            return sharesInfoCell;
+        }
+    } else if (indexPath.section == SectionCalculator) {
+        if (indexPath.row == 0) {
+            InfoDetailsCell *calculatorInfoCell = [InfoDetailsCell cellInTableView:tableView forIndexPath:indexPath];
+            calculatorInfoCell.infoText = [NSString stringWithFormat:@"%f per month", 0.0f];
+            return calculatorInfoCell;
         }
     }
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"errCell"];

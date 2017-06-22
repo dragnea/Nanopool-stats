@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRR-5Z-H9i">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="68.5"/>
+                        <rect key="frame" x="0.0" y="8" width="320" height="53.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="gi0-Es-jbO">
                             <size key="itemSize" width="50" height="50"/>
@@ -37,8 +37,8 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="LRR-5Z-H9i" secondAttribute="trailing" id="cxI-le-HmI"/>
                     <constraint firstItem="LRR-5Z-H9i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dw1-22-Vuj"/>
-                    <constraint firstAttribute="bottom" secondItem="LRR-5Z-H9i" secondAttribute="bottom" constant="1" id="r9D-yD-EsI"/>
-                    <constraint firstItem="LRR-5Z-H9i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="scn-8L-Vn8"/>
+                    <constraint firstAttribute="bottom" secondItem="LRR-5Z-H9i" secondAttribute="bottom" constant="8" id="r9D-yD-EsI"/>
+                    <constraint firstItem="LRR-5Z-H9i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="scn-8L-Vn8"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

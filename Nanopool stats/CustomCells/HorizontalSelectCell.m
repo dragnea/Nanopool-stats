@@ -27,7 +27,7 @@
 @implementation HorizontalSelectCell
 
 + (CGFloat)height {
-    return 70.0f;
+    return 86.0f;
 }
 
 - (void)awakeFromNib {
@@ -97,7 +97,7 @@
         }
     }
 }
-
+/*
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f/[UIScreen mainScreen].scale);
@@ -106,5 +106,6 @@
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
     CGContextStrokePath(context);
 }
+ */
 
 @end

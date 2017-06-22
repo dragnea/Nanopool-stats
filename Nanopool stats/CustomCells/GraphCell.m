@@ -111,7 +111,7 @@
     popupBounds.size.width += 8.0f;
     popupView.bounds = popupBounds;
 }
-
+/*
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0f/[UIScreen mainScreen].scale);
@@ -119,6 +119,6 @@
     CGContextMoveToPoint(context, 0.0f, rect.size.height);
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
     CGContextStrokePath(context);
-}
+}*/
 
 @end

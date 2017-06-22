@@ -34,6 +34,7 @@
     self.placeholderDetailsLabel.textColor = [[UIColor whiteColor] themeColorWithValueTitleAlpha];
     self.addButton.backgroundColor = [UIColor whiteColor];
     [self.addButton setTitleColor:[UIColor themeColorBackground] forState:UIControlStateNormal];
+    self.tableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 88.0f, 0.0f);
     
     [AccountTypeHeader registerNibInTableView:self.tableView];
     [AccountStatsCell registerNibInTableView:self.tableView];

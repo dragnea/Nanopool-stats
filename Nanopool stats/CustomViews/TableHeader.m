@@ -20,14 +20,22 @@
 
 - (void)setText:(NSString *)text {
     self.titleLabel.text = text;
+    [self setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGPathRef textBackgroundPath = CGPathCreateWithRoundedRect(CGRectInset(self.titleLabel.frame, -4.0f, -2.0f), 6.0f, 6.0f, NULL);
+    CGContextAddPath(context, textBackgroundPath);
+    CGPathRelease(textBackgroundPath);
+    CGContextSetFillColorWithColor(context, [[UIColor themeColorBackground] themeColorWithValueTitleAlpha].CGColor);
+    CGContextFillPath(context);
+    
     CGContextSetLineWidth(context, 1.0f/[UIScreen mainScreen].scale);
     CGContextSetStrokeColorWithColor(context, [UIColor themeColorBackground].CGColor);
-    CGContextMoveToPoint(context, 0.0f, rect.size.height);
-    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
+    CGContextMoveToPoint(context, CGRectGetMaxX(self.titleLabel.frame) + 16.0f, CGRectGetMidY(self.titleLabel.frame));
+    CGContextAddLineToPoint(context, rect.size.width, CGRectGetMidY(self.titleLabel.frame));
     CGContextStrokePath(context);
 }
 

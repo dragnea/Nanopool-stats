@@ -30,6 +30,8 @@
 		6480D6651EDDAF6B00D78FFD /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D65E1EDDAF6B00D78FFD /* AFURLResponseSerialization.m */; };
 		6480D6661EDDAF6B00D78FFD /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6601EDDAF6B00D78FFD /* AFURLSessionManager.m */; };
 		6480D6691EDEFA1500D78FFD /* DMSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6681EDEFA1500D78FFD /* DMSButton.m */; };
+		6487BB391EFBFCEF00F7D01F /* InfoDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6487BB371EFBFCEF00F7D01F /* InfoDetailsCell.m */; };
+		6487BB3A1EFBFCEF00F7D01F /* InfoDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6487BB381EFBFCEF00F7D01F /* InfoDetailsCell.xib */; };
 		6498E2941EDC453A00973BC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2931EDC453A00973BC1 /* main.m */; };
 		6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2961EDC453A00973BC1 /* AppDelegate.m */; };
 		6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6498E29E1EDC453A00973BC1 /* Assets.xcassets */; };
@@ -99,6 +101,9 @@
 		6480D6601EDDAF6B00D78FFD /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		6480D6671EDEFA1500D78FFD /* DMSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSButton.h; sourceTree = "<group>"; };
 		6480D6681EDEFA1500D78FFD /* DMSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSButton.m; sourceTree = "<group>"; };
+		6487BB361EFBFCEF00F7D01F /* InfoDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoDetailsCell.h; sourceTree = "<group>"; };
+		6487BB371EFBFCEF00F7D01F /* InfoDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoDetailsCell.m; sourceTree = "<group>"; };
+		6487BB381EFBFCEF00F7D01F /* InfoDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoDetailsCell.xib; sourceTree = "<group>"; };
 		6498E28F1EDC453A00973BC1 /* Nanopool stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nanopool stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6498E2931EDC453A00973BC1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6498E2951EDC453A00973BC1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -192,6 +197,9 @@
 				6A6891BA1EEEF42700D96ED1 /* GraphCell.h */,
 				6A6891BB1EEEF42700D96ED1 /* GraphCell.m */,
 				6A6891BC1EEEF42700D96ED1 /* GraphCell.xib */,
+				6487BB361EFBFCEF00F7D01F /* InfoDetailsCell.h */,
+				6487BB371EFBFCEF00F7D01F /* InfoDetailsCell.m */,
+				6487BB381EFBFCEF00F7D01F /* InfoDetailsCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -397,6 +405,7 @@
 				6480D64A1EDD8D5800D78FFD /* TextFieldCell.xib in Resources */,
 				6A8516221EE88126003B91B2 /* TitleValueCollectionCell.xib in Resources */,
 				6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */,
+				6487BB3A1EFBFCEF00F7D01F /* InfoDetailsCell.xib in Resources */,
 				6A97E3081EDDF5A700E23C7E /* TableHeader.xib in Resources */,
 				6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */,
 				6A6891BE1EEEF42700D96ED1 /* GraphCell.xib in Resources */,
@@ -429,6 +438,7 @@
 				6A97E30E1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.m in Sources */,
 				6AAE89DC1EE9B610002867AF /* BEMAverageLine.m in Sources */,
 				6480D6621EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m in Sources */,
+				6487BB391EFBFCEF00F7D01F /* InfoDetailsCell.m in Sources */,
 				6A97E3061EDDF59700E23C7E /* TableHeader.m in Sources */,
 				6A8516211EE88126003B91B2 /* TitleValueCollectionCell.m in Sources */,
 				6A6891B81EEEF01200D96ED1 /* HorizontalSelectCell.m in Sources */,
