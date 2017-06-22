@@ -9,7 +9,7 @@
 #import "AccountTypeHeader.h"
 
 @interface AccountTypeHeader ()
-
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @end
 
 @implementation AccountTypeHeader
@@ -25,9 +25,9 @@
 
 - (void)setAccountType:(AccountType)accountType {
     _accountType = accountType;
-    
+    self.nameLabel.text = [Account nameForType:accountType];
 }
-
+/*
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 3.0f/[UIScreen mainScreen].scale);
@@ -35,6 +35,6 @@
     CGContextMoveToPoint(context, 0.0f, rect.size.height - 1.0f);
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height - 1.0f);
     CGContextStrokePath(context);
-}
+}*/
 
 @end

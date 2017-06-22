@@ -13,7 +13,7 @@
 @interface Worker : ManagedObject
 
 @property (nullable, nonatomic, copy) NSString *id;
-@property (nullable, nonatomic, copy) NSDate *lastShare;
+@property (nonatomic) double lastShare;
 @property (nonatomic) double hashrate;
 @property (nonatomic) double avg_h1;
 @property (nonatomic) double avg_h3;

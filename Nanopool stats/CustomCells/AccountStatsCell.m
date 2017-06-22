@@ -32,6 +32,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.tintColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = [[UIColor whiteColor] themeColorWithSeparatorAlpha];
+    
     self.balanceLabel.textColor = [[UIColor whiteColor] themeColorWithValueAlpha];
     self.currentHashrateLabel.textColor = self.balanceLabel.textColor;
     self.averageHashrateLabel.textColor = self.balanceLabel.textColor;
@@ -48,13 +51,22 @@
     self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     self.numberFormatter.usesGroupingSeparator = NO;
     self.numberFormatter.minimumFractionDigits = 1;
-    self.numberFormatter.maximumFractionDigits = 8;
+    self.numberFormatter.maximumFractionDigits = 3;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(self.bounds, 4.0f, 4.0f) byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(4.0f, 4.0f)].CGPath;
+    self.layer.mask = maskLayer;
 }
 
 - (void)setAccount:(Account *)account {

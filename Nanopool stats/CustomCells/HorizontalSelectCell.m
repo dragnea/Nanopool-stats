@@ -27,7 +27,7 @@
 @implementation HorizontalSelectCell
 
 + (CGFloat)height {
-    return 86.0f;
+    return 70.0f;
 }
 
 - (void)awakeFromNib {

@@ -15,9 +15,10 @@
 #import "NanopoolController.h"
 #import "TextFieldCell.h"
 #import "InfoDetailsCell.h"
+#import "WorkersVC.h"
 
 typedef NS_ENUM(NSInteger, Section) {
-    SectionName = 0,
+    SectionGeneralInfo = 0,
     SectionAverages,
     SectionHashrateGraph,
     SectionWorkers,
@@ -53,6 +54,10 @@ typedef NS_ENUM(NSInteger, Section) {
     [super viewDidLoad];
     
     self.title = @"Account details";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"more"]
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(moreButtonTouched:)];
     
     self.numberFormatter = [[NSNumberFormatter alloc] init];
     self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
@@ -80,6 +85,10 @@ typedef NS_ENUM(NSInteger, Section) {
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)moreButtonTouched:(UIBarButtonItem *)barButton {
+    
 }
 
 - (HorizontalSelectCellItem *)avgHashrateWithAvgHour:(AccountAvgHour)accountAvgHour {
@@ -158,7 +167,7 @@ typedef NS_ENUM(NSInteger, Section) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case SectionName:
+        case SectionGeneralInfo:
             return 1;
         case SectionAverages:
             return 1;
@@ -185,7 +194,7 @@ typedef NS_ENUM(NSInteger, Section) {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case SectionName:
+        case SectionGeneralInfo:
             switch (indexPath.row) {
                 case 0:
                     return [TextFieldCell height];
@@ -233,7 +242,7 @@ typedef NS_ENUM(NSInteger, Section) {
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     TableHeader *headerView = [TableHeader headerFooterInTableView:tableView];
     switch (section) {
-        case SectionName:
+        case SectionGeneralInfo:
             headerView.text = @"General informations";
             break;
         case SectionAverages:
@@ -262,9 +271,10 @@ typedef NS_ENUM(NSInteger, Section) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == SectionName) {
+    if (indexPath.section == SectionGeneralInfo) {
         if (indexPath.row == 0) {
             TextFieldCell *nameTextFieldCell = [TextFieldCell cellInTableView:tableView forIndexPath:indexPath];
+            nameTextFieldCell.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
             nameTextFieldCell.textField.text = self.account.name;
             nameTextFieldCell.textField.placeholder = @"No account name (optional)";
             nameTextFieldCell.delegate = self;
@@ -314,6 +324,16 @@ typedef NS_ENUM(NSInteger, Section) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == SectionWorkers) {
+        WorkersVC *workersVC = [[WorkersVC alloc] initWithAddress:self.account.address];
+        [self.navigationController pushViewController:workersVC animated:YES];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.tableView endEditing:YES];
 }
 
 #pragma mark - HorizontalSelectCellDelegate

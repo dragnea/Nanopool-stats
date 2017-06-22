@@ -20,7 +20,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.tintColor = [UIColor themeColorBackground];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

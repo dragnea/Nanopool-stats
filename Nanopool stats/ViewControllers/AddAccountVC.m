@@ -114,12 +114,14 @@
         TextFieldCell *textFieldCell = [TextFieldCell cellInTableView:tableView forIndexPath:indexPath];
         switch (indexPath.row) {
             case 0:
-                textFieldCell.textField.placeholder = @"Name (optional)";
-                textFieldCell.textField.text = self.name;
-                break;
-            case 1:
+                textFieldCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
                 textFieldCell.textField.placeholder = @"Address";
                 textFieldCell.textField.text = self.address;
+                break;
+            case 1:
+                textFieldCell.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+                textFieldCell.textField.placeholder = @"Name (optional)";
+                textFieldCell.textField.text = self.name;
                 break;
         }
         textFieldCell.delegate = self;
@@ -158,10 +160,10 @@
 - (void)textFieldCell:(TextFieldCell *)textFieldCell textDidChanged:(NSString *)text {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:textFieldCell];
     if (indexPath.row == 0) {
-        self.name = text;
-    } else {
         self.address = text;
         self.navigationItem.rightBarButtonItem.enabled = (text.length && self.accountType);
+    } else {
+        self.name = text;
     }
 }
 

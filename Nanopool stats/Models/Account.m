@@ -152,7 +152,7 @@
 }
 
 - (NSString *)label {
-    return (!self.name ? self.address : self.name);;
+    return (!self.name.length ? self.address : self.name);;
 }
 
 @end

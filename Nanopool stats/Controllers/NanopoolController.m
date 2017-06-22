@@ -76,7 +76,7 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
             NSDictionary *accountDictionary = responseObject[@"data"];
             [account updateWithDictionary:accountDictionary];
             account.lastUpdate = [NSDate date];
-            for (NSDictionary *workerDictionary in accountDictionary[@"worker"]) {
+            for (NSDictionary *workerDictionary in accountDictionary[@"workers"]) {
                 Worker *worker = [Worker entityInContext:workerContext key:@"id" value:workerDictionary[@"id"] shouldCreate:YES];
                 [worker updateWithDictionary:workerDictionary];
                 worker.account = account;

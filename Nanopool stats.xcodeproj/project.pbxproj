@@ -39,6 +39,10 @@
 		6498E2AC1EDC461C00973BC1 /* DashboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2AA1EDC461C00973BC1 /* DashboardVC.m */; };
 		6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */; };
 		64A102F81EE8191E00ADE84F /* Worker.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A102F71EE8191E00ADE84F /* Worker.m */; };
+		6A4315F81EFC261D0043BACD /* WorkerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4315F61EFC261D0043BACD /* WorkerCell.m */; };
+		6A4315F91EFC261D0043BACD /* WorkerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4315F71EFC261D0043BACD /* WorkerCell.xib */; };
+		6A4316021EFC279E0043BACD /* WorkersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4316001EFC279E0043BACD /* WorkersVC.m */; };
+		6A4316031EFC279E0043BACD /* WorkersVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4316011EFC279E0043BACD /* WorkersVC.xib */; };
 		6A6891B81EEEF01200D96ED1 /* HorizontalSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6891B61EEEF01200D96ED1 /* HorizontalSelectCell.m */; };
 		6A6891B91EEEF01200D96ED1 /* HorizontalSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6891B71EEEF01200D96ED1 /* HorizontalSelectCell.xib */; };
 		6A6891BD1EEEF42700D96ED1 /* GraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6891BB1EEEF42700D96ED1 /* GraphCell.m */; };
@@ -116,6 +120,12 @@
 		6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardVC.xib; sourceTree = "<group>"; };
 		64A102F61EE8191E00ADE84F /* Worker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Worker.h; sourceTree = "<group>"; };
 		64A102F71EE8191E00ADE84F /* Worker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Worker.m; sourceTree = "<group>"; };
+		6A4315F51EFC261D0043BACD /* WorkerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerCell.h; sourceTree = "<group>"; };
+		6A4315F61EFC261D0043BACD /* WorkerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkerCell.m; sourceTree = "<group>"; };
+		6A4315F71EFC261D0043BACD /* WorkerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkerCell.xib; sourceTree = "<group>"; };
+		6A4315FF1EFC279E0043BACD /* WorkersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkersVC.h; sourceTree = "<group>"; };
+		6A4316001EFC279E0043BACD /* WorkersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkersVC.m; sourceTree = "<group>"; };
+		6A4316011EFC279E0043BACD /* WorkersVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkersVC.xib; sourceTree = "<group>"; };
 		6A6891B51EEEF01200D96ED1 /* HorizontalSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalSelectCell.h; sourceTree = "<group>"; };
 		6A6891B61EEEF01200D96ED1 /* HorizontalSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalSelectCell.m; sourceTree = "<group>"; };
 		6A6891B71EEEF01200D96ED1 /* HorizontalSelectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HorizontalSelectCell.xib; sourceTree = "<group>"; };
@@ -170,6 +180,9 @@
 				6AAEB0B91EE71C95005C7AD7 /* AccountDetailsVC.h */,
 				6AAEB0BA1EE71C95005C7AD7 /* AccountDetailsVC.m */,
 				6AAEB0BB1EE71C95005C7AD7 /* AccountDetailsVC.xib */,
+				6A4315FF1EFC279E0043BACD /* WorkersVC.h */,
+				6A4316001EFC279E0043BACD /* WorkersVC.m */,
+				6A4316011EFC279E0043BACD /* WorkersVC.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -200,6 +213,9 @@
 				6487BB361EFBFCEF00F7D01F /* InfoDetailsCell.h */,
 				6487BB371EFBFCEF00F7D01F /* InfoDetailsCell.m */,
 				6487BB381EFBFCEF00F7D01F /* InfoDetailsCell.xib */,
+				6A4315F51EFC261D0043BACD /* WorkerCell.h */,
+				6A4315F61EFC261D0043BACD /* WorkerCell.m */,
+				6A4315F71EFC261D0043BACD /* WorkerCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -403,6 +419,7 @@
 				6480D61E1EDC556700D78FFD /* AccountStatsCell.xib in Resources */,
 				6480D6401EDD652D00D78FFD /* AddAccountVC.xib in Resources */,
 				6480D64A1EDD8D5800D78FFD /* TextFieldCell.xib in Resources */,
+				6A4316031EFC279E0043BACD /* WorkersVC.xib in Resources */,
 				6A8516221EE88126003B91B2 /* TitleValueCollectionCell.xib in Resources */,
 				6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */,
 				6487BB3A1EFBFCEF00F7D01F /* InfoDetailsCell.xib in Resources */,
@@ -411,6 +428,7 @@
 				6A6891BE1EEEF42700D96ED1 /* GraphCell.xib in Resources */,
 				6480D6451EDD6BCA00D78FFD /* AccountSelectCell.xib in Resources */,
 				6480D63B1EDC5EC200D78FFD /* AccountTypeHeader.xib in Resources */,
+				6A4315F91EFC261D0043BACD /* WorkerCell.xib in Resources */,
 				6AAEB0BD1EE71C95005C7AD7 /* AccountDetailsVC.xib in Resources */,
 				6A6891B91EEEF01200D96ED1 /* HorizontalSelectCell.xib in Resources */,
 			);
@@ -436,6 +454,7 @@
 				6480D6251EDC58CA00D78FFD /* CustomCell.m in Sources */,
 				6A6891BD1EEEF42700D96ED1 /* GraphCell.m in Sources */,
 				6A97E30E1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.m in Sources */,
+				6A4315F81EFC261D0043BACD /* WorkerCell.m in Sources */,
 				6AAE89DC1EE9B610002867AF /* BEMAverageLine.m in Sources */,
 				6480D6621EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m in Sources */,
 				6487BB391EFBFCEF00F7D01F /* InfoDetailsCell.m in Sources */,
@@ -453,6 +472,7 @@
 				6AAE89DD1EE9B610002867AF /* BEMCircle.m in Sources */,
 				6480D6391EDC5EB700D78FFD /* AccountTypeHeader.m in Sources */,
 				6480D6521EDDAD0D00D78FFD /* NanopoolController.m in Sources */,
+				6A4316021EFC279E0043BACD /* WorkersVC.m in Sources */,
 				6480D6611EDDAF6B00D78FFD /* AFHTTPSessionManager.m in Sources */,
 				6480D6291EDC59E500D78FFD /* CoreData.m in Sources */,
 				6480D6691EDEFA1500D78FFD /* DMSButton.m in Sources */,
