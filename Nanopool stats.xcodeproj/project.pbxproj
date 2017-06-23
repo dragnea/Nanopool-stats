@@ -32,6 +32,8 @@
 		6480D6691EDEFA1500D78FFD /* DMSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6681EDEFA1500D78FFD /* DMSButton.m */; };
 		6487BB391EFBFCEF00F7D01F /* InfoDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6487BB371EFBFCEF00F7D01F /* InfoDetailsCell.m */; };
 		6487BB3A1EFBFCEF00F7D01F /* InfoDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6487BB381EFBFCEF00F7D01F /* InfoDetailsCell.xib */; };
+		6487BB431EFD47BC00F7D01F /* AccountInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6487BB411EFD47BC00F7D01F /* AccountInfoCell.m */; };
+		6487BB441EFD47BC00F7D01F /* AccountInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6487BB421EFD47BC00F7D01F /* AccountInfoCell.xib */; };
 		6498E2941EDC453A00973BC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2931EDC453A00973BC1 /* main.m */; };
 		6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2961EDC453A00973BC1 /* AppDelegate.m */; };
 		6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6498E29E1EDC453A00973BC1 /* Assets.xcassets */; };
@@ -108,6 +110,9 @@
 		6487BB361EFBFCEF00F7D01F /* InfoDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoDetailsCell.h; sourceTree = "<group>"; };
 		6487BB371EFBFCEF00F7D01F /* InfoDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoDetailsCell.m; sourceTree = "<group>"; };
 		6487BB381EFBFCEF00F7D01F /* InfoDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoDetailsCell.xib; sourceTree = "<group>"; };
+		6487BB401EFD47BC00F7D01F /* AccountInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountInfoCell.h; sourceTree = "<group>"; };
+		6487BB411EFD47BC00F7D01F /* AccountInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountInfoCell.m; sourceTree = "<group>"; };
+		6487BB421EFD47BC00F7D01F /* AccountInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoCell.xib; sourceTree = "<group>"; };
 		6498E28F1EDC453A00973BC1 /* Nanopool stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nanopool stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6498E2931EDC453A00973BC1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6498E2951EDC453A00973BC1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -216,6 +221,9 @@
 				6A4315F51EFC261D0043BACD /* WorkerCell.h */,
 				6A4315F61EFC261D0043BACD /* WorkerCell.m */,
 				6A4315F71EFC261D0043BACD /* WorkerCell.xib */,
+				6487BB401EFD47BC00F7D01F /* AccountInfoCell.h */,
+				6487BB411EFD47BC00F7D01F /* AccountInfoCell.m */,
+				6487BB421EFD47BC00F7D01F /* AccountInfoCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -420,6 +428,7 @@
 				6480D6401EDD652D00D78FFD /* AddAccountVC.xib in Resources */,
 				6480D64A1EDD8D5800D78FFD /* TextFieldCell.xib in Resources */,
 				6A4316031EFC279E0043BACD /* WorkersVC.xib in Resources */,
+				6487BB441EFD47BC00F7D01F /* AccountInfoCell.xib in Resources */,
 				6A8516221EE88126003B91B2 /* TitleValueCollectionCell.xib in Resources */,
 				6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */,
 				6487BB3A1EFBFCEF00F7D01F /* InfoDetailsCell.xib in Resources */,
@@ -470,6 +479,7 @@
 				6480D6441EDD6BCA00D78FFD /* AccountSelectCell.m in Sources */,
 				6498E2AC1EDC461C00973BC1 /* DashboardVC.m in Sources */,
 				6AAE89DD1EE9B610002867AF /* BEMCircle.m in Sources */,
+				6487BB431EFD47BC00F7D01F /* AccountInfoCell.m in Sources */,
 				6480D6391EDC5EB700D78FFD /* AccountTypeHeader.m in Sources */,
 				6480D6521EDDAD0D00D78FFD /* NanopoolController.m in Sources */,
 				6A4316021EFC279E0043BACD /* WorkersVC.m in Sources */,

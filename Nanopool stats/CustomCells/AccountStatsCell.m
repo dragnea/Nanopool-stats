@@ -65,7 +65,7 @@
     
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.frame = self.bounds;
-    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(self.bounds, 4.0f, 4.0f) byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(4.0f, 4.0f)].CGPath;
+    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(self.bounds, 4.0f, 2.0f) byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(4.0f, 4.0f)].CGPath;
     self.layer.mask = maskLayer;
 }
 

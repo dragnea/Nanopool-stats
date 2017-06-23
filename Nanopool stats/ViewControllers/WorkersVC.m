@@ -22,7 +22,7 @@
     if (self = [super init]) {
         NSFetchRequest *workersFetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Worker class])];
         workersFetchRequest.predicate = [NSPredicate predicateWithFormat:@"account.address == %@", address];
-        workersFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastShare" ascending:YES]];
+        workersFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastShare" ascending:NO]];
         self.workersFetchedController = [[NSFetchedResultsController alloc] initWithFetchRequest:workersFetchRequest
                                                                             managedObjectContext:[CoreData mainContext]
                                                                               sectionNameKeyPath:nil
@@ -69,8 +69,16 @@
 
 #pragma mark - UITableViewDelegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 1.0f;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [WorkerCell height];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 1.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
