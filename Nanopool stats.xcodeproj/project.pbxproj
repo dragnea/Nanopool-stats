@@ -41,16 +41,22 @@
 		6498E2AC1EDC461C00973BC1 /* DashboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2AA1EDC461C00973BC1 /* DashboardVC.m */; };
 		6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */; };
 		64A102F81EE8191E00ADE84F /* Worker.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A102F71EE8191E00ADE84F /* Worker.m */; };
+		6A37D3931EFEF6A50099ED12 /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A37D3921EFEF6A50099ED12 /* Payment.m */; };
 		6A4315F81EFC261D0043BACD /* WorkerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4315F61EFC261D0043BACD /* WorkerCell.m */; };
 		6A4315F91EFC261D0043BACD /* WorkerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4315F71EFC261D0043BACD /* WorkerCell.xib */; };
 		6A4316021EFC279E0043BACD /* WorkersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4316001EFC279E0043BACD /* WorkersVC.m */; };
 		6A4316031EFC279E0043BACD /* WorkersVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4316011EFC279E0043BACD /* WorkersVC.xib */; };
+		6A6039641EFEFAE600461F1E /* PaymentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6039621EFEFAE600461F1E /* PaymentCell.m */; };
+		6A6039651EFEFAE600461F1E /* PaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6039631EFEFAE600461F1E /* PaymentCell.xib */; };
 		6A6891B81EEEF01200D96ED1 /* HorizontalSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6891B61EEEF01200D96ED1 /* HorizontalSelectCell.m */; };
 		6A6891B91EEEF01200D96ED1 /* HorizontalSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6891B71EEEF01200D96ED1 /* HorizontalSelectCell.xib */; };
 		6A6891BD1EEEF42700D96ED1 /* GraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6891BB1EEEF42700D96ED1 /* GraphCell.m */; };
 		6A6891BE1EEEF42700D96ED1 /* GraphCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6891BC1EEEF42700D96ED1 /* GraphCell.xib */; };
 		6A8516211EE88126003B91B2 /* TitleValueCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A85161F1EE88126003B91B2 /* TitleValueCollectionCell.m */; };
 		6A8516221EE88126003B91B2 /* TitleValueCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8516201EE88126003B91B2 /* TitleValueCollectionCell.xib */; };
+		6A8749FB1EFFC31400850AF5 /* Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8749FA1EFFC31400850AF5 /* Share.m */; };
+		6A959F821EFEF36F00F94016 /* PaymentsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A959F801EFEF36F00F94016 /* PaymentsVC.m */; };
+		6A959F831EFEF36F00F94016 /* PaymentsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A959F811EFEF36F00F94016 /* PaymentsVC.xib */; };
 		6A97E3061EDDF59700E23C7E /* TableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A97E3051EDDF59700E23C7E /* TableHeader.m */; };
 		6A97E3081EDDF5A700E23C7E /* TableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A97E3071EDDF5A700E23C7E /* TableHeader.xib */; };
 		6A97E30B1EDDFD1000E23C7E /* ManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A97E30A1EDDFD1000E23C7E /* ManagedObject.m */; };
@@ -125,12 +131,17 @@
 		6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardVC.xib; sourceTree = "<group>"; };
 		64A102F61EE8191E00ADE84F /* Worker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Worker.h; sourceTree = "<group>"; };
 		64A102F71EE8191E00ADE84F /* Worker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Worker.m; sourceTree = "<group>"; };
+		6A37D3911EFEF6A50099ED12 /* Payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Payment.h; sourceTree = "<group>"; };
+		6A37D3921EFEF6A50099ED12 /* Payment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Payment.m; sourceTree = "<group>"; };
 		6A4315F51EFC261D0043BACD /* WorkerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerCell.h; sourceTree = "<group>"; };
 		6A4315F61EFC261D0043BACD /* WorkerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkerCell.m; sourceTree = "<group>"; };
 		6A4315F71EFC261D0043BACD /* WorkerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkerCell.xib; sourceTree = "<group>"; };
 		6A4315FF1EFC279E0043BACD /* WorkersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkersVC.h; sourceTree = "<group>"; };
 		6A4316001EFC279E0043BACD /* WorkersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkersVC.m; sourceTree = "<group>"; };
 		6A4316011EFC279E0043BACD /* WorkersVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkersVC.xib; sourceTree = "<group>"; };
+		6A6039611EFEFAE600461F1E /* PaymentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentCell.h; sourceTree = "<group>"; };
+		6A6039621EFEFAE600461F1E /* PaymentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentCell.m; sourceTree = "<group>"; };
+		6A6039631EFEFAE600461F1E /* PaymentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentCell.xib; sourceTree = "<group>"; };
 		6A6891B51EEEF01200D96ED1 /* HorizontalSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalSelectCell.h; sourceTree = "<group>"; };
 		6A6891B61EEEF01200D96ED1 /* HorizontalSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalSelectCell.m; sourceTree = "<group>"; };
 		6A6891B71EEEF01200D96ED1 /* HorizontalSelectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HorizontalSelectCell.xib; sourceTree = "<group>"; };
@@ -140,6 +151,11 @@
 		6A85161E1EE88126003B91B2 /* TitleValueCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleValueCollectionCell.h; sourceTree = "<group>"; };
 		6A85161F1EE88126003B91B2 /* TitleValueCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleValueCollectionCell.m; sourceTree = "<group>"; };
 		6A8516201EE88126003B91B2 /* TitleValueCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleValueCollectionCell.xib; sourceTree = "<group>"; };
+		6A8749F91EFFC31400850AF5 /* Share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Share.h; sourceTree = "<group>"; };
+		6A8749FA1EFFC31400850AF5 /* Share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Share.m; sourceTree = "<group>"; };
+		6A959F7F1EFEF36F00F94016 /* PaymentsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsVC.h; sourceTree = "<group>"; };
+		6A959F801EFEF36F00F94016 /* PaymentsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsVC.m; sourceTree = "<group>"; };
+		6A959F811EFEF36F00F94016 /* PaymentsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentsVC.xib; sourceTree = "<group>"; };
 		6A97E3041EDDF59700E23C7E /* TableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeader.h; sourceTree = "<group>"; };
 		6A97E3051EDDF59700E23C7E /* TableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeader.m; sourceTree = "<group>"; };
 		6A97E3071EDDF5A700E23C7E /* TableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableHeader.xib; sourceTree = "<group>"; };
@@ -188,6 +204,9 @@
 				6A4315FF1EFC279E0043BACD /* WorkersVC.h */,
 				6A4316001EFC279E0043BACD /* WorkersVC.m */,
 				6A4316011EFC279E0043BACD /* WorkersVC.xib */,
+				6A959F7F1EFEF36F00F94016 /* PaymentsVC.h */,
+				6A959F801EFEF36F00F94016 /* PaymentsVC.m */,
+				6A959F811EFEF36F00F94016 /* PaymentsVC.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -224,6 +243,9 @@
 				6487BB401EFD47BC00F7D01F /* AccountInfoCell.h */,
 				6487BB411EFD47BC00F7D01F /* AccountInfoCell.m */,
 				6487BB421EFD47BC00F7D01F /* AccountInfoCell.xib */,
+				6A6039611EFEFAE600461F1E /* PaymentCell.h */,
+				6A6039621EFEFAE600461F1E /* PaymentCell.m */,
+				6A6039631EFEFAE600461F1E /* PaymentCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -250,6 +272,10 @@
 				6480D6211EDC55B500D78FFD /* Account.m */,
 				64A102F61EE8191E00ADE84F /* Worker.h */,
 				64A102F71EE8191E00ADE84F /* Worker.m */,
+				6A37D3911EFEF6A50099ED12 /* Payment.h */,
+				6A37D3921EFEF6A50099ED12 /* Payment.m */,
+				6A8749F91EFFC31400850AF5 /* Share.h */,
+				6A8749FA1EFFC31400850AF5 /* Share.m */,
 				6480D62A1EDC5A9A00D78FFD /* Database.xcdatamodeld */,
 				6A97E3091EDDFD1000E23C7E /* ManagedObject.h */,
 				6A97E30A1EDDFD1000E23C7E /* ManagedObject.m */,
@@ -433,11 +459,13 @@
 				6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */,
 				6487BB3A1EFBFCEF00F7D01F /* InfoDetailsCell.xib in Resources */,
 				6A97E3081EDDF5A700E23C7E /* TableHeader.xib in Resources */,
+				6A6039651EFEFAE600461F1E /* PaymentCell.xib in Resources */,
 				6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */,
 				6A6891BE1EEEF42700D96ED1 /* GraphCell.xib in Resources */,
 				6480D6451EDD6BCA00D78FFD /* AccountSelectCell.xib in Resources */,
 				6480D63B1EDC5EC200D78FFD /* AccountTypeHeader.xib in Resources */,
 				6A4315F91EFC261D0043BACD /* WorkerCell.xib in Resources */,
+				6A959F831EFEF36F00F94016 /* PaymentsVC.xib in Resources */,
 				6AAEB0BD1EE71C95005C7AD7 /* AccountDetailsVC.xib in Resources */,
 				6A6891B91EEEF01200D96ED1 /* HorizontalSelectCell.xib in Resources */,
 			);
@@ -452,6 +480,7 @@
 			files = (
 				6AAE89DE1EE9B610002867AF /* BEMLine.m in Sources */,
 				6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */,
+				6A37D3931EFEF6A50099ED12 /* Payment.m in Sources */,
 				6480D61D1EDC556700D78FFD /* AccountStatsCell.m in Sources */,
 				6AAE89DF1EE9B610002867AF /* BEMPermanentPopupView.m in Sources */,
 				6480D63F1EDD652D00D78FFD /* AddAccountVC.m in Sources */,
@@ -469,6 +498,8 @@
 				6487BB391EFBFCEF00F7D01F /* InfoDetailsCell.m in Sources */,
 				6A97E3061EDDF59700E23C7E /* TableHeader.m in Sources */,
 				6A8516211EE88126003B91B2 /* TitleValueCollectionCell.m in Sources */,
+				6A959F821EFEF36F00F94016 /* PaymentsVC.m in Sources */,
+				6A8749FB1EFFC31400850AF5 /* Share.m in Sources */,
 				6A6891B81EEEF01200D96ED1 /* HorizontalSelectCell.m in Sources */,
 				6498E2941EDC453A00973BC1 /* main.m in Sources */,
 				6480D6221EDC55B500D78FFD /* Account.m in Sources */,
@@ -484,6 +515,7 @@
 				6480D6521EDDAD0D00D78FFD /* NanopoolController.m in Sources */,
 				6A4316021EFC279E0043BACD /* WorkersVC.m in Sources */,
 				6480D6611EDDAF6B00D78FFD /* AFHTTPSessionManager.m in Sources */,
+				6A6039641EFEFAE600461F1E /* PaymentCell.m in Sources */,
 				6480D6291EDC59E500D78FFD /* CoreData.m in Sources */,
 				6480D6691EDEFA1500D78FFD /* DMSButton.m in Sources */,
 				6480D64E1EDD98D400D78FFD /* UIColor+Additions.m in Sources */,

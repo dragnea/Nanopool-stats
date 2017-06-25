@@ -8,7 +8,7 @@
 
 #import "ManagedObject.h"
 
-@class Worker;
+@class Worker, Payment, Share;
 
 typedef NS_ENUM(int16_t, AccountType) {
     AccountTypeNone,
@@ -40,6 +40,8 @@ typedef NS_ENUM(int16_t, AccountAvgHour) {
 @property (nullable, nonatomic, copy) NSDictionary *avgHashrate;
 @property (nullable, nonatomic, copy) NSArray *hashrateHistory;
 @property (nullable, nonatomic, retain) NSSet <Worker *>*workers;
+@property (nullable, nonatomic, retain) NSSet <Payment *>*payments;
+@property (nullable, nonatomic, retain) NSSet <Share *>*shares;
 
 // custom properties
 @property (nonatomic, readonly) double selectedAvgHashrate;

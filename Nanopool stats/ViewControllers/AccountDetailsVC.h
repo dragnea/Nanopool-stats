@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface AccountDetailsVC : UIViewController
+@property (nonatomic, strong) NSString *address;
 
+- (void)reloadAll;
 - (id)initWithAddress:(NSString *)address;
 
 @end

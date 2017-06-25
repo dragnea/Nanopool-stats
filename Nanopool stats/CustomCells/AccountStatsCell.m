@@ -51,7 +51,7 @@
     self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     self.numberFormatter.usesGroupingSeparator = NO;
     self.numberFormatter.minimumFractionDigits = 1;
-    self.numberFormatter.maximumFractionDigits = 3;
+    self.numberFormatter.maximumFractionDigits = 8;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

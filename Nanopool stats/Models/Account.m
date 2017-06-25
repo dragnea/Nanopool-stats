@@ -19,6 +19,8 @@
 @dynamic hashrateHistory;
 @dynamic balance;
 @dynamic workers;
+@dynamic payments;
+@dynamic shares;
 
 + (NSString *)nameForType:(AccountType)type {
     switch (type) {

@@ -9,6 +9,8 @@
 #import "NanopoolController.h"
 #import "CoreData.h"
 #import "Worker.h"
+#import "Payment.h"
+#import "Share.h"
 #import "AFNetworking.h"
 
 typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *error);
@@ -91,12 +93,56 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
     }];
 }
 
+- (void)updatePaymentsForAccountType:(AccountType)accountType address:(NSString *)address {
+    [self getMinerWithAccountType:accountType endpoint:@"payments" address:address completion:^(NSDictionary *responseObject, NSString *error) {
+        NSManagedObjectContext *workerContext = [CoreData workerContext];
+        [workerContext performBlock:^{
+            Account *account = [Account entityInContext:workerContext key:@"address" value:address shouldCreate:YES];
+            NSArray *paymentsArray = responseObject[@"data"];
+            for (NSDictionary *paymentDict in paymentsArray) {
+                Payment *payment = [Payment entityInContext:workerContext key:@"txHash" value:paymentDict[@"txHash"] shouldCreate:YES];
+                [payment updateWithDictionary:paymentDict];
+                payment.account = account;
+            }
+            NSError *saveError = nil;
+            if (![workerContext save:&saveError]) {
+                // TODO: handle error
+            } else {
+                // success
+            }
+        }];
+    }];
+}
+
+- (void)updateSharesForAccountType:(AccountType)accountType address:(NSString *)address {
+    [self getMinerWithAccountType:accountType endpoint:@"shareratehistory" address:address completion:^(NSDictionary *responseObject, NSString *error) {
+        NSManagedObjectContext *workerContext = [CoreData workerContext];
+        [workerContext performBlock:^{
+            Account *account = [Account entityInContext:workerContext key:@"address" value:address shouldCreate:YES];
+            NSArray *sharesArray = responseObject[@"data"];
+            for (NSDictionary *shareDict in sharesArray) {
+                Share *share = [Share entityInContext:workerContext key:@"date" value:responseObject[@"date"] shouldCreate:YES];
+                share.shares = [shareDict[@"shares"] integerValue];
+                share.account = account;
+            }
+            NSError *saveError = nil;
+            if (![workerContext save:&saveError]) {
+                // TODO: handle error
+            } else {
+                // success
+            }
+        }];
+    }];
+}
+
 #pragma mark - public methods
 
 - (void)updateAccounts {
     NSArray *accounts = [Account entitiesInContext:[CoreData mainContext]];
     for (Account *account in accounts) {
         [self updateGeneralInfoForAccountType:account.type address:account.address];
+        [self updatePaymentsForAccountType:account.type address:account.address];
+        [self updateSharesForAccountType:account.type address:account.address];
     }
 }
 

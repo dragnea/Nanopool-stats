@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DashboardVC.h"
+#import "NanopoolController.h"
 
 @interface AppDelegate ()
 
@@ -40,6 +41,10 @@
     return YES;
 }
 
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [[NanopoolController sharedInstance] updateAccounts];
+    // TODO: implement completion handler in NanopoolController
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

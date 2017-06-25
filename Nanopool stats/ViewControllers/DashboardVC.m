@@ -21,6 +21,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *placeholderDetailsLabel;
 @property (nonatomic, weak) IBOutlet DMSButton *addButton;
 @property (nonatomic, strong) NSFetchedResultsController <Account *>*accountsFetchedResultsController;
+@property (nonatomic, weak) AccountDetailsVC *accountDetailsVC;
+@property (nonatomic, strong) NSTimer *refreshTimer;
 @end
 
 @implementation DashboardVC
@@ -53,13 +55,36 @@
         [self updatePlaceholder];
         [self.tableView reloadData];
     }
-    
-    [[NanopoolController sharedInstance] updateAccounts];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSTimeInterval currentTimestamp = [[NSDate date] timeIntervalSince1970];
+    if ([userDefaults doubleForKey:@"last_update"] < currentTimestamp - 60.0f) {
+        [userDefaults setDouble:currentTimestamp forKey:@"last_update"];
+        [userDefaults synchronize];
+        if (!self.refreshTimer) {
+            self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(refresh:) userInfo:nil repeats:YES];
+            [[NSRunLoop mainRunLoop] addTimer:self.refreshTimer forMode:NSDefaultRunLoopMode];
+        }
+        [self.refreshTimer fire];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.refreshTimer invalidate];
+    self.refreshTimer = nil;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)refresh:(NSTimer *)timer {
+    [[NanopoolController sharedInstance] updateAccounts];
 }
 
 - (void)updatePlaceholder {
@@ -109,6 +134,7 @@
     NSString *address = [self.accountsFetchedResultsController objectAtIndexPath:indexPath].address;
     AccountDetailsVC *accountDetailsVC = [[AccountDetailsVC alloc] initWithAddress:address];
     [self.navigationController pushViewController:accountDetailsVC animated:YES];
+    self.accountDetailsVC = accountDetailsVC;
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -136,7 +162,7 @@
 }
 
 - (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
+   didChangeObject:(Account *)account
        atIndexPath:(NSIndexPath *)indexPath
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
@@ -157,6 +183,14 @@
             
         default:
             break;
+    }
+    
+    if ([account.address isEqualToString:self.accountDetailsVC.address]) {
+        if (type == NSFetchedResultsChangeDelete) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        } else {
+            [self.accountDetailsVC reloadAll];
+        }
     }
 }
 
