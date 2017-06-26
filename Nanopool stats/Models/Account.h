@@ -51,6 +51,7 @@ typedef NS_ENUM(int16_t, AccountAvgHour) {
 + (NSString * _Nonnull)currencyForType:(AccountType)type;
 + (NSString * _Nullable)currencyIconForType:(AccountType)type large:(BOOL)large;
 + (NSString * _Nullable)apiForType:(AccountType)type;
++ (NSString * _Nullable)unitForType:(AccountType)type;
 + (NSArray * _Nonnull)types;
 - (double)avgHashrateForHour:(AccountAvgHour)hour;
 - (NSString * _Nonnull)avgHashrateTitleForHour:(AccountAvgHour)hour;

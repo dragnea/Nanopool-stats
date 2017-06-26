@@ -36,8 +36,6 @@ typedef NS_ENUM(NSInteger, Section) {
 @property (nonatomic, strong) NSArray <HorizontalSelectCellItem *> *avgHashrates;
 @property (nonatomic, strong) NSMutableArray <GraphCellItem*> *hashrates;
 
-@property (nonatomic, strong) NSNumberFormatter *numberFormatter;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @end
 
 @implementation AccountDetailsVC {
@@ -65,17 +63,6 @@ typedef NS_ENUM(NSInteger, Section) {
                                                                              target:self
                                                                              action:@selector(moreButtonTouched:)];
     
-    self.numberFormatter = [[NSNumberFormatter alloc] init];
-    self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    self.numberFormatter.usesGroupingSeparator = NO;
-    self.numberFormatter.minimumFractionDigits = 1;
-    self.numberFormatter.maximumFractionDigits = 2;
-    self.numberFormatter.positiveSuffix = @" MH/s";
-    
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-    self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
-    
     [self reloadAll];
     
     [TableHeader registerNibInTableView:self.tableView];
@@ -84,9 +71,6 @@ typedef NS_ENUM(NSInteger, Section) {
     [GraphCell registerNibInTableView:self.tableView];
     [InfoDetailsCell registerNibInTableView:self.tableView];
     [AccountInfoCell registerNibInTableView:self.tableView];
-    [[NanopoolController sharedInstance] updateHashrateHistoryForAccount:self.account completion:^(NSString *error) {
-        [self reloadAll];
-    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,19 +82,24 @@ typedef NS_ENUM(NSInteger, Section) {
     
 }
 
+- (NSString *)valueWithNumber:(NSNumber *)number {
+    return [NSString stringWithFormat:@"%@ %@", [NumberFormatter stringFromNumber:number], [Account unitForType:self.account.type]];
+}
+
 - (HorizontalSelectCellItem *)avgHashrateWithAvgHour:(AccountAvgHour)accountAvgHour {
     return [[HorizontalSelectCellItem alloc] initWithTitle:[self.account avgHashrateTitleForHour:accountAvgHour]
-                                                     value:[self.numberFormatter stringFromNumber:@([self.account avgHashrateForHour:accountAvgHour])]];
+                                                     value:[self valueWithNumber:@([self.account avgHashrateForHour:accountAvgHour])]];
 }
 
 - (void)reloadAverage {
     NSNumber *avgAllHashrates = [self.account.hashrateHistory valueForKeyPath:@"@avg.hashrate"];
+    NSString *value = [self valueWithNumber:avgAllHashrates];
     self.avgHashrates = @[[self avgHashrateWithAvgHour:AccountAvgHour1h],
                           [self avgHashrateWithAvgHour:AccountAvgHour3h],
                           [self avgHashrateWithAvgHour:AccountAvgHour6h],
                           [self avgHashrateWithAvgHour:AccountAvgHour12h],
                           [self avgHashrateWithAvgHour:AccountAvgHour24h],
-                          [[HorizontalSelectCellItem alloc] initWithTitle:@"All" value:[self.numberFormatter stringFromNumber:avgAllHashrates]]];
+                          [[HorizontalSelectCellItem alloc] initWithTitle:@"All" value:value]];
     
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -144,7 +133,7 @@ typedef NS_ENUM(NSInteger, Section) {
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:[hashrateHistory[index][@"date"] doubleValue]];
         if ([date compare:minDate] == NSOrderedDescending) {
             CGFloat hashrate = [hashrateHistory[index][@"hashrate"] floatValue];
-            [self.hashrates addObject:[[GraphCellItem alloc] initWithTitle:[self.dateFormatter stringFromDate:date] value:hashrate]];
+            [self.hashrates addObject:[[GraphCellItem alloc] initWithTitle:[DateFormatter stringFromDate:date] value:hashrate]];
         }
     }
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:SectionHashrateGraph]] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -370,6 +359,33 @@ typedef NS_ENUM(NSInteger, Section) {
     } else if (indexPath.section == SectionPayments) {
         PaymentsVC *paymentsVC = [[PaymentsVC alloc] initWithAddress:self.account.address];
         [self.navigationController pushViewController:paymentsVC animated:YES];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section ==  SectionGeneralInfo) {
+        if (indexPath.row == 0 ||
+            indexPath.row == 1) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    return (action == @selector(copy:));
+}
+
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    if (action == @selector(copy:)) {
+        if (indexPath.section ==  SectionGeneralInfo) {
+            if (indexPath.row == 0) {
+                [[UIPasteboard generalPasteboard] setString:self.account.address];
+            } else if (indexPath.row == 1) {
+                AccountInfoCell *balanceCell = [tableView cellForRowAtIndexPath:indexPath];
+                [[UIPasteboard generalPasteboard] setString:balanceCell.valueLabel.text];
+            }
+        }
     }
 }
 

@@ -9,14 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "Account.h"
 
-typedef void(^completionBlock)(NSString *error);
+typedef void(^completionBlock)(UIBackgroundFetchResult result);
 
 @interface NanopoolController : NSObject
 
 + (NanopoolController *)sharedInstance;
 
-- (void)updateAccounts;
+- (void)updateAccounts:(completionBlock)completion;
 - (void)addAccountWithType:(AccountType)accountType name:(NSString *)name address:(NSString *)address completion:(completionBlock)completion;
-- (void)updateHashrateHistoryForAccount:(Account *)account completion:(completionBlock)completion;
 
 @end

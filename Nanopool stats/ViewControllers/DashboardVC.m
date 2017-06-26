@@ -14,6 +14,7 @@
 #import "NanopoolController.h"
 #import "AddAccountVC.h"
 #import "AccountDetailsVC.h"
+#import "Reachability.h"
 
 @interface DashboardVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) NSFetchedResultsController <Account *>*accountsFetchedResultsController;
 @property (nonatomic, weak) AccountDetailsVC *accountDetailsVC;
 @property (nonatomic, strong) NSTimer *refreshTimer;
+@property (nonatomic, strong) Reachability *reachability;
 @end
 
 @implementation DashboardVC
@@ -55,27 +57,29 @@
         [self updatePlaceholder];
         [self.tableView reloadData];
     }
+    
+    self.reachability = [Reachability reachabilityForInternetConnection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityNotification:) name:kReachabilityChangedNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSTimeInterval currentTimestamp = [[NSDate date] timeIntervalSince1970];
-    if ([userDefaults doubleForKey:@"last_update"] < currentTimestamp - 60.0f) {
-        [userDefaults setDouble:currentTimestamp forKey:@"last_update"];
-        [userDefaults synchronize];
-        if (!self.refreshTimer) {
-            self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(refresh:) userInfo:nil repeats:YES];
-            [[NSRunLoop mainRunLoop] addTimer:self.refreshTimer forMode:NSDefaultRunLoopMode];
-        }
-        [self.refreshTimer fire];
+    if (!self.refreshTimer) {
+        self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(refresh:) userInfo:nil repeats:YES];
     }
+    [self.refreshTimer fire];
+    [self.reachability startNotifier];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.refreshTimer invalidate];
     self.refreshTimer = nil;
+    [self.reachability stopNotifier];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,8 +87,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)updateAccounts {
+    if ([self.reachability currentReachabilityStatus] != NotReachable) {
+        [[NanopoolController sharedInstance] updateAccounts:nil];
+    }
+}
+
 - (void)refresh:(NSTimer *)timer {
-    [[NanopoolController sharedInstance] updateAccounts];
+    [self updateAccounts];
+}
+
+- (void)reachabilityNotification:(NSNotification *)notification {
+    [self updateAccounts];
 }
 
 - (void)updatePlaceholder {

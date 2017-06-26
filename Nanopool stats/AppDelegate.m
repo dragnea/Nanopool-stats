@@ -42,8 +42,7 @@
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    [[NanopoolController sharedInstance] updateAccounts];
-    // TODO: implement completion handler in NanopoolController
+    [[NanopoolController sharedInstance] updateAccounts:completionHandler];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

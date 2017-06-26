@@ -98,6 +98,25 @@
     }
 }
 
++ (NSString * _Nullable)unitForType:(AccountType)type {
+    switch (type) {
+        case AccountTypeEthereum:
+            return @"MH/s";
+        case AccountTypeEthereumClassic:
+            return @"MH/s";
+        case AccountTypeSiaCoin:
+            return @"MH/s";
+        case AccountTypeZCash:
+            return @"Sol/s";
+        case AccountTypeMonero:
+            return @"H/s";
+        case AccountTypePascal:
+            return @"MH/s";
+        default:
+            return @"MH/s";
+    }
+}
+
 + (NSArray * _Nonnull)types {
     static NSArray *types;
     if (!types) {

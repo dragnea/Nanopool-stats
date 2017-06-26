@@ -42,16 +42,11 @@
 
 - (void)addAccount {
     [self.tableView endEditing:YES];
-    [[NanopoolController sharedInstance] addAccountWithType:self.accountType name:self.name address:self.address completion:^(NSString *error) {
-        NSString *message;
-        if (!error) {
-            message = @"Successfully added!";
-        } else {
-            message = error;
-        }
+    [[NanopoolController sharedInstance] addAccountWithType:self.accountType name:self.name address:self.address completion:^(UIBackgroundFetchResult result) {
+        NSString *message = (result == UIBackgroundFetchResultNewData ? @"Successfully added" : @"Failed to add. Please review the input data and try again");
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"New account" message:message preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            if (!error) {
+            if (result == UIBackgroundFetchResultNewData) {
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }]];

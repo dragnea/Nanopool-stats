@@ -15,7 +15,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *statusLabel;
 
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @end
 
 @implementation PaymentCell
@@ -31,10 +30,6 @@
     self.amountLabel.textColor = [textsColor themeColorWithValueAlpha];
     self.dateLabel.textColor = [textsColor themeColorWithValueTitleAlpha];
     self.statusLabel.textColor = self.dateLabel.textColor;
-    
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    self.dateFormatter.dateStyle = NSDateFormatterLongStyle;
-    self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -48,7 +43,7 @@
     self.amountLabel.text = [NSString stringWithFormat:@"%f %@", payment.amount, [Account currencyForType:payment.account.type]];
     self.statusLabel.text = payment.confirmed ? @"Confirmed" : @"Not confirmed";
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:payment.date];
-    self.dateLabel.text = [self.dateFormatter stringFromDate:date];
+    self.dateLabel.text = [DateFormatter stringFromDate:date];
 }
 
 - (void)drawRect:(CGRect)rect {

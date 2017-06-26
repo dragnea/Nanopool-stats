@@ -13,6 +13,9 @@
 
 @interface WorkersVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
+@property (nonatomic, weak) IBOutlet UILabel *placeholderLabel;
+@property (nonatomic, weak) IBOutlet UILabel *placeholderTipsLabel;
 @property (nonatomic, strong) NSFetchedResultsController <Worker *> *workersFetchedController;
 @end
 
@@ -44,11 +47,21 @@
         self.workersFetchedController.delegate = self;
         [self.tableView reloadData];
     }
+    
+    UIColor *placeholderColor = [[UIColor blackColor] themeColorWithValueTitleAlpha];
+    self.placeholderImageView.tintColor = placeholderColor;
+    self.placeholderLabel.textColor = placeholderColor;
+    self.placeholderTipsLabel.textColor = placeholderColor;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updatePlaceholder {
+    self.placeholderImageView.hidden = self.workersFetchedController.fetchedObjects.count != 0;
+    self.placeholderLabel.hidden = self.placeholderImageView.hidden;
 }
 
 #pragma mark - UITableViewDataSource
@@ -86,6 +99,10 @@
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
 
 - (void)controller:(NSFetchedResultsController *)controller
   didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo
@@ -128,6 +145,11 @@
         default:
             break;
     }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+    [self updatePlaceholder];
 }
 
 @end

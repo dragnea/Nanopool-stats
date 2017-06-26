@@ -23,17 +23,14 @@
 		6480D64A1EDD8D5800D78FFD /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6480D6481EDD8D5800D78FFD /* TextFieldCell.xib */; };
 		6480D64E1EDD98D400D78FFD /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D64D1EDD98D400D78FFD /* UIColor+Additions.m */; };
 		6480D6521EDDAD0D00D78FFD /* NanopoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6511EDDAD0D00D78FFD /* NanopoolController.m */; };
-		6480D6611EDDAF6B00D78FFD /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6551EDDAF6B00D78FFD /* AFHTTPSessionManager.m */; };
-		6480D6621EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6581EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m */; };
-		6480D6631EDDAF6B00D78FFD /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D65A1EDDAF6B00D78FFD /* AFSecurityPolicy.m */; };
-		6480D6641EDDAF6B00D78FFD /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D65C1EDDAF6B00D78FFD /* AFURLRequestSerialization.m */; };
-		6480D6651EDDAF6B00D78FFD /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D65E1EDDAF6B00D78FFD /* AFURLResponseSerialization.m */; };
-		6480D6661EDDAF6B00D78FFD /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6601EDDAF6B00D78FFD /* AFURLSessionManager.m */; };
 		6480D6691EDEFA1500D78FFD /* DMSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6480D6681EDEFA1500D78FFD /* DMSButton.m */; };
 		6487BB391EFBFCEF00F7D01F /* InfoDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6487BB371EFBFCEF00F7D01F /* InfoDetailsCell.m */; };
 		6487BB3A1EFBFCEF00F7D01F /* InfoDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6487BB381EFBFCEF00F7D01F /* InfoDetailsCell.xib */; };
 		6487BB431EFD47BC00F7D01F /* AccountInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6487BB411EFD47BC00F7D01F /* AccountInfoCell.m */; };
 		6487BB441EFD47BC00F7D01F /* AccountInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6487BB421EFD47BC00F7D01F /* AccountInfoCell.xib */; };
+		6489C6EE1F00F2F500F38A92 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6489C6ED1F00F2F500F38A92 /* Reachability.m */; };
+		6489C6F11F0105B100F38A92 /* NumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6489C6F01F0105B100F38A92 /* NumberFormatter.m */; };
+		6489C6F41F01074D00F38A92 /* DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6489C6F31F01074D00F38A92 /* DateFormatter.m */; };
 		6498E2941EDC453A00973BC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2931EDC453A00973BC1 /* main.m */; };
 		6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6498E2961EDC453A00973BC1 /* AppDelegate.m */; };
 		6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6498E29E1EDC453A00973BC1 /* Assets.xcassets */; };
@@ -98,19 +95,6 @@
 		6480D64F1EDD997200D78FFD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6480D6501EDDAD0D00D78FFD /* NanopoolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanopoolController.h; sourceTree = "<group>"; };
 		6480D6511EDDAD0D00D78FFD /* NanopoolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanopoolController.m; sourceTree = "<group>"; };
-		6480D6541EDDAF6B00D78FFD /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		6480D6551EDDAF6B00D78FFD /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		6480D6561EDDAF6B00D78FFD /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		6480D6571EDDAF6B00D78FFD /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		6480D6581EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		6480D6591EDDAF6B00D78FFD /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		6480D65A1EDDAF6B00D78FFD /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		6480D65B1EDDAF6B00D78FFD /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		6480D65C1EDDAF6B00D78FFD /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		6480D65D1EDDAF6B00D78FFD /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		6480D65E1EDDAF6B00D78FFD /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		6480D65F1EDDAF6B00D78FFD /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		6480D6601EDDAF6B00D78FFD /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		6480D6671EDEFA1500D78FFD /* DMSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSButton.h; sourceTree = "<group>"; };
 		6480D6681EDEFA1500D78FFD /* DMSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSButton.m; sourceTree = "<group>"; };
 		6487BB361EFBFCEF00F7D01F /* InfoDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoDetailsCell.h; sourceTree = "<group>"; };
@@ -119,6 +103,12 @@
 		6487BB401EFD47BC00F7D01F /* AccountInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountInfoCell.h; sourceTree = "<group>"; };
 		6487BB411EFD47BC00F7D01F /* AccountInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountInfoCell.m; sourceTree = "<group>"; };
 		6487BB421EFD47BC00F7D01F /* AccountInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoCell.xib; sourceTree = "<group>"; };
+		6489C6EC1F00F2F500F38A92 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6489C6ED1F00F2F500F38A92 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		6489C6EF1F0105B100F38A92 /* NumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberFormatter.h; sourceTree = "<group>"; };
+		6489C6F01F0105B100F38A92 /* NumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberFormatter.m; sourceTree = "<group>"; };
+		6489C6F21F01074D00F38A92 /* DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatter.h; sourceTree = "<group>"; };
+		6489C6F31F01074D00F38A92 /* DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatter.m; sourceTree = "<group>"; };
 		6498E28F1EDC453A00973BC1 /* Nanopool stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nanopool stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6498E2931EDC453A00973BC1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6498E2951EDC453A00973BC1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -298,33 +288,18 @@
 			isa = PBXGroup;
 			children = (
 				6AAE89D11EE9B5FC002867AF /* BEMSimpleLineChart */,
-				6480D6531EDDAED500D78FFD /* AFNetworking */,
 				6480D64C1EDD98D400D78FFD /* UIColor+Additions.h */,
 				6480D64D1EDD98D400D78FFD /* UIColor+Additions.m */,
 				6A97E30C1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.h */,
 				6A97E30D1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.m */,
+				6489C6EC1F00F2F500F38A92 /* Reachability.h */,
+				6489C6ED1F00F2F500F38A92 /* Reachability.m */,
+				6489C6EF1F0105B100F38A92 /* NumberFormatter.h */,
+				6489C6F01F0105B100F38A92 /* NumberFormatter.m */,
+				6489C6F21F01074D00F38A92 /* DateFormatter.h */,
+				6489C6F31F01074D00F38A92 /* DateFormatter.m */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		6480D6531EDDAED500D78FFD /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				6480D6541EDDAF6B00D78FFD /* AFHTTPSessionManager.h */,
-				6480D6551EDDAF6B00D78FFD /* AFHTTPSessionManager.m */,
-				6480D6561EDDAF6B00D78FFD /* AFNetworking.h */,
-				6480D6571EDDAF6B00D78FFD /* AFNetworkReachabilityManager.h */,
-				6480D6581EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m */,
-				6480D6591EDDAF6B00D78FFD /* AFSecurityPolicy.h */,
-				6480D65A1EDDAF6B00D78FFD /* AFSecurityPolicy.m */,
-				6480D65B1EDDAF6B00D78FFD /* AFURLRequestSerialization.h */,
-				6480D65C1EDDAF6B00D78FFD /* AFURLRequestSerialization.m */,
-				6480D65D1EDDAF6B00D78FFD /* AFURLResponseSerialization.h */,
-				6480D65E1EDDAF6B00D78FFD /* AFURLResponseSerialization.m */,
-				6480D65F1EDDAF6B00D78FFD /* AFURLSessionManager.h */,
-				6480D6601EDDAF6B00D78FFD /* AFURLSessionManager.m */,
-			);
-			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 		6498E2861EDC453A00973BC1 = {
@@ -423,6 +398,11 @@
 						DevelopmentTeam = NJT84KJKR3;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -481,6 +461,7 @@
 				6AAE89DE1EE9B610002867AF /* BEMLine.m in Sources */,
 				6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */,
 				6A37D3931EFEF6A50099ED12 /* Payment.m in Sources */,
+				6489C6F11F0105B100F38A92 /* NumberFormatter.m in Sources */,
 				6480D61D1EDC556700D78FFD /* AccountStatsCell.m in Sources */,
 				6AAE89DF1EE9B610002867AF /* BEMPermanentPopupView.m in Sources */,
 				6480D63F1EDD652D00D78FFD /* AddAccountVC.m in Sources */,
@@ -488,13 +469,11 @@
 				6A97E30B1EDDFD1000E23C7E /* ManagedObject.m in Sources */,
 				6AAE89E01EE9B610002867AF /* BEMSimpleLineGraphView.m in Sources */,
 				6480D62C1EDC5A9A00D78FFD /* Database.xcdatamodeld in Sources */,
-				6480D6661EDDAF6B00D78FFD /* AFURLSessionManager.m in Sources */,
 				6480D6251EDC58CA00D78FFD /* CustomCell.m in Sources */,
 				6A6891BD1EEEF42700D96ED1 /* GraphCell.m in Sources */,
 				6A97E30E1EDDFDF700E23C7E /* NSManagedObjectContext+Additions.m in Sources */,
 				6A4315F81EFC261D0043BACD /* WorkerCell.m in Sources */,
 				6AAE89DC1EE9B610002867AF /* BEMAverageLine.m in Sources */,
-				6480D6621EDDAF6B00D78FFD /* AFNetworkReachabilityManager.m in Sources */,
 				6487BB391EFBFCEF00F7D01F /* InfoDetailsCell.m in Sources */,
 				6A97E3061EDDF59700E23C7E /* TableHeader.m in Sources */,
 				6A8516211EE88126003B91B2 /* TitleValueCollectionCell.m in Sources */,
@@ -503,18 +482,16 @@
 				6A6891B81EEEF01200D96ED1 /* HorizontalSelectCell.m in Sources */,
 				6498E2941EDC453A00973BC1 /* main.m in Sources */,
 				6480D6221EDC55B500D78FFD /* Account.m in Sources */,
-				6480D6651EDDAF6B00D78FFD /* AFURLResponseSerialization.m in Sources */,
 				6AAEB0BC1EE71C95005C7AD7 /* AccountDetailsVC.m in Sources */,
-				6480D6641EDDAF6B00D78FFD /* AFURLRequestSerialization.m in Sources */,
-				6480D6631EDDAF6B00D78FFD /* AFSecurityPolicy.m in Sources */,
+				6489C6EE1F00F2F500F38A92 /* Reachability.m in Sources */,
 				6480D6441EDD6BCA00D78FFD /* AccountSelectCell.m in Sources */,
 				6498E2AC1EDC461C00973BC1 /* DashboardVC.m in Sources */,
 				6AAE89DD1EE9B610002867AF /* BEMCircle.m in Sources */,
 				6487BB431EFD47BC00F7D01F /* AccountInfoCell.m in Sources */,
 				6480D6391EDC5EB700D78FFD /* AccountTypeHeader.m in Sources */,
+				6489C6F41F01074D00F38A92 /* DateFormatter.m in Sources */,
 				6480D6521EDDAD0D00D78FFD /* NanopoolController.m in Sources */,
 				6A4316021EFC279E0043BACD /* WorkersVC.m in Sources */,
-				6480D6611EDDAF6B00D78FFD /* AFHTTPSessionManager.m in Sources */,
 				6A6039641EFEFAE600461F1E /* PaymentCell.m in Sources */,
 				6480D6291EDC59E500D78FFD /* CoreData.m in Sources */,
 				6480D6691EDEFA1500D78FFD /* DMSButton.m in Sources */,

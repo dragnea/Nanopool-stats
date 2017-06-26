@@ -16,8 +16,6 @@
 @property (nonatomic, strong) IBOutletCollection(NSLayoutConstraint) NSArray <NSLayoutConstraint *> *valuesBottomConstraints;
 @property (nonatomic, strong) IBOutletCollection(UILabel) NSArray <UILabel *> *titleLabels;
 
-@property (nonatomic, strong) NSNumberFormatter *numberFormatter;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSMutableArray <NSNumber *> *values;
 @property (nonatomic) double maxValue;
 @end
@@ -30,16 +28,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    self.numberFormatter = [[NSNumberFormatter alloc] init];
-    self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    self.numberFormatter.usesGroupingSeparator = NO;
-    self.numberFormatter.minimumFractionDigits = 1;
-    self.numberFormatter.maximumFractionDigits = 8;
-    
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    self.dateFormatter.dateStyle = NSDateFormatterLongStyle;
-    self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
     
     self.values = [NSMutableArray array];
     
@@ -67,8 +55,7 @@
 - (void)setWorker:(Worker *)worker {
     _worker = worker;
     self.idLabel.text = worker.id;
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:worker.lastShare];
-    self.lastUpdateLabel.text = [self.dateFormatter stringFromDate:date];
+    self.lastUpdateLabel.text = [DateFormatter stringFromTimeInterval:worker.lastShare];
     
     [self.values addObject:@(worker.avg_h24)];
     [self.values addObject:@(worker.avg_h12)];

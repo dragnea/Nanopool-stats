@@ -19,8 +19,6 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *averageHashrateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *averageHashrateTitleLabel;
-
-@property (nonatomic, strong) NSNumberFormatter *numberFormatter;
 @end
 
 @implementation AccountStatsCell
@@ -46,12 +44,6 @@
     self.currencyImageView.backgroundColor = [UIColor whiteColor];
     self.currencyImageView.layer.cornerRadius = self.currencyImageView.bounds.size.width / 2.0f;
     self.currencyImageView.layer.masksToBounds = YES;
-    
-    self.numberFormatter = [[NSNumberFormatter alloc] init];
-    self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    self.numberFormatter.usesGroupingSeparator = NO;
-    self.numberFormatter.minimumFractionDigits = 1;
-    self.numberFormatter.maximumFractionDigits = 8;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -71,12 +63,13 @@
 
 - (void)setAccount:(Account *)account {
     _account = account;
-    
-    self.currencyImageView.image = [UIImage imageNamed:[Account currencyIconForType:account.type large:NO]];
+    AccountType type = account.type;
+    NSString *unit = [Account unitForType:type];
+    self.currencyImageView.image = [UIImage imageNamed:[Account currencyIconForType:type large:NO]];
     self.accountLabel.text = account.label;
-    self.balanceLabel.text = [NSString stringWithFormat:@"%@ %@", [self.numberFormatter stringFromNumber:@(account.balance)], [Account currencyForType:account.type]];
-    self.currentHashrateLabel.text = [NSString stringWithFormat:@"%@ MH/s", [self.numberFormatter stringFromNumber:@(account.hashrate)]];
-    self.averageHashrateLabel.text = [NSString stringWithFormat:@"%@ MH/s", [self.numberFormatter stringFromNumber:@([account avgHashrateForHour:AccountAvgHour6h])]];
+    self.balanceLabel.text = [NSString stringWithFormat:@"%@ %@", [NumberFormatter stringFromNumber:@(account.balance)], [Account currencyForType:type]];
+    self.currentHashrateLabel.text = [NSString stringWithFormat:@"%@ %@", [NumberFormatter stringFromNumber:@(account.hashrate)], unit];
+    self.averageHashrateLabel.text = [NSString stringWithFormat:@"%@ %@", [NumberFormatter stringFromNumber:@([account avgHashrateForHour:AccountAvgHour6h])], unit];
     self.averageHashrateTitleLabel.text = [account avgHashrateTitleForHour:AccountAvgHour6h];
     
 }
