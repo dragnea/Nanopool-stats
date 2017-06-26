@@ -10,6 +10,7 @@
 #import "Account.h"
 
 typedef void(^completionBlock)(UIBackgroundFetchResult result);
+typedef void(^completionResultBlock)(NSDictionary *result);
 
 @interface NanopoolController : NSObject
 
@@ -17,5 +18,6 @@ typedef void(^completionBlock)(UIBackgroundFetchResult result);
 
 - (void)updateAccounts:(completionBlock)completion;
 - (void)addAccountWithType:(AccountType)accountType name:(NSString *)name address:(NSString *)address completion:(completionBlock)completion;
+- (void)estimatedEarningsForAddress:(NSString *)address completion:(completionResultBlock)completion;
 
 @end

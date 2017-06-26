@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SharesVC">
+            <connections>
+                <outlet property="placeholderImageView" destination="shd-2K-wzN" id="zsP-sa-nEa"/>
+                <outlet property="placeholderLabel" destination="ass-qF-hNv" id="QdZ-7J-DnW"/>
+                <outlet property="placeholderTipsLabel" destination="8FD-dN-Fre" id="AMK-bh-qzX"/>
+                <outlet property="tableView" destination="DeY-9n-5TV" id="znR-j0-qPn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="DeY-9n-5TV">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="d4i-KJ-oxh"/>
+                        <outlet property="delegate" destination="-1" id="yzw-5P-XCk"/>
+                    </connections>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go further with mining." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FD-dN-Fre">
+                    <rect key="frame" x="62" y="405" width="250" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any payment until now." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ass-qF-hNv">
+                    <rect key="frame" x="62" y="356" width="250" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="JJI-o9-jz3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="payments_large" translatesAutoresizingMaskIntoConstraints="NO" id="shd-2K-wzN">
+                    <rect key="frame" x="145" y="241" width="85" height="85"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="DeY-9n-5TV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2wB-SA-Irr"/>
+                <constraint firstItem="DeY-9n-5TV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3FM-iL-gzo"/>
+                <constraint firstItem="shd-2K-wzN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Jz6-z1-tKt"/>
+                <constraint firstItem="ass-qF-hNv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OCs-mG-hrE"/>
+                <constraint firstItem="8FD-dN-Fre" firstAttribute="trailing" secondItem="ass-qF-hNv" secondAttribute="trailing" id="Oap-oz-PIy"/>
+                <constraint firstItem="ass-qF-hNv" firstAttribute="top" secondItem="shd-2K-wzN" secondAttribute="bottom" constant="30" id="Pg3-Yr-XWg"/>
+                <constraint firstAttribute="bottom" secondItem="DeY-9n-5TV" secondAttribute="bottom" id="guZ-33-Wsy"/>
+                <constraint firstItem="shd-2K-wzN" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-50" id="lOS-Ce-HYJ"/>
+                <constraint firstItem="8FD-dN-Fre" firstAttribute="leading" secondItem="ass-qF-hNv" secondAttribute="leading" id="phK-XF-jMp"/>
+                <constraint firstAttribute="trailing" secondItem="DeY-9n-5TV" secondAttribute="trailing" id="rzk-jJ-HPt"/>
+                <constraint firstItem="8FD-dN-Fre" firstAttribute="top" secondItem="ass-qF-hNv" secondAttribute="bottom" constant="8" id="yKm-fd-MCv"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="payments_large" width="85" height="85"/>
+    </resources>
+</document>

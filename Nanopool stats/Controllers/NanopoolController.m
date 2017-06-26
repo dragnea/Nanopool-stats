@@ -183,4 +183,26 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
     }];
 }
 
+- (void)estimatedEarningsForAddress:(NSString *)address completion:(completionResultBlock)completion {
+    Account *account = [Account entityInContext:[CoreData mainContext] key:@"address" value:address shouldCreate:NO];
+    NSString *poolType = [Account apiForType:account.type];
+    NSString *endpoint = @"approximated_earnings";
+    NSString *hashrate = [NSString stringWithFormat:@"%f", account.hashrate];
+    NSString *stringURL = [[[self.apiURLString stringByAppendingPathComponent:poolType] stringByAppendingPathComponent:endpoint] stringByAppendingPathComponent:hashrate];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:stringURL]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSDictionary *result = [self sendSynchronousRequest:urlRequest returningResponse:nil error:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+           
+            if (completion) {
+                completion(result);
+            }
+            
+        });
+        
+    });
+}
+
 @end

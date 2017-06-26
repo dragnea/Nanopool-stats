@@ -62,6 +62,7 @@
 - (void)updatePlaceholder {
     self.placeholderImageView.hidden = self.paymentsFetchedController.fetchedObjects.count != 0;
     self.placeholderLabel.hidden = self.placeholderImageView.hidden;
+    self.placeholderTipsLabel.hidden = self.placeholderImageView.hidden;
 }
 
 #pragma mark - UITableViewDataSource

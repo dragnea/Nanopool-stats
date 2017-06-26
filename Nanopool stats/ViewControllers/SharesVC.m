@@ -1,35 +1,35 @@
 //
-//  WorkersVC.m
+//  SharesVC.m
 //  Nanopool stats
 //
-//  Created by Dragnea Mihai on 6/22/17.
+//  Created by Dragnea Mihai on 6/26/17.
 //  Copyright © 2017 Dragnea Mihai. All rights reserved.
 //
 
-#import "WorkersVC.h"
-#import "Worker.h"
+#import "SharesVC.h"
+#import "ShareCell.h"
+#import "Share.h"
 #import "CoreData.h"
-#import "WorkerCell.h"
 
-@interface WorkersVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface SharesVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
 @property (nonatomic, weak) IBOutlet UILabel *placeholderLabel;
 @property (nonatomic, weak) IBOutlet UILabel *placeholderTipsLabel;
-@property (nonatomic, strong) NSFetchedResultsController <Worker *> *workersFetchedController;
+@property (nonatomic, strong) NSFetchedResultsController <Share *> *sharesFetchedController;
 @end
 
-@implementation WorkersVC
+@implementation SharesVC
 
 - (id)initWithAddress:(NSString *)address {
     if (self = [super init]) {
-        NSFetchRequest *workersFetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Worker class])];
-        workersFetchRequest.predicate = [NSPredicate predicateWithFormat:@"account.address == %@", address];
-        workersFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastShare" ascending:NO]];
-        self.workersFetchedController = [[NSFetchedResultsController alloc] initWithFetchRequest:workersFetchRequest
-                                                                            managedObjectContext:[CoreData mainContext]
-                                                                              sectionNameKeyPath:nil
-                                                                                       cacheName:nil];
+        NSFetchRequest *sharesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Share class])];
+        sharesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"account.address == %@", address];
+        sharesFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
+        self.sharesFetchedController = [[NSFetchedResultsController alloc] initWithFetchRequest:sharesFetchRequest
+                                                                             managedObjectContext:[CoreData mainContext]
+                                                                               sectionNameKeyPath:nil
+                                                                                        cacheName:nil];
     }
     return self;
 }
@@ -37,14 +37,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Workers";
-    [WorkerCell registerNibInTableView:self.tableView];
-    
+    self.navigationItem.title = @"Shares";
+    [ShareCell registerNibInTableView:self.tableView];
     NSError *error = nil;
-    if (![self.workersFetchedController performFetch:&error]) {
+    if (![self.sharesFetchedController performFetch:&error]) {
         NSLog(@"WorkersVC: error fetching workers: %@", error.localizedDescription);
     } else {
-        self.workersFetchedController.delegate = self;
+        self.sharesFetchedController.delegate = self;
         [self.tableView reloadData];
         [self updatePlaceholder];
     }
@@ -61,7 +60,7 @@
 }
 
 - (void)updatePlaceholder {
-    self.placeholderImageView.hidden = self.workersFetchedController.fetchedObjects.count != 0;
+    self.placeholderImageView.hidden = self.sharesFetchedController.fetchedObjects.count != 0;
     self.placeholderLabel.hidden = self.placeholderImageView.hidden;
     self.placeholderTipsLabel.hidden = self.placeholderImageView.hidden;
 }
@@ -69,17 +68,17 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.workersFetchedController.sections.count;
+    return self.sharesFetchedController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.workersFetchedController.sections[section].numberOfObjects;
+    return self.sharesFetchedController.sections[section].numberOfObjects;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WorkerCell *workerCell = [WorkerCell cellInTableView:tableView forIndexPath:indexPath];
-    workerCell.worker = [self.workersFetchedController objectAtIndexPath:indexPath];
-    return workerCell;
+    ShareCell *shareCell = [ShareCell cellInTableView:tableView forIndexPath:indexPath];
+    shareCell.share = [self.sharesFetchedController objectAtIndexPath:indexPath];
+    return shareCell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -89,7 +88,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [WorkerCell height];
+    return [ShareCell height];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

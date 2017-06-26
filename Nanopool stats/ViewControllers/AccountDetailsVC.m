@@ -18,6 +18,9 @@
 #import "WorkersVC.h"
 #import "AccountInfoCell.h"
 #import "PaymentsVC.h"
+#import "SharesVC.h"
+#import "PaymentDetailsCell.h"
+#import "EstimatedCalculatorVC.h"
 
 typedef NS_ENUM(NSInteger, Section) {
     SectionGeneralInfo = 0,
@@ -71,6 +74,7 @@ typedef NS_ENUM(NSInteger, Section) {
     [GraphCell registerNibInTableView:self.tableView];
     [InfoDetailsCell registerNibInTableView:self.tableView];
     [AccountInfoCell registerNibInTableView:self.tableView];
+    [PaymentDetailsCell registerNibInTableView:self.tableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -216,7 +220,7 @@ typedef NS_ENUM(NSInteger, Section) {
         case SectionPayments:
             switch (indexPath.row) {
                 case 0:
-                    return [InfoDetailsCell height];
+                    return [PaymentDetailsCell height];
             }
         case SectionShares:
             switch (indexPath.row) {
@@ -316,16 +320,9 @@ typedef NS_ENUM(NSInteger, Section) {
         }
     } else if (indexPath.section == SectionPayments) {
         if (indexPath.row == 0) {
-            InfoDetailsCell *paymentsInfoCell = [InfoDetailsCell cellInTableView:tableView forIndexPath:indexPath];
-            NSInteger paymentsCount = self.account.payments.count;
-            if (!paymentsCount) {
-                paymentsInfoCell.infoText = @"No payments yet";
-            } else if (paymentsCount == 1) {
-                paymentsInfoCell.infoText = @"See the payment";
-            } else {
-                paymentsInfoCell.infoText = [NSString stringWithFormat:@"See all %d payments", (int)paymentsCount];
-            }
-            return paymentsInfoCell;
+            PaymentDetailsCell *paymentsDetailsCell = [PaymentDetailsCell cellInTableView:tableView forIndexPath:indexPath];
+            paymentsDetailsCell.account = self.account;
+            return paymentsDetailsCell;
         }
     } else if (indexPath.section == SectionShares) {
         if (indexPath.row == 0) {
@@ -344,7 +341,9 @@ typedef NS_ENUM(NSInteger, Section) {
     } else if (indexPath.section == SectionCalculator) {
         if (indexPath.row == 0) {
             InfoDetailsCell *calculatorInfoCell = [InfoDetailsCell cellInTableView:tableView forIndexPath:indexPath];
-            calculatorInfoCell.infoText = [NSString stringWithFormat:@"%f per month", 0.0f];
+            calculatorInfoCell.infoText = [NSString stringWithFormat:@"Approx. earnings for %.2f %@",
+                                           self.account.hashrate,
+                                           [Account unitForType:self.account.type]];
             return calculatorInfoCell;
         }
     }
@@ -359,6 +358,12 @@ typedef NS_ENUM(NSInteger, Section) {
     } else if (indexPath.section == SectionPayments) {
         PaymentsVC *paymentsVC = [[PaymentsVC alloc] initWithAddress:self.account.address];
         [self.navigationController pushViewController:paymentsVC animated:YES];
+    } else if (indexPath.section == SectionShares) {
+        SharesVC *sharesVC = [[SharesVC alloc] initWithAddress:self.account.address];
+        [self.navigationController pushViewController:sharesVC animated:YES];
+    } else if (indexPath.section == SectionCalculator) {
+        EstimatedCalculatorVC *estimatesCalculatorVC = [[EstimatedCalculatorVC alloc] initWithAddress:self.account.address];
+        [self.navigationController pushViewController:estimatesCalculatorVC animated:YES];
     }
 }
 

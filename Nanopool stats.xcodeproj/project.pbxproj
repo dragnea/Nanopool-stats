@@ -39,6 +39,16 @@
 		6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6498E2AB1EDC461C00973BC1 /* DashboardVC.xib */; };
 		64A102F81EE8191E00ADE84F /* Worker.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A102F71EE8191E00ADE84F /* Worker.m */; };
 		6A37D3931EFEF6A50099ED12 /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A37D3921EFEF6A50099ED12 /* Payment.m */; };
+		6A39655D1F015854007BB9FC /* PaymentDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A39655B1F015854007BB9FC /* PaymentDetailsCell.m */; };
+		6A39655E1F015854007BB9FC /* PaymentDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A39655C1F015854007BB9FC /* PaymentDetailsCell.xib */; };
+		6A3965621F015EB0007BB9FC /* EstimatedCalculatorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3965601F015EB0007BB9FC /* EstimatedCalculatorVC.m */; };
+		6A3965631F015EB0007BB9FC /* EstimatedCalculatorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A3965611F015EB0007BB9FC /* EstimatedCalculatorVC.xib */; };
+		6A3965671F01695B007BB9FC /* EstimatedEarningCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3965651F01695B007BB9FC /* EstimatedEarningCell.m */; };
+		6A3965681F01695B007BB9FC /* EstimatedEarningCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A3965661F01695B007BB9FC /* EstimatedEarningCell.xib */; };
+		6A3E25841F0152490003F91A /* SharesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E25821F0152490003F91A /* SharesVC.m */; };
+		6A3E25851F0152490003F91A /* SharesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A3E25831F0152490003F91A /* SharesVC.xib */; };
+		6A3E25891F01536D0003F91A /* ShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E25871F01536D0003F91A /* ShareCell.m */; };
+		6A3E258A1F01536D0003F91A /* ShareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A3E25881F01536D0003F91A /* ShareCell.xib */; };
 		6A4315F81EFC261D0043BACD /* WorkerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4315F61EFC261D0043BACD /* WorkerCell.m */; };
 		6A4315F91EFC261D0043BACD /* WorkerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4315F71EFC261D0043BACD /* WorkerCell.xib */; };
 		6A4316021EFC279E0043BACD /* WorkersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4316001EFC279E0043BACD /* WorkersVC.m */; };
@@ -123,6 +133,21 @@
 		64A102F71EE8191E00ADE84F /* Worker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Worker.m; sourceTree = "<group>"; };
 		6A37D3911EFEF6A50099ED12 /* Payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Payment.h; sourceTree = "<group>"; };
 		6A37D3921EFEF6A50099ED12 /* Payment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Payment.m; sourceTree = "<group>"; };
+		6A39655A1F015854007BB9FC /* PaymentDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentDetailsCell.h; sourceTree = "<group>"; };
+		6A39655B1F015854007BB9FC /* PaymentDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentDetailsCell.m; sourceTree = "<group>"; };
+		6A39655C1F015854007BB9FC /* PaymentDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentDetailsCell.xib; sourceTree = "<group>"; };
+		6A39655F1F015EB0007BB9FC /* EstimatedCalculatorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatedCalculatorVC.h; sourceTree = "<group>"; };
+		6A3965601F015EB0007BB9FC /* EstimatedCalculatorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatedCalculatorVC.m; sourceTree = "<group>"; };
+		6A3965611F015EB0007BB9FC /* EstimatedCalculatorVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EstimatedCalculatorVC.xib; sourceTree = "<group>"; };
+		6A3965641F01695B007BB9FC /* EstimatedEarningCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatedEarningCell.h; sourceTree = "<group>"; };
+		6A3965651F01695B007BB9FC /* EstimatedEarningCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatedEarningCell.m; sourceTree = "<group>"; };
+		6A3965661F01695B007BB9FC /* EstimatedEarningCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EstimatedEarningCell.xib; sourceTree = "<group>"; };
+		6A3E25811F0152490003F91A /* SharesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharesVC.h; sourceTree = "<group>"; };
+		6A3E25821F0152490003F91A /* SharesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharesVC.m; sourceTree = "<group>"; };
+		6A3E25831F0152490003F91A /* SharesVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SharesVC.xib; sourceTree = "<group>"; };
+		6A3E25861F01536D0003F91A /* ShareCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareCell.h; sourceTree = "<group>"; };
+		6A3E25871F01536D0003F91A /* ShareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareCell.m; sourceTree = "<group>"; };
+		6A3E25881F01536D0003F91A /* ShareCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCell.xib; sourceTree = "<group>"; };
 		6A4315F51EFC261D0043BACD /* WorkerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerCell.h; sourceTree = "<group>"; };
 		6A4315F61EFC261D0043BACD /* WorkerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkerCell.m; sourceTree = "<group>"; };
 		6A4315F71EFC261D0043BACD /* WorkerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkerCell.xib; sourceTree = "<group>"; };
@@ -197,6 +222,12 @@
 				6A959F7F1EFEF36F00F94016 /* PaymentsVC.h */,
 				6A959F801EFEF36F00F94016 /* PaymentsVC.m */,
 				6A959F811EFEF36F00F94016 /* PaymentsVC.xib */,
+				6A3E25811F0152490003F91A /* SharesVC.h */,
+				6A3E25821F0152490003F91A /* SharesVC.m */,
+				6A3E25831F0152490003F91A /* SharesVC.xib */,
+				6A39655F1F015EB0007BB9FC /* EstimatedCalculatorVC.h */,
+				6A3965601F015EB0007BB9FC /* EstimatedCalculatorVC.m */,
+				6A3965611F015EB0007BB9FC /* EstimatedCalculatorVC.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -236,6 +267,15 @@
 				6A6039611EFEFAE600461F1E /* PaymentCell.h */,
 				6A6039621EFEFAE600461F1E /* PaymentCell.m */,
 				6A6039631EFEFAE600461F1E /* PaymentCell.xib */,
+				6A39655A1F015854007BB9FC /* PaymentDetailsCell.h */,
+				6A39655B1F015854007BB9FC /* PaymentDetailsCell.m */,
+				6A39655C1F015854007BB9FC /* PaymentDetailsCell.xib */,
+				6A3E25861F01536D0003F91A /* ShareCell.h */,
+				6A3E25871F01536D0003F91A /* ShareCell.m */,
+				6A3E25881F01536D0003F91A /* ShareCell.xib */,
+				6A3965641F01695B007BB9FC /* EstimatedEarningCell.h */,
+				6A3965651F01695B007BB9FC /* EstimatedEarningCell.m */,
+				6A3965661F01695B007BB9FC /* EstimatedEarningCell.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -434,15 +474,20 @@
 				6480D6401EDD652D00D78FFD /* AddAccountVC.xib in Resources */,
 				6480D64A1EDD8D5800D78FFD /* TextFieldCell.xib in Resources */,
 				6A4316031EFC279E0043BACD /* WorkersVC.xib in Resources */,
+				6A3965681F01695B007BB9FC /* EstimatedEarningCell.xib in Resources */,
 				6487BB441EFD47BC00F7D01F /* AccountInfoCell.xib in Resources */,
 				6A8516221EE88126003B91B2 /* TitleValueCollectionCell.xib in Resources */,
 				6498E2AD1EDC461C00973BC1 /* DashboardVC.xib in Resources */,
+				6A3E25851F0152490003F91A /* SharesVC.xib in Resources */,
 				6487BB3A1EFBFCEF00F7D01F /* InfoDetailsCell.xib in Resources */,
+				6A3965631F015EB0007BB9FC /* EstimatedCalculatorVC.xib in Resources */,
 				6A97E3081EDDF5A700E23C7E /* TableHeader.xib in Resources */,
 				6A6039651EFEFAE600461F1E /* PaymentCell.xib in Resources */,
 				6498E29F1EDC453A00973BC1 /* Assets.xcassets in Resources */,
+				6A39655E1F015854007BB9FC /* PaymentDetailsCell.xib in Resources */,
 				6A6891BE1EEEF42700D96ED1 /* GraphCell.xib in Resources */,
 				6480D6451EDD6BCA00D78FFD /* AccountSelectCell.xib in Resources */,
+				6A3E258A1F01536D0003F91A /* ShareCell.xib in Resources */,
 				6480D63B1EDC5EC200D78FFD /* AccountTypeHeader.xib in Resources */,
 				6A4315F91EFC261D0043BACD /* WorkerCell.xib in Resources */,
 				6A959F831EFEF36F00F94016 /* PaymentsVC.xib in Resources */,
@@ -459,13 +504,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AAE89DE1EE9B610002867AF /* BEMLine.m in Sources */,
+				6A3965671F01695B007BB9FC /* EstimatedEarningCell.m in Sources */,
 				6498E2971EDC453A00973BC1 /* AppDelegate.m in Sources */,
 				6A37D3931EFEF6A50099ED12 /* Payment.m in Sources */,
 				6489C6F11F0105B100F38A92 /* NumberFormatter.m in Sources */,
+				6A3E25841F0152490003F91A /* SharesVC.m in Sources */,
 				6480D61D1EDC556700D78FFD /* AccountStatsCell.m in Sources */,
 				6AAE89DF1EE9B610002867AF /* BEMPermanentPopupView.m in Sources */,
 				6480D63F1EDD652D00D78FFD /* AddAccountVC.m in Sources */,
 				6480D6491EDD8D5800D78FFD /* TextFieldCell.m in Sources */,
+				6A3965621F015EB0007BB9FC /* EstimatedCalculatorVC.m in Sources */,
+				6A39655D1F015854007BB9FC /* PaymentDetailsCell.m in Sources */,
 				6A97E30B1EDDFD1000E23C7E /* ManagedObject.m in Sources */,
 				6AAE89E01EE9B610002867AF /* BEMSimpleLineGraphView.m in Sources */,
 				6480D62C1EDC5A9A00D78FFD /* Database.xcdatamodeld in Sources */,
@@ -478,6 +527,7 @@
 				6A97E3061EDDF59700E23C7E /* TableHeader.m in Sources */,
 				6A8516211EE88126003B91B2 /* TitleValueCollectionCell.m in Sources */,
 				6A959F821EFEF36F00F94016 /* PaymentsVC.m in Sources */,
+				6A3E25891F01536D0003F91A /* ShareCell.m in Sources */,
 				6A8749FB1EFFC31400850AF5 /* Share.m in Sources */,
 				6A6891B81EEEF01200D96ED1 /* HorizontalSelectCell.m in Sources */,
 				6498E2941EDC453A00973BC1 /* main.m in Sources */,
