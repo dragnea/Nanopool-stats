@@ -150,7 +150,7 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
     [workerContext performBlock:^{
         
         BOOL exists = [self getPoolType:[Account apiForType:accountType] endpoint:@"accountexist" address:address];
-        if (!exists) {
+        if (exists) {
             
             Account *account = [Account entityInContext:workerContext key:@"address" value:address shouldCreate:YES];
             account.name = name;

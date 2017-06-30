@@ -44,7 +44,8 @@
     [AccountStatsCell registerNibInTableView:self.tableView];
     
     NSFetchRequest *accountsFetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Account class])];
-    accountsFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"balance" ascending:YES]];
+    accountsFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES],
+                                             [NSSortDescriptor sortDescriptorWithKey:@"balance" ascending:YES]];
     NSError *error = nil;
     self.accountsFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:accountsFetchRequest
                                                                                 managedObjectContext:[CoreData mainContext]

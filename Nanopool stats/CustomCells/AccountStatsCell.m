@@ -10,21 +10,19 @@
 #import "Account.h"
 
 @interface AccountStatsCell ()
-@property (nonatomic, weak) IBOutlet UIImageView *currencyImageView;
+@property (nonatomic, weak) IBOutlet UILabel *accountTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *balanceLabel;
-@property (nonatomic, weak) IBOutlet UILabel *accountLabel;
+@property (nonatomic, weak) IBOutlet UILabel *balanceTitleLabel;
 
 @property (nonatomic, weak) IBOutlet UILabel *currentHashrateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *currentHashrateTitleLabel;
 
-@property (nonatomic, weak) IBOutlet UILabel *averageHashrateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *averageHashrateTitleLabel;
 @end
 
 @implementation AccountStatsCell
 
 + (CGFloat)heigth {
-    return 141.0f;
+    return 118.0f;
 }
 
 - (void)awakeFromNib {
@@ -33,17 +31,15 @@
     self.tintColor = [UIColor whiteColor];
     self.contentView.backgroundColor = [[UIColor whiteColor] themeColorWithSeparatorAlpha];
     
+    
     self.balanceLabel.textColor = [[UIColor whiteColor] themeColorWithValueAlpha];
     self.currentHashrateLabel.textColor = self.balanceLabel.textColor;
-    self.averageHashrateLabel.textColor = self.balanceLabel.textColor;
+    self.accountTitleLabel.textColor = self.balanceLabel.textColor;
     
-    self.accountLabel.textColor = [[UIColor whiteColor] themeColorWithValueTitleAlpha];
-    self.currentHashrateTitleLabel.textColor = self.accountLabel.textColor;
-    self.averageHashrateTitleLabel.textColor = self.accountLabel.textColor;
+    self.balanceTitleLabel.textColor = [[UIColor whiteColor] themeColorWithValueTitleAlpha];
+    self.currentHashrateTitleLabel.textColor = self.balanceTitleLabel.textColor;
     
-    self.currencyImageView.backgroundColor = [UIColor whiteColor];
-    self.currencyImageView.layer.cornerRadius = self.currencyImageView.bounds.size.width / 2.0f;
-    self.currencyImageView.layer.masksToBounds = YES;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -64,13 +60,9 @@
 - (void)setAccount:(Account *)account {
     _account = account;
     AccountType type = account.type;
-    NSString *unit = [Account unitForType:type];
-    self.currencyImageView.image = [UIImage imageNamed:[Account currencyIconForType:type large:NO]];
-    self.accountLabel.text = account.label;
+    self.accountTitleLabel.text = account.label;
     self.balanceLabel.text = [NSString stringWithFormat:@"%@ %@", [NumberFormatter stringFromNumber:@(account.balance)], [Account currencyForType:type]];
-    self.currentHashrateLabel.text = [NSString stringWithFormat:@"%@ %@", [NumberFormatter stringFromNumber:@(account.hashrate)], unit];
-    self.averageHashrateLabel.text = [NSString stringWithFormat:@"%@ %@", [NumberFormatter stringFromNumber:@([account avgHashrateForHour:AccountAvgHour6h])], unit];
-    self.averageHashrateTitleLabel.text = [account avgHashrateTitleForHour:AccountAvgHour6h];
+    self.currentHashrateLabel.text = [NSString stringWithFormat:@"%@ %@", [NumberFormatter stringFromNumber:@(account.hashrate)], [Account unitForType:type]];
     
 }
 

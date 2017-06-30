@@ -43,7 +43,18 @@
 - (void)addAccount {
     [self.tableView endEditing:YES];
     [[NanopoolController sharedInstance] addAccountWithType:self.accountType name:self.name address:self.address completion:^(UIBackgroundFetchResult result) {
-        NSString *message = (result == UIBackgroundFetchResultNewData ? @"Successfully added" : @"Failed to add. Please review the input data and try again");
+        NSString *message;
+        switch (result) {
+            case UIBackgroundFetchResultNewData:
+                message = @"Successfully added";
+                break;
+            case UIBackgroundFetchResultNoData:
+                message = @"The account already exists in you list";
+                break;
+            default:
+                message = @"Failed to add. Please review the input data and try again";
+                break;
+        }
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"New account" message:message preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             if (result == UIBackgroundFetchResultNewData) {
