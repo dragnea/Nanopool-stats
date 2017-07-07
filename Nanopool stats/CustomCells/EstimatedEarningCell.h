@@ -9,5 +9,6 @@
 #import "CustomCell.h"
 
 @interface EstimatedEarningCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel *periodLabel;
 @property (nonatomic, weak) NSDictionary *values;
 @end

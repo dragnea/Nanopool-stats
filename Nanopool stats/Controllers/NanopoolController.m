@@ -63,7 +63,11 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
     
     dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
     
-    return [NSJSONSerialization JSONObjectWithData:resultedData options:NSJSONReadingAllowFragments error:errorPtr];
+    if (!resultedData) {
+        return nil;
+    } else {
+        return [NSJSONSerialization JSONObjectWithData:resultedData options:NSJSONReadingAllowFragments error:errorPtr];
+    }
 }
 
 - (id)getPoolType:(NSString *)poolType endpoint:(NSString *)endpoint address:(NSString *)address {

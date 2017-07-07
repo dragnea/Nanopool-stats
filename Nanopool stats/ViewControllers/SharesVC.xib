@@ -37,7 +37,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any payment until now." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ass-qF-hNv">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any shares until now." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ass-qF-hNv">
                     <rect key="frame" x="62" y="356" width="250" height="41"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="250" id="JJI-o9-jz3"/>
@@ -46,7 +46,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="payments_large" translatesAutoresizingMaskIntoConstraints="NO" id="shd-2K-wzN">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shares_large" translatesAutoresizingMaskIntoConstraints="NO" id="shd-2K-wzN">
                     <rect key="frame" x="145" y="241" width="85" height="85"/>
                 </imageView>
             </subviews>
@@ -68,6 +68,6 @@
         </view>
     </objects>
     <resources>
-        <image name="payments_large" width="85" height="85"/>
+        <image name="shares_large" width="85" height="85"/>
     </resources>
 </document>
