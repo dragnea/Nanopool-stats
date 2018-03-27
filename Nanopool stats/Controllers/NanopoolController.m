@@ -7,19 +7,36 @@
 //
 
 #import "NanopoolController.h"
-#import "CoreData.h"
+#import "DBController.h"
 #import "Worker.h"
 #import "Payment.h"
 #import "Share.h"
+#import "AccountChartData.h"
+#import "AFNetworking.h"
 
-typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *error);
+typedef void(^APICompletionHandler)(id responseObject, NSString *error);
 
 @interface NanopoolController ()
-@property (nonatomic, strong) NSString *apiURLString;
-@property (nonatomic, strong) NSOperationQueue *apiQueue;
+@property (nonatomic, strong) AFHTTPSessionManager *httpSessionManager;
+@property (nonatomic, strong) NSString *apiStringURL;
 @end
 
 @implementation NanopoolController
+
+- (instancetype)init {
+    if (self = [super init]) {
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.dragneamihai.api"];
+        self.httpSessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:sessionConfiguration];
+        self.httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [self.httpSessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        self.httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        self.httpSessionManager.securityPolicy.allowInvalidCertificates = YES;
+        self.apiStringURL = @"https://api.nanopool.org/v1";
+    }
+    return self;
+}
+
+#pragma mark - public methods
 
 + (NanopoolController *)sharedInstance {
     static NanopoolController *staticInstance = nil;
@@ -30,183 +47,155 @@ typedef void(^APICompletionHandler)(NSDictionary *responseObject, NSString *erro
     return staticInstance;
 }
 
-- (instancetype)init {
-    if (self = [super init]) {
+- (NSURLSessionDataTask *)getWithType:(NSString *)type endpoint:(NSString *)endpoint address:(NSString *)address completion:(APICompletionHandler)completion {
+    NSString *get = [[[self.apiStringURL stringByAppendingPathComponent:type] stringByAppendingPathComponent:endpoint] stringByAppendingPathComponent:address];
+    return [self.httpSessionManager GET:get parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
-        self.apiURLString = @"https://api.nanopool.org/v1";
-        self.apiQueue = [[NSOperationQueue alloc] init];
-        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (completion) {
+            completion(responseObject, nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (completion) {
+            completion(nil, error.localizedDescription);
+        }
+    }];
+    /* :TODO implement this function
+     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+     NSTimeInterval currentTimestamp = [[NSDate date] timeIntervalSince1970];
+     if ([userDefaults doubleForKey:@"last_update"] < currentTimestamp - 60.0f) {
+     
+     [userDefaults setDouble:currentTimestamp forKey:@"last_update"];
+     [userDefaults synchronize];
+     
+     
+     
+     } else {
+     
+     return nil;
+     
+     }
+     */
+}
+
+- (void)updateAccountWithAccount:(Account *)account {
+    if (!account) {
+        return;
     }
-    return self;
-}
-
-- (id)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(__autoreleasing NSURLResponse **)responsePtr error:(__autoreleasing NSError **)errorPtr {
-    dispatch_semaphore_t sem;
-    __block NSData *resultedData;
-    
-    resultedData = nil;
-    
-    sem = dispatch_semaphore_create(0);
-    
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (errorPtr != NULL) {
-            *errorPtr = error;
-        }
-        if (responsePtr != NULL) {
-            *responsePtr = response;
-        }
-        if (error == nil) {
-            resultedData = data;
-        }
-        dispatch_semaphore_signal(sem);
-    }] resume];
-    
-    dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
-    
-    if (!resultedData) {
-        return nil;
-    } else {
-        return [NSJSONSerialization JSONObjectWithData:resultedData options:NSJSONReadingAllowFragments error:errorPtr];
-    }
-}
-
-- (id)getPoolType:(NSString *)poolType endpoint:(NSString *)endpoint address:(NSString *)address {
-    NSString *stringURL = [[[self.apiURLString stringByAppendingPathComponent:poolType] stringByAppendingPathComponent:endpoint] stringByAppendingPathComponent:address];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:stringURL]];
-    return [self sendSynchronousRequest:urlRequest returningResponse:nil error:nil];
-}
-
-- (void)updateAccount:(Account *)account inContext:(NSManagedObjectContext *)context {
     NSString *poolType = [Account apiForType:account.type];
-    
-    // update account info
-    NSDictionary *accountInfoDictionary = [self getPoolType:poolType endpoint:@"user" address:account.address][@"data"];
-    [account updateWithDictionary:accountInfoDictionary];
-    account.lastUpdate = [NSDate date];
-    for (NSDictionary *workerDictionary in accountInfoDictionary[@"workers"]) {
-        Worker *worker = [Worker entityInContext:context key:@"id" value:workerDictionary[@"id"] shouldCreate:YES];
-        [worker updateWithDictionary:workerDictionary];
-        worker.account = account;
-    }
-    
-    // update hashrates history
-    account.hashrateHistory = [self getPoolType:poolType endpoint:@"history" address:account.address][@"data"];
-    
-    // update payments
-    NSArray *paymentsArray = [self getPoolType:poolType endpoint:@"payments" address:account.address][@"data"];
-    for (NSDictionary *paymentDict in paymentsArray) {
-        Payment *payment = [Payment entityInContext:context key:@"txHash" value:paymentDict[@"txHash"] shouldCreate:YES];
-        [payment updateWithDictionary:paymentDict];
-        payment.account = account;
-    }
-    
-    // update shares
-    NSArray *sharesArray = [self getPoolType:poolType endpoint:@"shareratehistory" address:account.address][@"data"];
-    for (NSDictionary *shareDict in sharesArray) {
-        Share *share = [Share entityInContext:context key:@"date" value:shareDict[@"date"] shouldCreate:YES];
-        share.shares = [shareDict[@"shares"] integerValue];
-        share.account = account;
-    }
-}
-
-#pragma mark - public methods
-
-- (void)updateAccounts:(completionBlock)completion {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSTimeInterval currentTimestamp = [[NSDate date] timeIntervalSince1970];
-    if ([userDefaults doubleForKey:@"last_update"] < currentTimestamp - 60.0f) {
-        
-        [userDefaults setDouble:currentTimestamp forKey:@"last_update"];
-        [userDefaults synchronize];
-        
-        NSManagedObjectContext *workerContext = [CoreData workerContext];
-        [workerContext performBlock:^{
-            
-            NSArray *accounts = [Account entitiesInContext:workerContext];
-            for (Account *account in accounts) {
-                [self updateAccount:account inContext:workerContext];
+    NSString *address = account.address;
+    [self getWithType:poolType endpoint:@"user" address:address completion:^(id responseObject, NSString *error) {
+        NSManagedObjectContext *context = [DBController workerContext];
+        [context performBlock:^{
+            Account *account = [Account entityInContext:context name:@"Account" key:@"address" value:address shouldCreate:YES];
+            [account updateWithDictionary:responseObject[@"data"] dateFormatter:nil];
+            account.lastUpdate = [NSDate date];
+            for (NSDictionary *workerDictionary in responseObject[@"workers"]) {
+                Worker *worker = [Worker entityInContext:context name:@"Worker" key:@"id" value:workerDictionary[@"id"] shouldCreate:YES];
+                [worker updateWithDictionary:workerDictionary dateFormatter:nil];
+                worker.account = account;
             }
-            NSError *saveError = nil;
-            if (![workerContext save:&saveError]) {
-                // TODO: handle error
+            NSError *error = nil;
+            if (![context save:&error]){
+                NSLog(@"error saving user info... %@", error.localizedDescription);
             } else {
-                // success
+                
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completion) {
-                    if (!accounts.count) {
-                        completion(UIBackgroundFetchResultNoData);
-                    } else if (!saveError) {
-                        completion(UIBackgroundFetchResultNewData);
-                    } else {
-                        completion(UIBackgroundFetchResultFailed);
-                    }
-                }
-            });
-            
         }];
-    }
-}
-
-- (void)addAccountWithType:(AccountType)accountType name:(NSString *)name address:(NSString *)address completion:(completionBlock)completion {
-    // check miner account
-    NSManagedObjectContext *workerContext = [CoreData workerContext];
-    [workerContext performBlock:^{
-        
-        BOOL exists = [self getPoolType:[Account apiForType:accountType] endpoint:@"accountexist" address:address];
-        if (exists) {
-            
-            Account *account = [Account entityInContext:workerContext key:@"address" value:address shouldCreate:YES];
-            account.name = name;
-            account.type = accountType;
-            [self updateAccount:account inContext:workerContext];
-            NSError *saveError = nil;
-            if (![workerContext save:&saveError]) {
-                // TODO: handle error
-            } else {
-                // success
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completion) {
-                    if (!saveError) {
-                        completion(UIBackgroundFetchResultNewData);
-                    } else {
-                        completion(UIBackgroundFetchResultFailed);
-                    }
-                }
-            });
-            
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completion) {
-                    completion(UIBackgroundFetchResultNoData);
-                }
-            });
-        }
-        
     }];
 }
 
-- (void)estimatedEarningsForAddress:(NSString *)address completion:(completionResultBlock)completion {
-    Account *account = [Account entityInContext:[CoreData mainContext] key:@"address" value:address shouldCreate:NO];
+- (void)updateChartDataWithAccount:(Account *)account {
+    if (!account) {
+        return;
+    }
     NSString *poolType = [Account apiForType:account.type];
-    NSString *endpoint = @"approximated_earnings";
-    NSString *hashrate = [NSString stringWithFormat:@"%f", account.hashrate];
-    NSString *stringURL = [[[self.apiURLString stringByAppendingPathComponent:poolType] stringByAppendingPathComponent:endpoint] stringByAppendingPathComponent:hashrate];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:stringURL]];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSDictionary *result = [self sendSynchronousRequest:urlRequest returningResponse:nil error:nil];
-        dispatch_async(dispatch_get_main_queue(), ^{
-           
-            if (completion) {
-                completion(result);
+    NSString *address = account.address;
+    [self getWithType:poolType endpoint:@"hashratechart" address:address completion:^(id responseObject, NSString *error) {
+        NSManagedObjectContext *context = [DBController workerContext];
+        [context performBlock:^{
+            Account *account = [Account entityInContext:context name:@"Account" key:@"address" value:address shouldCreate:YES];
+            for (AccountChartData *chartData in account.chartData) {
+                [chartData remove];
             }
-            
-        });
-        
-    });
+            for (NSDictionary *chartDataDict in responseObject[@"data"]) {
+                AccountChartData *chartData = [AccountChartData newEntityInContext:context name:@"AccountChartData"];
+                chartData.account = account;
+                [chartData updateWithDictionary:chartDataDict dateFormatter:nil];
+            }
+            NSError *error = nil;
+            if (![context save:&error]){
+                NSLog(@"error saving chart data info... %@", error.localizedDescription);
+            } else {
+                
+            }
+        }];
+    }];
+}
+
+- (void)updatePaymentsWithAccount:(Account *)account {
+    if (!account) {
+        return;
+    }
+    NSString *poolType = [Account apiForType:account.type];
+    NSString *address = account.address;
+    [self getWithType:poolType endpoint:@"payments" address:address completion:^(id responseObject, NSString *error) {
+        NSManagedObjectContext *context = [DBController workerContext];
+        [context performBlock:^{
+            Account *account = [Account entityInContext:context name:@"Account" key:@"address" value:address shouldCreate:YES];
+            for (NSDictionary *paymentDict in responseObject[@"data"]) {
+                Payment *payment = [Payment entityInContext:context name:@"Payment" key:@"txHash" value:paymentDict[@"txHash"] shouldCreate:YES];
+                [payment updateWithDictionary:paymentDict dateFormatter:nil];
+                payment.account = account;
+            }
+            NSError *error = nil;
+            if (![context save:&error]){
+                NSLog(@"error saving payments info... %@", error.localizedDescription);
+            } else {
+                
+            }
+        }];
+    }];
+}
+
+- (void)verifyAccountType:(AccountType)accountType address:(NSString *)address completion:(NanopoolControllerBlock)completion {
+    NSPredicate *accountPredicate = [NSPredicate predicateWithFormat:@"address = %@ AND type = %d", address, accountType];
+    if (![Account countEntitiesInContext:[DBController mainContext] predicate:accountPredicate]) {
+        NSString *poolType = [Account apiForType:accountType];
+        [self getWithType:poolType endpoint:@"accountexist" address:address completion:^(id responseObject, NSString *error) {
+            if (completion) {
+                completion(error);
+            }
+        }];
+    } else {
+        if (completion) {
+            completion(@"The wallet address already exists");
+        }
+    }
+}
+
+- (void)addAccount:(AccountType)accountType address:(NSString *)address name:(NSString *)name {
+    NSManagedObjectContext *context = [DBController mainContext];
+    NSBatchUpdateRequest *batchUpdateRequest = [[NSBatchUpdateRequest alloc] initWithEntityName:@"Account"];
+    batchUpdateRequest.predicate = [NSPredicate predicateWithFormat:@"isCurrent = YES"];
+    batchUpdateRequest.propertiesToUpdate = @{@"isCurrent": @NO};
+    NSError *error = nil;
+    [context executeRequest:batchUpdateRequest error:&error];
+    if (error) {
+        // TODO: handle batch update error
+        return;
+    }
+    Account *account = [Account entityInContext:[DBController mainContext] name:@"Account" key:@"address" value:address shouldCreate:YES];
+    account.name = name;
+    account.type = accountType;
+    account.isCurrent = YES;
+    if (![context save:&error]) {
+        // TODO: handle save error
+        NSLog(@"error saving payments info... %@", error.localizedDescription);
+    } else {
+        [self updateAccountWithAccount:account];
+        [self updateChartDataWithAccount:account];
+    }
 }
 
 @end

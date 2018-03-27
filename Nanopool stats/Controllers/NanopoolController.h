@@ -9,15 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "Account.h"
 
-typedef void(^completionBlock)(UIBackgroundFetchResult result);
-typedef void(^completionResultBlock)(NSDictionary *result);
+typedef void(^NanopoolControllerBlock)(NSString *errorString);
 
 @interface NanopoolController : NSObject
 
 + (NanopoolController *)sharedInstance;
 
-- (void)updateAccounts:(completionBlock)completion;
-- (void)addAccountWithType:(AccountType)accountType name:(NSString *)name address:(NSString *)address completion:(completionBlock)completion;
-- (void)estimatedEarningsForAddress:(NSString *)address completion:(completionResultBlock)completion;
+- (void)updateAccountWithAccount:(Account *)account;
+- (void)updatePaymentsWithAccount:(Account *)account;
+- (void)updateChartDataWithAccount:(Account *)account;
+
+- (void)verifyAccountType:(AccountType)accountType address:(NSString *)address completion:(NanopoolControllerBlock)completion;
+- (void)addAccount:(AccountType)accountType address:(NSString *)address name:(NSString *)name;
+
+
 
 @end

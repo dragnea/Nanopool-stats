@@ -6,11 +6,11 @@
 //  Copyright © 2017 Dragnea Mihai. All rights reserved.
 //
 
-#import "ManagedObject.h"
+#import <CoreData/CoreData.h>
 
 @class Account;
 
-@interface Worker : ManagedObject
+@interface Worker : NSManagedObject
 
 @property (nullable, nonatomic, copy) NSString *id;
 @property (nonatomic) double lastShare;

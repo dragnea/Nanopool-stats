@@ -6,11 +6,11 @@
 //  Copyright © 2017 Dragnea Mihai. All rights reserved.
 //
 
-#import "ManagedObject.h"
+#import <CoreData/CoreData.h>
 
 @class Account;
 
-@interface Payment : ManagedObject
+@interface Payment : NSManagedObject
 @property (nonatomic) double amount;
 @property (nonatomic) BOOL confirmed;
 @property (nonatomic) double date;

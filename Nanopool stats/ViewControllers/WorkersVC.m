@@ -8,7 +8,7 @@
 
 #import "WorkersVC.h"
 #import "Worker.h"
-#import "CoreData.h"
+#import "DBController.h"
 #import "WorkerCell.h"
 
 @interface WorkersVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
@@ -27,7 +27,7 @@
         workersFetchRequest.predicate = [NSPredicate predicateWithFormat:@"account.address == %@", address];
         workersFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastShare" ascending:NO]];
         self.workersFetchedController = [[NSFetchedResultsController alloc] initWithFetchRequest:workersFetchRequest
-                                                                            managedObjectContext:[CoreData mainContext]
+                                                                            managedObjectContext:[DBController mainContext]
                                                                               sectionNameKeyPath:nil
                                                                                        cacheName:nil];
     }

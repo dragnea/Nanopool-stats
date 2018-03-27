@@ -35,33 +35,19 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)addAccount {
     [self.tableView endEditing:YES];
-    [[NanopoolController sharedInstance] addAccountWithType:self.accountType name:self.name address:self.address completion:^(UIBackgroundFetchResult result) {
-        NSString *message;
-        switch (result) {
-            case UIBackgroundFetchResultNewData:
-                message = @"Successfully added";
-                break;
-            case UIBackgroundFetchResultNoData:
-                message = @"The account already exists in you list";
-                break;
-            default:
-                message = @"Failed to add. Please review the input data and try again";
-                break;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    [[NanopoolController sharedInstance] verifyAccountType:self.accountType address:self.address completion:^(NSString *errorString) {
+        if (!errorString) {
+            [[NanopoolController sharedInstance] addAccount:self.accountType address:self.address name:self.name];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"New account" message:errorString preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil]];
+            [self.navigationController presentViewController:alertController animated:YES completion:nil];
         }
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"New account" message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            if (result == UIBackgroundFetchResultNewData) {
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }]];
-        [self presentViewController: alertController animated:YES completion:nil];
     }];
 }
 
@@ -89,7 +75,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    TableHeader *headerView = [TableHeader headerFooterInTableView:tableView];
+    TableHeader *headerView = [TableHeader headerInTableView:tableView];
     switch (section) {
         case 0:
             headerView.text = @"General informations";
@@ -139,7 +125,7 @@
         accountSelectCell.selected = (accountType == self.accountType);
         return accountSelectCell;
     } else {
-        return [UITableViewCell dummyTableViewCell];
+        return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"errCell"];
     }
 }
 

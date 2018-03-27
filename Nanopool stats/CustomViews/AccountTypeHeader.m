@@ -7,7 +7,7 @@
 //
 
 #import "AccountTypeHeader.h"
-#import "CoreData.h"
+#import "DBController.h"
 
 @interface AccountTypeHeader ()
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
@@ -39,7 +39,7 @@
     _accountType = accountType;
     self.iconImageView.image = [UIImage imageNamed:[Account currencyIconForType:accountType large:NO]];
     self.nameLabel.text = [Account nameForType:accountType];
-    NSArray *accounts = [Account entitiesInContext:[CoreData mainContext] predicate:[NSPredicate predicateWithFormat:@"type == %d", (int)accountType]];
+    NSArray *accounts = [Account entitiesInContext:[DBController mainContext] predicate:[NSPredicate predicateWithFormat:@"type == %d", (int)accountType]];
     NSNumber *total = [accounts valueForKeyPath:@"@sum.balance"];
     self.descriptionLabel.text = [NSString stringWithFormat:@"Total: %@ %@", total, [Account currencyForType:accountType]];
 }

@@ -9,7 +9,7 @@
 #import "SharesVC.h"
 #import "ShareCell.h"
 #import "Share.h"
-#import "CoreData.h"
+#import "DBController.h"
 
 @interface SharesVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -27,7 +27,7 @@
         sharesFetchRequest.predicate = [NSPredicate predicateWithFormat:@"account.address == %@", address];
         sharesFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
         self.sharesFetchedController = [[NSFetchedResultsController alloc] initWithFetchRequest:sharesFetchRequest
-                                                                             managedObjectContext:[CoreData mainContext]
+                                                                             managedObjectContext:[DBController mainContext]
                                                                                sectionNameKeyPath:nil
                                                                                         cacheName:nil];
     }

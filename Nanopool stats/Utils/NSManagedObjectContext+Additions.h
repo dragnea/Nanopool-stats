@@ -1,14 +1,14 @@
 //
 //  NSManagedObjectContext+Additions.h
-//  Nanopool stats
+//  Nanopool
 //
-//  Created by Dragnea Mihai on 5/30/17.
+//  Created by Mihai Dragnea on 9/29/17.
 //  Copyright © 2017 Dragnea Mihai. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
 
-@interface NSManagedObjectContext(NSManagedObjectContext_Additions)
+@interface NSManagedObjectContext (NSManagedObjectContext_Additions)
 
 - (NSArray *)entitesWithName:(NSString *)entityName;
 - (NSArray *)entitesWithName:(NSString *)entityName predicate:(NSPredicate *)predicate;

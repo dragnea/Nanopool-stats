@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "DashboardVC.h"
 #import "NanopoolController.h"
+#import "AccountVC.h"
+#import "DBController.h"
 
 @interface AppDelegate ()
 
@@ -31,18 +32,19 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
+    [DBController setupWithName:@"Database"];
     [self customizeAppearances];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[DashboardVC alloc] init]];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[AccountVC alloc] init]];
     [self.window makeKeyAndVisible];
     
     return YES;
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    [[NanopoolController sharedInstance] updateAccounts:completionHandler];
+    //[[NanopoolController sharedInstance] updateAccounts:completionHandler];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -13,6 +13,14 @@
 + (UIColor *)decColorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
 
 + (UIColor *)themeColorBackground;
++ (UIColor *)themeColorBackgroundDark;
++ (UIColor *)themeColorBackgroundLight;
+
++ (UIColor *)themeColorHighlightedHard;
++ (UIColor *)themeColorHighlightedMedium;
++ (UIColor *)themeColorHighlightedSoft;
++ (UIColor *)themeColorHighlightBlue;
++ (UIColor *)themeColorHighlightRed;
 
 - (UIColor *)themeColorWithValueAlpha;
 - (UIColor *)themeColorWithValueTitleAlpha;

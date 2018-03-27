@@ -13,14 +13,20 @@
 @dynamic address;
 @dynamic name;
 @dynamic lastUpdate;
+@dynamic isCurrent;
 @dynamic hashrate;
 @dynamic selectedAvgHashrateIndex;
 @dynamic avgHashrate;
-@dynamic hashrateHistory;
 @dynamic balance;
 @dynamic workers;
 @dynamic payments;
 @dynamic shares;
+@dynamic chartData;
+
+- (NSArray<ChartData *> *)sortedChartData {
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+    return [self.chartData sortedArrayUsingDescriptors:@[sortDescriptor]];
+}
 
 + (NSString *)nameForType:(AccountType)type {
     switch (type) {
@@ -36,6 +42,8 @@
             return @"Monero";
         case AccountTypePascal:
             return @"Pascal";
+        case AccountTypeElectroneum:
+            return @"Electroneum";
         default:
             return @"n/a";
     }
@@ -55,6 +63,8 @@
             return @"XMR";
         case AccountTypePascal:
             return @"Pasc";
+        case AccountTypeElectroneum:
+            return @"ETN";
         default:
             return @"n/a";
     }
@@ -74,6 +84,8 @@
             return large ? @"monero_large" : @"monero_small";
         case AccountTypePascal:
             return large ? @"pascal_large" : @"pascal_small";
+        case AccountTypeElectroneum:
+            return large ? @"etn_large" : @"etn_small";
         default:
             return nil;
     }
@@ -93,8 +105,10 @@
             return @"xmr";
         case AccountTypePascal:
             return @"pasc";
+        case AccountTypeElectroneum:
+            return @"etn";
         default:
-            return @"";
+            return nil;
     }
 }
 
@@ -112,9 +126,36 @@
             return @"H/s";
         case AccountTypePascal:
             return @"MH/s";
+        case AccountTypeElectroneum:
+            return @"H/s";
         default:
             return @"MH/s";
     }
+}
+
++ (NSDate *)dateForAvgHour:(AccountAvgHour)avgHour {
+    NSTimeInterval timeInterval;
+    switch (avgHour) {
+        case AccountAvgHour1h:
+            timeInterval = 60.0f * 60.0f;
+            break;
+        case AccountAvgHour3h:
+            timeInterval = 60.0f * 60.0f * 3.0f;
+            break;
+        case AccountAvgHour6h:
+            timeInterval = 60.0f * 60.0f * 6.0f;
+            break;
+        case AccountAvgHour12h:
+            timeInterval = 60.0f * 60.0f * 12.0f;
+            break;
+        case AccountAvgHour24h:
+            timeInterval = 60.0f * 60.0f * 24.0f;
+            break;
+        default:
+            timeInterval = 60.0f * 60.0f * 24.0f * 90.0f;
+            break;
+    }
+    return [NSDate dateWithTimeInterval:-timeInterval sinceDate:[NSDate date]];
 }
 
 + (NSArray * _Nonnull)types {
@@ -125,13 +166,18 @@
                   @(AccountTypeSiaCoin),
                   @(AccountTypeZCash),
                   @(AccountTypeMonero),
-                  @(AccountTypePascal)];
+                  @(AccountTypePascal),
+                  @(AccountTypeElectroneum)];
     }
     return types;
 }
 
 - (double)selectedAvgHashrate {
     return [self avgHashrateForHour:self.selectedAvgHashrateIndex];
+}
+
++ (NSArray<NSString *> *)avgHashrateLabels {
+    return @[@"1h", @"3h", @"6h", @"12h", @"24h", @"All"];
 }
 
 - (NSString *)selectedAvgHashrateTitle {
@@ -151,7 +197,11 @@
         case AccountAvgHour24h:
             return [self.avgHashrate[@"h24"] doubleValue];
         default:
-            return 0.0f;
+            return ([self.avgHashrate[@"h1"] doubleValue] +
+                    [self.avgHashrate[@"h3"] doubleValue] +
+                    [self.avgHashrate[@"h6"] doubleValue] +
+                    [self.avgHashrate[@"h12"] doubleValue] +
+                    [self.avgHashrate[@"h24"] doubleValue]) / 5.0f;
     }
 }
 

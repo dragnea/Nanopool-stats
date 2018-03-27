@@ -6,7 +6,7 @@
 //  Copyright © 2017 Dragnea Mihai. All rights reserved.
 //
 
-#import "CustomCell.h"
+#import <UIKit/UIKit.h>
 
 @class TextFieldCell;
 

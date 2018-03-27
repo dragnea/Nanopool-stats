@@ -8,7 +8,7 @@
 
 #import "PaymentsVC.h"
 #import "Payment.h"
-#import "CoreData.h"
+#import "DBController.h"
 #import "PaymentCell.H"
 
 @interface PaymentsVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
@@ -27,7 +27,7 @@
         paymentsFetchRequest.predicate = [NSPredicate predicateWithFormat:@"account.address == %@", address];
         paymentsFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
         self.paymentsFetchedController = [[NSFetchedResultsController alloc] initWithFetchRequest:paymentsFetchRequest
-                                                                            managedObjectContext:[CoreData mainContext]
+                                                                            managedObjectContext:[DBController mainContext]
                                                                               sectionNameKeyPath:nil
                                                                                        cacheName:nil];
     }

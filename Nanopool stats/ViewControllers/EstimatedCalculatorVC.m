@@ -9,7 +9,7 @@
 #import "EstimatedCalculatorVC.h"
 #import "NanopoolController.h"
 #import "EstimatedEarningCell.h"
-#import "CoreData.h"
+#import "DBController.h"
 
 @interface EstimatedCalculatorVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -41,7 +41,7 @@
     self.navigationItem.title = @"Earnings";
     self.warningLabel.text = @"EXPERIMENTAL. Calculated based on average block time, average difficulty, difficulty change tendency and your average hashrate for last 6 hours.";
     
-    Account *account = [Account entityInContext:[CoreData mainContext] key:@"address" value:self.address shouldCreate:NO];
+    Account *account = [Account entityInContext:[DBController mainContext] name:@"Account" key:@"address" value:self.address shouldCreate:NO];
     
     self.warningLabel.textColor = [UIColor whiteColor];
     self.headerView.backgroundColor = [UIColor themeColorBackground];
@@ -79,6 +79,7 @@
     [self.loadingView startAnimating];
     [self showPlaceholder:NO];
     self.navigationItem.rightBarButtonItem.enabled = NO;
+   /*
     [[NanopoolController sharedInstance] estimatedEarningsForAddress:self.address completion:^(NSDictionary *result) {
         if ([result[@"status"] boolValue]) {
             self.earnings = result[@"data"];
@@ -90,6 +91,7 @@
         [self showPlaceholder:!self.earnings.count];
         self.navigationItem.rightBarButtonItem.enabled = YES;
     }];
+    */
 }
 
 - (void)showPlaceholder:(BOOL)showPlaceholder {
