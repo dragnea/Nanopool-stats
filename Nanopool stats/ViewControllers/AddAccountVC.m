@@ -41,6 +41,7 @@
     [[NanopoolController sharedInstance] verifyAccountType:self.accountType address:self.address completion:^(NSString *errorString) {
         if (!errorString) {
             [[NanopoolController sharedInstance] addAccount:self.accountType address:self.address name:self.name];
+            [self.delegate addAccountVC:self didAddAccountName:self.name address:self.address type:self.accountType];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             self.navigationItem.rightBarButtonItem.enabled = YES;

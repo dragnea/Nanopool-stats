@@ -47,8 +47,9 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
     return staticInstance;
 }
 
-- (NSURLSessionDataTask *)getWithType:(NSString *)type endpoint:(NSString *)endpoint address:(NSString *)address completion:(APICompletionHandler)completion {
-    NSString *get = [[[self.apiStringURL stringByAppendingPathComponent:type] stringByAppendingPathComponent:endpoint] stringByAppendingPathComponent:address];
+- (NSURLSessionDataTask *)getWithType:(AccountType)type endpoint:(NSString *)endpoint address:(NSString *)address completion:(APICompletionHandler)completion {
+    NSString *typeString = [Account apiForType:type];
+    NSString *get = [[[self.apiStringURL stringByAppendingPathComponent:typeString] stringByAppendingPathComponent:endpoint] stringByAppendingPathComponent:address];
     return [self.httpSessionManager GET:get parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -78,17 +79,28 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
      */
 }
 
-- (void)updateAccountWithAccount:(Account *)account {
-    if (!account) {
-        return;
+- (Account *)accountWithAddress:(NSString *)address type:(AccountType)type context:(NSManagedObjectContext *)context shouldCreate:(BOOL)shouldCreate {
+    NSPredicate *accountPredicate = [NSPredicate predicateWithFormat:@"address = %@ AND type = %d", address, type];
+    Account *account = [context entitesWithName:@"Account" predicate:accountPredicate].firstObject;
+    if (!account && shouldCreate) {
+        account = [Account newEntityInContext:context name:@"Account"];
+        account.address = address;
+        account.type = type;
     }
-    NSString *poolType = [Account apiForType:account.type];
+    return account;
+}
+
+- (void)updateAccount:(Account *)account {
+    AccountType type = account.type;
     NSString *address = account.address;
-    [self getWithType:poolType endpoint:@"user" address:address completion:^(id responseObject, NSString *error) {
+    __weak __typeof(self) weakSelf = self;
+    [self getWithType:type endpoint:@"user" address:address completion:^(id responseObject, NSString *error) {
         NSManagedObjectContext *context = [DBController workerContext];
         [context performBlock:^{
-            Account *account = [Account entityInContext:context name:@"Account" key:@"address" value:address shouldCreate:YES];
-            [account updateWithDictionary:responseObject[@"data"] dateFormatter:nil];
+            Account *account = [weakSelf accountWithAddress:address type:type context:context shouldCreate:YES];
+            account.balance = [responseObject[@"data"][@"balance"] doubleValue];
+            account.hashrate = [responseObject[@"data"][@"hashrate"] doubleValue];
+            account.avgHashrate = responseObject[@"data"][@"avghashrate"];
             account.lastUpdate = [NSDate date];
             for (NSDictionary *workerDictionary in responseObject[@"workers"]) {
                 Worker *worker = [Worker entityInContext:context name:@"Worker" key:@"id" value:workerDictionary[@"id"] shouldCreate:YES];
@@ -99,31 +111,33 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
             if (![context save:&error]){
                 NSLog(@"error saving user info... %@", error.localizedDescription);
             } else {
-                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NanopoolControllerDidUpdateAccountNotification object:account.objectID];
+                });
             }
         }];
     }];
 }
 
 - (void)updateChartDataWithAccount:(Account *)account {
-    if (!account) {
-        return;
-    }
-    NSString *poolType = [Account apiForType:account.type];
+    AccountType type = account.type;
     NSString *address = account.address;
-    [self getWithType:poolType endpoint:@"hashratechart" address:address completion:^(id responseObject, NSString *error) {
+    __weak __typeof(self) weakSelf = self;
+    [self getWithType:type endpoint:@"hashratechart" address:address completion:^(id responseObject, NSString *error) {
         NSManagedObjectContext *context = [DBController workerContext];
         [context performBlock:^{
-            Account *account = [Account entityInContext:context name:@"Account" key:@"address" value:address shouldCreate:YES];
-            for (AccountChartData *chartData in account.chartData) {
-                [chartData remove];
+            Account *account = [weakSelf accountWithAddress:address type:type context:context shouldCreate:YES];
+            NSError *error = nil;
+            if (account.chartData.count) {
+                NSArray *chartIDsToRemove = [[account valueForKeyPath:@"chartData.objectID"] allObjects];
+                NSBatchDeleteRequest *chartRemoveRequest = [[NSBatchDeleteRequest alloc] initWithObjectIDs:chartIDsToRemove];
+                [context executeRequest:chartRemoveRequest error:&error];
             }
             for (NSDictionary *chartDataDict in responseObject[@"data"]) {
                 AccountChartData *chartData = [AccountChartData newEntityInContext:context name:@"AccountChartData"];
                 chartData.account = account;
                 [chartData updateWithDictionary:chartDataDict dateFormatter:nil];
             }
-            NSError *error = nil;
             if (![context save:&error]){
                 NSLog(@"error saving chart data info... %@", error.localizedDescription);
             } else {
@@ -134,12 +148,10 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
 }
 
 - (void)updatePaymentsWithAccount:(Account *)account {
-    if (!account) {
-        return;
-    }
+    AccountType type = account.type;
     NSString *poolType = [Account apiForType:account.type];
     NSString *address = account.address;
-    [self getWithType:poolType endpoint:@"payments" address:address completion:^(id responseObject, NSString *error) {
+    [self getWithType:type endpoint:@"payments" address:address completion:^(id responseObject, NSString *error) {
         NSManagedObjectContext *context = [DBController workerContext];
         [context performBlock:^{
             Account *account = [Account entityInContext:context name:@"Account" key:@"address" value:address shouldCreate:YES];
@@ -162,7 +174,7 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
     NSPredicate *accountPredicate = [NSPredicate predicateWithFormat:@"address = %@ AND type = %d", address, accountType];
     if (![Account countEntitiesInContext:[DBController mainContext] predicate:accountPredicate]) {
         NSString *poolType = [Account apiForType:accountType];
-        [self getWithType:poolType endpoint:@"accountexist" address:address completion:^(id responseObject, NSString *error) {
+        [self getWithType:accountType endpoint:@"accountexist" address:address completion:^(id responseObject, NSString *error) {
             if (completion) {
                 completion(error);
             }
@@ -193,7 +205,7 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
         // TODO: handle save error
         NSLog(@"error saving payments info... %@", error.localizedDescription);
     } else {
-        [self updateAccountWithAccount:account];
+        [self updateAccount:account];
         [self updateChartDataWithAccount:account];
     }
 }

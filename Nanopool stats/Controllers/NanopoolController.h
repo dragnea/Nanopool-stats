@@ -9,13 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "Account.h"
 
+static NSNotificationName NanopoolControllerDidUpdateAccountNotification = @"NanopoolControllerDidUpdateAccountNotification";
+
 typedef void(^NanopoolControllerBlock)(NSString *errorString);
 
 @interface NanopoolController : NSObject
 
 + (NanopoolController *)sharedInstance;
 
-- (void)updateAccountWithAccount:(Account *)account;
+- (void)updateAccount:(Account *)account;
 - (void)updatePaymentsWithAccount:(Account *)account;
 - (void)updateChartDataWithAccount:(Account *)account;
 

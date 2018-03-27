@@ -8,7 +8,7 @@
 
 #import <CoreData/CoreData.h>
 
-@class Worker, Payment, Share, ChartData;
+@class Worker, Payment, Share, AccountChartData;
 
 typedef NS_ENUM(int16_t, AccountType) {
     AccountTypeNone,
@@ -31,22 +31,24 @@ typedef NS_ENUM(int16_t, AccountAvgHour) {
 };
 
 @interface Account : NSManagedObject
+@property (nonatomic) double balance;
+@property (nonatomic) double hashrate;
+@property (nullable, nonatomic, copy) NSDictionary *avgHashrate;
+
+@property (nullable, nonatomic, retain) NSSet <Worker *>*workers;
+@property (nullable, nonatomic, retain) NSSet <Payment *>*payments;
+@property (nullable, nonatomic, retain) NSSet <Share *>*shares;
+@property (nullable, nonatomic, retain) NSSet <AccountChartData *>*chartData;
+
 @property (nonatomic) AccountType type;
 @property (nullable, nonatomic, copy) NSString *address;
 @property (nullable, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSDate *lastUpdate;
-@property (nonatomic) BOOL isCurrent;
-@property (nonatomic) double balance;
-@property (nonatomic) double hashrate;
 @property (nonatomic) AccountAvgHour selectedAvgHashrateIndex;
-@property (nullable, nonatomic, copy) NSDictionary *avgHashrate;
-@property (nullable, nonatomic, retain) NSSet <Worker *>*workers;
-@property (nullable, nonatomic, retain) NSSet <Payment *>*payments;
-@property (nullable, nonatomic, retain) NSSet <Share *>*shares;
-@property (nullable, nonatomic, retain) NSSet <ChartData *>*chartData;
+@property (nonatomic) BOOL isCurrent;
 
 // custom properties
-@property (nullable, nonatomic, strong, readonly) NSArray <ChartData *>*sortedChartData;
+@property (nullable, nonatomic, strong, readonly) NSArray <AccountChartData *>*sortedChartData;
 @property (nonatomic, readonly) double selectedAvgHashrate;
 @property (nullable, nonatomic, strong, readonly) NSString *label;
 

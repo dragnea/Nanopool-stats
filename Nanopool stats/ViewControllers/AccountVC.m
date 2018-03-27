@@ -18,7 +18,7 @@
 #import "BottomMenuCell.h"
 #import <Charts/Charts.h>
 
-@interface AccountVC ()<ChartViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface AccountVC ()<ChartViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, AddAccountVCDelegate>
 @property (nonatomic, weak) IBOutlet CombinedChartView *chartView;
 @property (nonatomic, weak) IBOutlet UILabel *balanceTitleLabel;
 
@@ -109,19 +109,27 @@
     [self updateAccount];
     [self updateCharts];
     
-    [[NanopoolController sharedInstance] updateAccountWithAccount:self.account];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAccountNotification:) name:NanopoolControllerDidUpdateAccountNotification object:nil];
+    
+    [[NanopoolController sharedInstance] updateAccount:self.account];
     [[NanopoolController sharedInstance] updateChartDataWithAccount:self.account];
     
     
     [BottomMenuCell registerNibInCollectionView:self.bottomMenuCollectionView];
+    
     self.bottomMenuDataSource = [NSMutableArray array];
     [self.bottomMenuDataSource addObject:[[BottomMenuItem alloc] initWithTitle:@"Workers" detail:@"All active" selector:@selector(showWorkers)]];
     [self.bottomMenuDataSource addObject:[[BottomMenuItem alloc] initWithTitle:@"Payouts" detail:@"4 days ago" selector:@selector(showPayouts)]];
     [self.bottomMenuDataSource addObject:[[BottomMenuItem alloc] initWithTitle:@"Calculator" detail:@"See details" selector:@selector(showCalculator)]];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NanopoolControllerDidUpdateAccountNotification object:nil];
+}
+
 - (void)addButtonTouched:(UIBarButtonItem *)barButtonItem {
     AddAccountVC *addAccountVC = [[AddAccountVC alloc] init];
+    addAccountVC.delegate = self;
     [self.navigationController pushViewController:addAccountVC animated:YES];
 }
 
@@ -149,6 +157,11 @@
 - (void)showCalculator {
     EstimatedCalculatorVC *calculatorVC = [[EstimatedCalculatorVC alloc] initWithAddress:self.account.address];
     [self.navigationController pushViewController:calculatorVC animated:YES];
+}
+
+- (void)updateAccountNotification:(NSNotification *)notification {
+    [self updateAccount];
+    [self updateCharts];
 }
 
 - (void)updateAccount {
@@ -293,6 +306,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SEL selector = self.bottomMenuDataSource[indexPath.item].selector;
     performMethod(self, selector);
+}
+
+#pragma mark - AddAccountVCDelegate
+
+- (void)addAccountVC:(AddAccountVC *)addAccountVC didAddAccountName:(NSString *)name address:(NSString *)address type:(int16_t)type {
+    // TODO: implement a loader
 }
 
 @end

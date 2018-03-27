@@ -23,7 +23,7 @@
 @dynamic shares;
 @dynamic chartData;
 
-- (NSArray<ChartData *> *)sortedChartData {
+- (NSArray<AccountChartData *> *)sortedChartData {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
     return [self.chartData sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
