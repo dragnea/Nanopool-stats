@@ -196,7 +196,13 @@
     NSMutableArray *dataEntries = [NSMutableArray array];
     NSArray <NSNumber *>*hashrates = [self.sortedCHartData valueForKeyPath:@"hashrate"];
     for (int index = 0; index < hashrates.count; index++) {
-        ChartDataEntry *dataEntry = [[ChartDataEntry alloc] initWithX:index y:hashrates[index].doubleValue];
+        double value;
+        if ([hashrates[index] respondsToSelector:@selector(doubleValue)]) {
+            value = hashrates[index].doubleValue;
+        } else {
+            value = 0.0;
+        }
+        ChartDataEntry *dataEntry = [[ChartDataEntry alloc] initWithX:index y:value];
         [dataEntries addObject:dataEntry];
     }
     

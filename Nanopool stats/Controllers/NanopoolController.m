@@ -149,7 +149,6 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
 
 - (void)updatePaymentsWithAccount:(Account *)account {
     AccountType type = account.type;
-    NSString *poolType = [Account apiForType:account.type];
     NSString *address = account.address;
     [self getWithType:type endpoint:@"payments" address:address completion:^(id responseObject, NSString *error) {
         NSManagedObjectContext *context = [DBController workerContext];
@@ -173,7 +172,6 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
 - (void)verifyAccountType:(AccountType)accountType address:(NSString *)address completion:(NanopoolControllerBlock)completion {
     NSPredicate *accountPredicate = [NSPredicate predicateWithFormat:@"address = %@ AND type = %d", address, accountType];
     if (![Account countEntitiesInContext:[DBController mainContext] predicate:accountPredicate]) {
-        NSString *poolType = [Account apiForType:accountType];
         [self getWithType:accountType endpoint:@"accountexist" address:address completion:^(id responseObject, NSString *error) {
             if (completion) {
                 completion(error);
