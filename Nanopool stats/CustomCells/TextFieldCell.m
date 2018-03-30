@@ -34,7 +34,7 @@
 }
 
 - (BOOL)resignFirstResponder {
-    return [self.textField resignFirstResponder];
+    return [self.textField resignFirstResponder] && [super resignFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate

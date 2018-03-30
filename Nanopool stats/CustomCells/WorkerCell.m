@@ -55,13 +55,13 @@
 - (void)setWorker:(Worker *)worker {
     _worker = worker;
     self.idLabel.text = worker.id;
-    self.lastUpdateLabel.text = [DateFormatter stringFromTimeInterval:worker.lastShare];
+    self.lastUpdateLabel.text = [DateFormatter stringFromTimeInterval:worker.lastshare];
     
-    [self.values addObject:@(worker.avg_h24)];
-    [self.values addObject:@(worker.avg_h12)];
-    [self.values addObject:@(worker.avg_h6)];
-    [self.values addObject:@(worker.avg_h3)];
-    [self.values addObject:@(worker.avg_h1)];
+    [self.values addObject:@(worker.h24)];
+    [self.values addObject:@(worker.h12)];
+    [self.values addObject:@(worker.h6)];
+    [self.values addObject:@(worker.h3)];
+    [self.values addObject:@(worker.h1)];
     [self.values addObject:@(worker.hashrate)];
 
     self.maxValue = 0.0f;

@@ -28,7 +28,13 @@
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"left_arrow"]];
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"left_arrow"]];
     
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-100.0f, -100.0f) forBarMetrics:UIBarMetricsDefault];
+    UIBarButtonItem<UIAppearance> *barButtonAppearance = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UINavigationController class]]];
+    if (@available(iOS 11, *)) {
+        [barButtonAppearance setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:0.1], NSForegroundColorAttributeName: [UIColor clearColor]} forState:UIControlStateNormal];
+        [barButtonAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor clearColor]} forState:UIControlStateHighlighted];
+    } else {
+        [barButtonAppearance setBackButtonTitlePositionAdjustment:UIOffsetMake(-200.0f, 0.0f) forBarMetrics:UIBarMetricsDefault];
+    }
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

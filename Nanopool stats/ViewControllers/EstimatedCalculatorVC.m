@@ -16,14 +16,13 @@
 @property (nonatomic, weak) IBOutlet UIView *headerView;
 @property (nonatomic, weak) IBOutlet UILabel *hashesLabel;
 @property (nonatomic, weak) IBOutlet UILabel *currencyLabel;
-@property (nonatomic, weak) IBOutlet UILabel *warningLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
 @property (nonatomic, weak) IBOutlet UILabel *placeholderLabel;
 @property (nonatomic, weak) IBOutlet UILabel *placeholderTipsLabel;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *loadingView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *headerViewHeightConstraint;
 @property (nonatomic, strong) NSString *address;
-@property (nonatomic, strong) NSDictionary *earnings;
+@property (nonatomic, strong) NSMutableArray *earnings;
 @end
 
 @implementation EstimatedCalculatorVC
@@ -39,11 +38,9 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Earnings";
-    self.warningLabel.text = @"EXPERIMENTAL. Calculated based on average block time, average difficulty, difficulty change tendency and your average hashrate for last 6 hours.";
     
     Account *account = [Account entityInContext:[DBController mainContext] name:@"Account" key:@"address" value:self.address shouldCreate:NO];
     
-    self.warningLabel.textColor = [UIColor whiteColor];
     self.headerView.backgroundColor = [UIColor themeColorBackground];
     self.hashesLabel.text = [NSString stringWithFormat:@"%.2f %@", account.hashrate, [Account unitForType:account.type]];
     self.currencyLabel.text = [Account currencyForType:account.type];
@@ -67,31 +64,40 @@
     [super viewDidAppear:animated];
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    self.headerViewHeightConstraint.constant = [self.warningLabel.text boundingRectWithSize:CGSizeMake(self.warningLabel.bounds.size.width, 200.0f)
-                                                                                    options:NSStringDrawingUsesLineFragmentOrigin
-                                                                                 attributes:@{NSFontAttributeName: self.warningLabel.font}
-                                                                                    context:nil].size.height + self.hashesLabel.bounds.size.height + 25.0f;
-}
-
 - (void)reload {
     [self.loadingView startAnimating];
     [self showPlaceholder:NO];
     self.navigationItem.rightBarButtonItem.enabled = NO;
-   /*
-    [[NanopoolController sharedInstance] estimatedEarningsForAddress:self.address completion:^(NSDictionary *result) {
-        if ([result[@"status"] boolValue]) {
-            self.earnings = result[@"data"];
-        } else {
-            self.earnings = nil;
+
+    if (!self.earnings) {
+        self.earnings = [NSMutableArray array];
+    } else {
+        [self.earnings removeAllObjects];
+    }
+    Account *account = [Account entityInContext:[DBController mainContext] name:@"Account" key:@"address" value:self.address shouldCreate:NO];
+    [[NanopoolController sharedInstance] estimatedEarningsForAccount:account completion:^(NSDictionary *response, NSString *errorString) {
+        
+        NSArray *keys = @[@{@"key": @"minute", @"value": @"Minute"},
+                          @{@"key": @"hour", @"value": @"Hour"},
+                          @{@"key": @"day", @"value": @"Day"},
+                          @{@"key": @"week", @"value": @"Week"},
+                          @{@"key": @"month", @"value": @"Month"}];
+        
+        [self.earnings addObject:@{@"period": @"Period", @"coins": [Account currencyForType:account.type], @"dollars": @"USD", @"bitcoins": @"BTC", @"isHeader": @YES}];
+        
+        for (NSDictionary *obj in keys) {
+            NSMutableDictionary *values = [NSMutableDictionary dictionary];
+            [values setDictionary:response[obj[@"key"]]];
+            [values setValue:obj[@"value"] forKey:@"period"];
+            [self.earnings addObject:values];
         }
+        
         [self.tableView reloadData];
         [self.loadingView stopAnimating];
         [self showPlaceholder:!self.earnings.count];
         self.navigationItem.rightBarButtonItem.enabled = YES;
+        
     }];
-    */
 }
 
 - (void)showPlaceholder:(BOOL)showPlaceholder {
@@ -100,50 +106,26 @@
     self.placeholderTipsLabel.hidden = self.placeholderImageView.hidden;
 }
 
-- (NSString *)nameForSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"minute";
-        case 1:
-            return @"hour";
-        case 2:
-            return @"day";
-        case 3:
-            return @"week";
-        case 4:
-            return @"month";
-            
-        default:
-            return nil;
-    }
-}
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return !self.earnings ? 0 : 5;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.earnings.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EstimatedEarningCell *earningsCell = [EstimatedEarningCell cellInTableView:tableView forIndexPath:indexPath];
-    NSString *sectionKey = [self nameForSection:indexPath.section];
-    earningsCell.values = self.earnings[sectionKey];
-    earningsCell.periodLabel.text = sectionKey.uppercaseString;
+    earningsCell.values = self.earnings[indexPath.row];
     return earningsCell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0f;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 1.0f;
+    return [EstimatedEarningCell height];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

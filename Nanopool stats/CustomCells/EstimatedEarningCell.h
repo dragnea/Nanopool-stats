@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface EstimatedEarningCell : UITableViewCell
-@property (nonatomic, weak) IBOutlet UILabel *periodLabel;
 @property (nonatomic, weak) NSDictionary *values;
++ (CGFloat)height;
 @end

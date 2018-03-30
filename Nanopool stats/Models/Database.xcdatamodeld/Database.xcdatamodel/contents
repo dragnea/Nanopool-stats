@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="avgHashrate" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -10,9 +10,9 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="selectedAvgHashrateIndex" optional="YES" attributeType="Integer 16" defaultValueString="2" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="chartData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AccountChartData" inverseName="account" inverseEntity="AccountChartData" syncable="YES"/>
-        <relationship name="payments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Payment" inverseName="account" inverseEntity="Payment" syncable="YES"/>
-        <relationship name="shares" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Share" inverseName="account" inverseEntity="Share" syncable="YES"/>
+        <relationship name="chartData" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AccountChartData" inverseName="account" inverseEntity="AccountChartData" syncable="YES"/>
+        <relationship name="payments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Payment" inverseName="account" inverseEntity="Payment" syncable="YES"/>
+        <relationship name="shares" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Share" inverseName="account" inverseEntity="Share" syncable="YES"/>
         <relationship name="workers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Worker" inverseName="account" inverseEntity="Worker" syncable="YES"/>
     </entity>
     <entity name="AccountChartData" representedClassName="AccountChartData" syncable="YES">
@@ -34,21 +34,22 @@
         <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="shares" inverseEntity="Account" syncable="YES"/>
     </entity>
     <entity name="Worker" representedClassName="Worker" syncable="YES">
-        <attribute name="avg_h1" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="avg_h3" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="avg_h6" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="avg_h12" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="avg_h24" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="h1" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="h3" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="h6" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="h12" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="h24" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="hashrate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastShare" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastshare" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="workers" inverseEntity="Account" syncable="YES"/>
     </entity>
     <elements>
         <element name="Account" positionX="-63" positionY="-18" width="128" height="240"/>
+        <element name="AccountChartData" positionX="-54" positionY="81" width="128" height="105"/>
         <element name="Payment" positionX="-54" positionY="81" width="128" height="120"/>
         <element name="Share" positionX="-54" positionY="81" width="128" height="90"/>
-        <element name="Worker" positionX="-63" positionY="27" width="128" height="180"/>
-        <element name="AccountChartData" positionX="-54" positionY="81" width="128" height="105"/>
+        <element name="Worker" positionX="-63" positionY="27" width="128" height="195"/>
     </elements>
 </model>

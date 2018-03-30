@@ -110,21 +110,18 @@
     [self updateCharts];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAccountNotification:) name:NanopoolControllerDidUpdateAccountNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateChartsNotification:) name:NanopoolControllerDidUpdateChartsNotification object:nil];
     
     [[NanopoolController sharedInstance] updateAccount:self.account];
     [[NanopoolController sharedInstance] updateChartDataWithAccount:self.account];
     
     
     [BottomMenuCell registerNibInCollectionView:self.bottomMenuCollectionView];
-    
-    self.bottomMenuDataSource = [NSMutableArray array];
-    [self.bottomMenuDataSource addObject:[[BottomMenuItem alloc] initWithTitle:@"Workers" detail:@"All active" selector:@selector(showWorkers)]];
-    [self.bottomMenuDataSource addObject:[[BottomMenuItem alloc] initWithTitle:@"Payouts" detail:@"4 days ago" selector:@selector(showPayouts)]];
-    [self.bottomMenuDataSource addObject:[[BottomMenuItem alloc] initWithTitle:@"Calculator" detail:@"See details" selector:@selector(showCalculator)]];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NanopoolControllerDidUpdateAccountNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NanopoolControllerDidUpdateChartsNotification object:nil];
 }
 
 - (void)addButtonTouched:(UIBarButtonItem *)barButtonItem {
@@ -135,7 +132,6 @@
 
 - (IBAction)hashrateSelectorChanged:(DMSSegmentedBar *)sender {
     self.account.selectedAvgHashrateIndex = sender.selectedIndex;
-    [self updateAccount];
     [self updateCharts];
 }
 
@@ -161,23 +157,43 @@
 
 - (void)updateAccountNotification:(NSNotification *)notification {
     [self updateAccount];
+}
+
+- (void)updateChartsNotification:(NSNotification *)notification {
     [self updateCharts];
+}
+
+- (void)updateBottomButtons {
+    if (!self.bottomMenuDataSource) {
+        self.bottomMenuDataSource = [NSMutableArray array];
+    } else {
+        [self.bottomMenuDataSource removeAllObjects];
+    }
+    NSPredicate *inactiveWorkersPredicate = [NSPredicate predicateWithFormat:@"hashrate = 0 AND account = %@ AND lastshare > %f",
+                                             self.account,
+                                             [[NSDate date] timeIntervalSince1970] - 86400.0];
+    NSInteger inactiveWorkersCount = [[DBController mainContext] countWithName:@"Worker" predicate:inactiveWorkersPredicate];
+    NSString *workersDetails = (inactiveWorkersCount > 0 ? [NSString stringWithFormat:@"%d inactive", (int)inactiveWorkersCount] : @"All active");
+    [self.bottomMenuDataSource addObject:[[BottomMenuItem alloc] initWithTitle:@"Workers" detail:workersDetails selector:@selector(showWorkers)]];
+    
+    NSInteger paymentsCount = self.account.payments.count;
+    NSString *paymentsDetails = (paymentsCount > 0 ? [NSString stringWithFormat:@"%d payout%@", (int)paymentsCount, (paymentsCount > 1 ? @"s" : @"")] : @"No payout");
+    [self.bottomMenuDataSource addObject:[[BottomMenuItem alloc] initWithTitle:@"Payouts" detail:paymentsDetails selector:@selector(showPayouts)]];
+    
+    [self.bottomMenuDataSource addObject:[[BottomMenuItem alloc] initWithTitle:@"Calculator" detail:@"See details" selector:@selector(showCalculator)]];
 }
 
 - (void)updateAccount {
     self.account = [Account entitiesInContext:[DBController mainContext] predicate:[NSPredicate predicateWithFormat:@"isCurrent == YES"]].firstObject;
     self.hashrateSelector.selectedIndex = self.account.selectedAvgHashrateIndex;
     self.balanceLabel.text = [NSString stringWithFormat:@"%f %@", self.account.balance, [Account currencyForType:self.account.type]];
+    [self updateBottomButtons];
     
     NSAttributedString *dollarValueString = [[NSAttributedString alloc] initWithString:@"304.43 $" attributes:@{NSForegroundColorAttributeName: [UIColor themeColorHighlightedMedium]}];
     NSMutableAttributedString *valueString = [[NSMutableAttributedString alloc] initWithAttributedString:dollarValueString];
     [valueString appendAttributedString:[[NSAttributedString alloc] initWithString:@" • " attributes:@{NSForegroundColorAttributeName: [UIColor themeColorHighlightedSoft]}]];
     [valueString appendAttributedString:[[NSAttributedString alloc] initWithString:@"0.0343449 BTC" attributes:@{NSForegroundColorAttributeName: [UIColor themeColorHighlightedMedium]}]];
     self.equivalentBalanceLabel.text = [NSString stringWithFormat:@"%f • %f", 304.0343f, 0.034935523f];
-    
-    NSPredicate *historyPredicate = [NSPredicate predicateWithFormat:@"date > %f", [[Account dateForAvgHour:self.account.selectedAvgHashrateIndex] timeIntervalSince1970]];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
-    self.sortedCHartData = [[self.account.chartData filteredSetUsingPredicate:historyPredicate] sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 - (NSString *)formattedStringForHashrate:(double)hashrate {
@@ -224,7 +240,9 @@
     
     NSArray *gradientArray = @[(__bridge id)lineColor.CGColor, (__bridge id)[UIColor clearColor].CGColor];
     CGFloat gradientColorLocations[2] = {1.0f, 0.0f};
-    CGGradientRef gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), (__bridge CFArrayRef)gradientArray, gradientColorLocations);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientArray, gradientColorLocations);
+    CGColorSpaceRelease(colorSpace);
     ChartFill *lineFill = [[ChartFill alloc] initWithLinearGradient:gradient angle:90.0];
     CGGradientRelease(gradient);
     lineDataSet.fill = lineFill;
@@ -260,6 +278,10 @@
 }
 
 - (void)updateCharts {
+    NSPredicate *historyPredicate = [NSPredicate predicateWithFormat:@"date > %f", [[Account dateForAvgHour:self.account.selectedAvgHashrateIndex] timeIntervalSince1970]];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+    self.sortedCHartData = [[self.account.chartData filteredSetUsingPredicate:historyPredicate] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    
     CombinedChartData *combinedChartData = [[CombinedChartData alloc] init];
     combinedChartData.lineData = [self lineChartData];
     combinedChartData.barData = [self barChartData];

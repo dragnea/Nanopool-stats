@@ -24,12 +24,19 @@
 - (id)initWithAddress:(NSString *)address {
     if (self = [super init]) {
         NSFetchRequest *workersFetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Worker class])];
-        workersFetchRequest.predicate = [NSPredicate predicateWithFormat:@"account.address == %@", address];
-        workersFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastShare" ascending:NO]];
+        workersFetchRequest.predicate = [NSPredicate predicateWithFormat:@"account.address = %@", address];
+        workersFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO],
+                                                [NSSortDescriptor sortDescriptorWithKey:@"lastshare" ascending:NO]];
         self.workersFetchedController = [[NSFetchedResultsController alloc] initWithFetchRequest:workersFetchRequest
                                                                             managedObjectContext:[DBController mainContext]
-                                                                              sectionNameKeyPath:nil
+                                                                              sectionNameKeyPath:@"status"
                                                                                        cacheName:nil];
+        NSError *error = nil;
+        if (![self.workersFetchedController performFetch:&error]) {
+            NSLog(@"WorkersVC: error fetching workers: %@", error.localizedDescription);
+        } else {
+            self.workersFetchedController.delegate = self;
+        }
     }
     return self;
 }
@@ -40,19 +47,12 @@
     self.navigationItem.title = @"Workers";
     [WorkerCell registerNibInTableView:self.tableView];
     
-    NSError *error = nil;
-    if (![self.workersFetchedController performFetch:&error]) {
-        NSLog(@"WorkersVC: error fetching workers: %@", error.localizedDescription);
-    } else {
-        self.workersFetchedController.delegate = self;
-        [self.tableView reloadData];
-        [self updatePlaceholder];
-    }
-    
     UIColor *placeholderColor = [[UIColor blackColor] themeColorWithValueTitleAlpha];
     self.placeholderImageView.tintColor = placeholderColor;
     self.placeholderLabel.textColor = placeholderColor;
     self.placeholderTipsLabel.textColor = placeholderColor;
+    
+    [self updatePlaceholder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,16 +84,16 @@
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 1.0f;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [WorkerCell height];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 1.0f;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return self.workersFetchedController.sections[section].name;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 44.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

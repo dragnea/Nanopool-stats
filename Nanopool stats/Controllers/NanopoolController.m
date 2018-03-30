@@ -94,20 +94,25 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
     AccountType type = account.type;
     NSString *address = account.address;
     __weak __typeof(self) weakSelf = self;
-    [self getWithType:type endpoint:@"user" address:address completion:^(id responseObject, NSString *error) {
+    [self getWithType:type endpoint:@"user" address:address completion:^(id responseObject, NSString *responseError) {
         NSManagedObjectContext *context = [DBController workerContext];
         [context performBlock:^{
             Account *account = [weakSelf accountWithAddress:address type:type context:context shouldCreate:YES];
             account.balance = [responseObject[@"data"][@"balance"] doubleValue];
             account.hashrate = [responseObject[@"data"][@"hashrate"] doubleValue];
-            account.avgHashrate = responseObject[@"data"][@"avghashrate"];
-            account.lastUpdate = [NSDate date];
-            for (NSDictionary *workerDictionary in responseObject[@"workers"]) {
-                Worker *worker = [Worker entityInContext:context name:@"Worker" key:@"id" value:workerDictionary[@"id"] shouldCreate:YES];
+            account.avgHashrate = responseObject[@"data"][@"avgHashrate"];
+            NSError *error = nil;
+            if (account.workers.count) {
+                NSArray *workersToRemove = [account.workers.allObjects valueForKeyPath:@"objectID"];
+                NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithObjectIDs:workersToRemove];
+                [context executeRequest:deleteRequest error:&error];
+            }
+            for (NSDictionary *workerDictionary in responseObject[@"data"][@"workers"]) {
+                Worker *worker = [Worker newEntityInContext:context name:@"Worker"];
                 [worker updateWithDictionary:workerDictionary dateFormatter:nil];
                 worker.account = account;
             }
-            NSError *error = nil;
+            account.lastUpdate = [NSDate date];
             if (![context save:&error]){
                 NSLog(@"error saving user info... %@", error.localizedDescription);
             } else {
@@ -123,13 +128,13 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
     AccountType type = account.type;
     NSString *address = account.address;
     __weak __typeof(self) weakSelf = self;
-    [self getWithType:type endpoint:@"hashratechart" address:address completion:^(id responseObject, NSString *error) {
+    [self getWithType:type endpoint:@"hashratechart" address:address completion:^(id responseObject, NSString *responseError) {
         NSManagedObjectContext *context = [DBController workerContext];
         [context performBlock:^{
             Account *account = [weakSelf accountWithAddress:address type:type context:context shouldCreate:YES];
             NSError *error = nil;
             if (account.chartData.count) {
-                NSArray *chartIDsToRemove = [[account valueForKeyPath:@"chartData.objectID"] allObjects];
+                NSArray *chartIDsToRemove = [account.chartData.allObjects valueForKeyPath:@"objectID"];
                 NSBatchDeleteRequest *chartRemoveRequest = [[NSBatchDeleteRequest alloc] initWithObjectIDs:chartIDsToRemove];
                 [context executeRequest:chartRemoveRequest error:&error];
             }
@@ -141,16 +146,18 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
             if (![context save:&error]){
                 NSLog(@"error saving chart data info... %@", error.localizedDescription);
             } else {
-                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NanopoolControllerDidUpdateChartsNotification object:account.objectID];
+                });
             }
         }];
     }];
 }
 
-- (void)updatePaymentsWithAccount:(Account *)account {
+- (void)updatePaymentsWithAccount:(Account *)account completion:(NanopoolControllerBlock)completion {
     AccountType type = account.type;
     NSString *address = account.address;
-    [self getWithType:type endpoint:@"payments" address:address completion:^(id responseObject, NSString *error) {
+    [self getWithType:type endpoint:@"payments" address:address completion:^(id responseObject, NSString *responseError) {
         NSManagedObjectContext *context = [DBController workerContext];
         [context performBlock:^{
             Account *account = [Account entityInContext:context name:@"Account" key:@"address" value:address shouldCreate:YES];
@@ -165,6 +172,11 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
             } else {
                 
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completion) {
+                    completion(responseError);
+                }
+            });
         }];
     }];
 }
@@ -172,9 +184,9 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
 - (void)verifyAccountType:(AccountType)accountType address:(NSString *)address completion:(NanopoolControllerBlock)completion {
     NSPredicate *accountPredicate = [NSPredicate predicateWithFormat:@"address = %@ AND type = %d", address, accountType];
     if (![Account countEntitiesInContext:[DBController mainContext] predicate:accountPredicate]) {
-        [self getWithType:accountType endpoint:@"accountexist" address:address completion:^(id responseObject, NSString *error) {
+        [self getWithType:accountType endpoint:@"accountexist" address:address completion:^(id responseObject, NSString *responseError) {
             if (completion) {
-                completion(error);
+                completion(responseError);
             }
         }];
     } else {
@@ -206,6 +218,16 @@ typedef void(^APICompletionHandler)(id responseObject, NSString *error);
         [self updateAccount:account];
         [self updateChartDataWithAccount:account];
     }
+}
+
+- (void)estimatedEarningsForAccount:(Account *)account completion:(NanopoolControllerEarningsBlock)completion {
+    AccountType type = account.type;
+    NSString *hashrate = [NSString stringWithFormat:@"%f", account.hashrate];
+    [self getWithType:type endpoint:@"approximated_earnings" address:hashrate completion:^(id responseObject, NSString *responseError) {
+        if (completion) {
+            completion(responseObject[@"data"], responseError);
+        }
+    }];
 }
 
 @end

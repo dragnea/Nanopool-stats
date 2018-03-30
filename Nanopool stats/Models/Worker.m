@@ -11,14 +11,20 @@
 @implementation Worker
 
 @dynamic id;
-@dynamic lastShare;
+@dynamic lastshare;
 @dynamic hashrate;
-@dynamic avg_h1;
-@dynamic avg_h3;
-@dynamic avg_h6;
-@dynamic avg_h12;
-@dynamic avg_h24;
+@dynamic h1;
+@dynamic h3;
+@dynamic h6;
+@dynamic h12;
+@dynamic h24;
+@dynamic status;
 
 @dynamic account;
+
+- (void)awakeFromFetch {
+    [super awakeFromFetch];
+    self.status = self.hashrate > 0 ? @"Active" : @"Inactive";
+}
 
 @end

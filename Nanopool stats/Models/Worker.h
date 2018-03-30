@@ -13,14 +13,16 @@
 @interface Worker : NSManagedObject
 
 @property (nullable, nonatomic, copy) NSString *id;
-@property (nonatomic) double lastShare;
+@property (nonatomic) double lastshare;
 @property (nonatomic) double hashrate;
-@property (nonatomic) double avg_h1;
-@property (nonatomic) double avg_h3;
-@property (nonatomic) double avg_h6;
-@property (nonatomic) double avg_h12;
-@property (nonatomic) double avg_h24;
+@property (nonatomic) double h1;
+@property (nonatomic) double h3;
+@property (nonatomic) double h6;
+@property (nonatomic) double h12;
+@property (nonatomic) double h24;
+@property (nullable, nonatomic, copy) NSString *status;
 
 @property (nullable, nonatomic, retain) Account *account;
+
 
 @end

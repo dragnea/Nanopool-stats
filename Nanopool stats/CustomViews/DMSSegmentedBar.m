@@ -21,21 +21,21 @@
 #pragma mark - Private methods
 
 - (id)init {
-    if ([super init]) {
+    if (self = [super init]) {
         [self setup];
     }
     return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    if ([super initWithCoder:aDecoder]) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self setup];
     }
     return self;
 }
 
 - (id)initWithFrame:(CGRect)frame {
-    if ([super initWithFrame:frame]) {
+    if (self = [super initWithFrame:frame]) {
         [self setup];
     }
     return self;

@@ -9,6 +9,7 @@
 #import "PaymentsVC.h"
 #import "Payment.h"
 #import "DBController.h"
+#import "NanopoolController.h"
 #import "PaymentCell.H"
 
 @interface PaymentsVC ()<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
@@ -17,12 +18,14 @@
 @property (nonatomic, weak) IBOutlet UILabel *placeholderLabel;
 @property (nonatomic, weak) IBOutlet UILabel *placeholderTipsLabel;
 @property (nonatomic, strong) NSFetchedResultsController <Payment *> *paymentsFetchedController;
+@property (nonatomic, strong) NSString *address;
 @end
 
 @implementation PaymentsVC
 
 - (id)initWithAddress:(NSString *)address {
     if (self = [super init]) {
+        self.address = address;
         NSFetchRequest *paymentsFetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Payment class])];
         paymentsFetchRequest.predicate = [NSPredicate predicateWithFormat:@"account.address == %@", address];
         paymentsFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
@@ -30,6 +33,12 @@
                                                                             managedObjectContext:[DBController mainContext]
                                                                               sectionNameKeyPath:nil
                                                                                        cacheName:nil];
+        NSError *error = nil;
+        if (![self.paymentsFetchedController performFetch:&error]) {
+            NSLog(@"WorkersVC: error fetching workers: %@", error.localizedDescription);
+        } else {
+            self.paymentsFetchedController.delegate = self;
+        }
     }
     return self;
 }
@@ -39,19 +48,18 @@
    
     self.navigationItem.title = @"Payments";
     [PaymentCell registerNibInTableView:self.tableView];
-    NSError *error = nil;
-    if (![self.paymentsFetchedController performFetch:&error]) {
-        NSLog(@"WorkersVC: error fetching workers: %@", error.localizedDescription);
-    } else {
-        self.paymentsFetchedController.delegate = self;
-        [self.tableView reloadData];
-        [self updatePlaceholder];
-    }
     
     UIColor *placeholderColor = [[UIColor blackColor] themeColorWithValueTitleAlpha];
     self.placeholderImageView.tintColor = placeholderColor;
     self.placeholderLabel.textColor = placeholderColor;
     self.placeholderTipsLabel.textColor = placeholderColor;
+    [self updatePlaceholder];
+    
+    Account *account = [Account entityInContext:[DBController mainContext] name:@"Account" key:@"address" value:self.address shouldCreate:NO];
+    [[NanopoolController sharedInstance] updatePaymentsWithAccount:account completion:^(NSString *errorString) {
+        [self updatePlaceholder];
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
